@@ -29,14 +29,19 @@
         </StackLayout>
         <ScrollView Grid.Row="1">
             <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="Start developing now" FontSize="Title"/>
-                <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="0,0,0,0"/>
-                <Label FontSize="16" Padding="0,24,0,0">
+                <Label Text="Návod" FontSize="Title"/>
+                <Label Text="Vytáhněte si jednu kartu denně, splňte úkol, je-li na ní nějaký, nebo se jí jen nechte volně inspirovat. Nejlepších výsledků dosáhnete, pokud si budete zapisovat vytaženou kartu a k ní i samotný průběh vlastní akce. Na co jste díky její realizaci přišli, co nového jste se díky ní o sobě dozvěděli, pokud jste ji neuskutečnili, proč se tak stalo, co vám k tomu chybělo, co se vám na ní nelíbilo a proč? I nesplnění akce patří sebepoznávacího procesu. Buďte jako detektiv, jděte po samotné příčině. Nezastavujte se u emoce, jděte dál. ,,Mám strach. Z čeho konkrétně mám strach?“" FontSize="16" Padding="0,0,0,0"/>
+                    <Label Text="Obě hemisféry se nejlépe propojují, pokud jsou mozkové vlny ve stavu alfa. Stav alfa má mj. mnoho velmi blahodárných účinků na tělo i mysl. Podpořit ho můžete našimi relaxacemi." FontSize="16" Padding="0,0,0,0"/>
+                    <Label Text="Karty je možné využít též při volné hře s rodinou nebo s přáteli. Každý si vytáhne jednu kartu a na dané téma může sdělit svou osobní zkušenost, historku nebo svou úvahu, která se ke kartě váže." FontSize="16" Padding="0,0,0,0"/>
+                    <Label Text="Další z variací této aktivity může sloužit k prolomení ledů, je proto vhodná zejména pro semináře, lekce, výukové hodiny, teambuildingy. Každý z posluchačů, studentů si vytáhne jednu kartu a stejně jako v předchozí hře může ostatním povědět, co ho napadlo v souvislosti s tématem karty." FontSize="16" Padding="0,0,0,0"/>
+                    <Label Text="Tip: Balíček karet si můžete rozdělit na levou a pravou hemisféru a používat po nějaký čas pouze karty podporující tu hemisféru, kterou potřebujete posílit více." FontSize="16" Padding="0,0,0,0"/>
+                    <Label Text="Napadnou-li vás další způsoby her, napište nám je prosím na info@iost.cz." FontSize="16" Padding="0,0,0,0"/>
+                    <Label FontSize="16" Padding="0,24,0,0">
                     <Label.FormattedText>
                         <FormattedString>
                             <FormattedString.Spans>
-                                <Span Text="Learn more at "/>
-                                <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
+                                <Span Text="Více na "/>
+                                    <Span Text="www.mindartconcept.cz" FontAttributes="Bold"/>
                             </FormattedString.Spans>
                         </FormattedString>
                     </Label.FormattedText>
@@ -45,6 +50,8 @@
                         Command="{Binding OpenWebCommand}"
                         BackgroundColor="{StaticResource Primary}"
                         TextColor="White" />
+                    <Label Text="Všechna práva vyhrazena © 2022" FontSize="16" Padding="0,0,0,0"/>
+
             </StackLayout>
         </ScrollView>
     </Grid>

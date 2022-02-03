@@ -1,16 +1,15 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
-    public class AboutViewModel : BaseViewModel
+    public class AboutCardsViewModel : BaseViewModel
     {
-        public AboutViewModel()
+        public AboutCardsViewModel()
         {
-            Title = "About";
-            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://aka.ms/xamarin-quickstart"));
+            Title = "About Cards";
+            OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://www.mindartconcept.cz"));
         }
 
         public ICommand OpenWebCommand { get; }

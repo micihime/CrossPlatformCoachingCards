@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoachingCards.Views.AboutCardsPage" xmlns:vm="clr-namespace:CoachingCards.ViewModels"
+             Title="{Binding Title}">
+
+    <ContentPage.BindingContext>
+        <vm:AboutCardsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Accent">#96d1ff</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackLayout BackgroundColor="{StaticResource Accent}" VerticalOptions="FillAndExpand" HorizontalOptions="Fill">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <ContentView Padding="0,40,0,40" VerticalOptions="FillAndExpand">
+                    <Image Source="xamarin_logo.png" VerticalOptions="Center" HeightRequest="64" />
+                </ContentView>
+            </StackLayout>
+        </StackLayout>
+        <ScrollView Grid.Row="1">
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="O kartách " FontSize="Title"/>
+                <Label Text="Držíte v rukách první koučovací karty svého druhu vytvořené podle MindArt Conceptu. Koučovací karty pro ty, kteří chtějí osobnostní růst, ale nevědí, jak začít. Slouží k rozpřemýšlení. Pomohou připravit vaše myšlení na další váš posun v osobnostním růstu. Určitě také pomohou k udržování a rozvoji již získaných znalostí o sobě samém a osvojených dovedností. " FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Karty nenahradí služby kouče a terapeuta." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Karty vychází z našich praktických poznatků z koučování a terapií. " FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Karty jsou rozděleny na dva druhy podle toho, kterou hemisféru podporují. Cílem je aktivitu obou hemisfér dostat do rovnováhy." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Levá hemisféra je zaměřena na: analytické myšlení, logiku, detaily, fakta, pravidla, znalosti, slova, jazyk, vědu, data, čísla, vůli, míry, váhy, matematiku, bezpečí, názvy objektů, minulost a současnost." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Pravá hemisféra je zaměřena na: syntetické myšlení, tvořivost, možnosti, obecnost, intuici, souvislosti, symboly, významy, obrazy, umění, hudbu, rytmus, emoce, pocity, vtip, fantazii, chutě a vůně, filozofii, riziko, funkci objektů, současnost a budoucnost." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Rádi bychom poděkovali všem našim klientům, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků." FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Veronika a Petr Pavelkovi, Institut osobnostního tréninku" FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Karty vydává MindArt Concpet" FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Autoři textu: Veronika a Petr Pavelkovi" FontSize="16" Padding="0,0,0,0"/>
+                <Label Text="Ilustrace: Mgr. Magdalena Krejčí" FontSize="16" Padding="0,0,0,0"/>
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+
+</ContentPage>
