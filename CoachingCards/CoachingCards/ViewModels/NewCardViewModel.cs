@@ -1,18 +1,15 @@
 ﻿using CoachingCards.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
-    public class NewItemViewModel : BaseViewModel
+    public class NewCardViewModel : BaseViewModel
     {
         private string text;
         private string description;
 
-        public NewItemViewModel()
+        public NewCardViewModel()
         {
             SaveCommand = new Command(OnSave, ValidateSave);
             CancelCommand = new Command(OnCancel);
@@ -49,14 +46,9 @@ namespace CoachingCards.ViewModels
 
         private async void OnSave()
         {
-            Item newItem = new Item()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Text = Text,
-                Description = Description
-            };
+            Card newCard = new Card(0, "", "", "", false);
 
-            await DataStore.AddItemAsync(newItem);
+            await DataStore.AddAsync(newCard);
 
             // This will pop the current page off the navigation stack
             await Shell.Current.GoToAsync("..");

@@ -12,15 +12,15 @@ using Xamarin.Forms.Xaml;
 
 namespace CoachingCards.Views
 {
-    public partial class ItemsPage : ContentPage
+    public partial class CardsPage : ContentPage
     {
-        ItemsViewModel _viewModel;
+        CardsViewModel _viewModel;
 
-        public ItemsPage()
+        public CardsPage()
         {
             InitializeComponent();
 
-            BindingContext = _viewModel = new ItemsViewModel();
+            BindingContext = _viewModel = new CardsViewModel();
         }
 
         protected override void OnAppearing()

@@ -8,14 +8,14 @@ using Xamarin.Forms.Xaml;
 
 namespace CoachingCards.Views
 {
-    public partial class NewItemPage : ContentPage
+    public partial class NewCardPage : ContentPage
     {
-        public Item Item { get; set; }
+        public Card Card { get; set; }
 
-        public NewItemPage()
+        public NewCardPage()
         {
             InitializeComponent();
-            BindingContext = new NewItemViewModel();
+            BindingContext = new NewCardViewModel();
         }
     }
 }

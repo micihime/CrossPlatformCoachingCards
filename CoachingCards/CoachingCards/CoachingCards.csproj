@@ -11,10 +11,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\CardDetailPage.xaml.cs">
+      <DependentUpon>CardDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CardsPage.xaml.cs">
+      <DependentUpon>CardsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\NewCardPage.xaml.cs">
+      <DependentUpon>NewCardPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\AboutCardsPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Update="Views\CardPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

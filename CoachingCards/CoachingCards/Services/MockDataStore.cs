@@ -65,14 +65,14 @@ namespace CoachingCards.Services
             };
         }
 
-        public async Task<bool> AddItemAsync(Card item)
+        public async Task<bool> AddAsync(Card item)
         {
             items.Add(item);
 
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> UpdateItemAsync(Card item)
+        public async Task<bool> UpdateAsync(Card item)
         {
             var oldItem = items.Where((Card arg) => arg.ID == item.ID).FirstOrDefault();
             items.Remove(oldItem);
@@ -81,7 +81,7 @@ namespace CoachingCards.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<bool> DeleteItemAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
             var oldItem = items.Where((Card arg) => arg.ID == id).FirstOrDefault();
             items.Remove(oldItem);
@@ -89,12 +89,12 @@ namespace CoachingCards.Services
             return await Task.FromResult(true);
         }
 
-        public async Task<Card> GetItemAsync(int id)
+        public async Task<Card> GetAsync(int id)
         {
             return await Task.FromResult(items.FirstOrDefault(s => s.ID == id));
         }
 
-        public async Task<IEnumerable<Card>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Card>> GetAllAsync(bool forceRefresh = false)
         {
             return await Task.FromResult(items);
         }
