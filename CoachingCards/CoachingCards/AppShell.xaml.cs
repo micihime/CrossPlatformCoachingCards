@@ -10,7 +10,6 @@ namespace CoachingCards
         {
             InitializeComponent();
             Routing.RegisterRoute(nameof(CardDetailPage), typeof(CardDetailPage));
-            Routing.RegisterRoute(nameof(NewCardPage), typeof(NewCardPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)

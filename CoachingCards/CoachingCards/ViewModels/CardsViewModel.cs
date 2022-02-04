@@ -24,8 +24,6 @@ namespace CoachingCards.ViewModels
             LoadCardsCommand = new Command(async () => await ExecuteLoadCardsCommand());
 
             CardTapped = new Command<Card>(OnCardSelected);
-
-            AddCardCommand = new Command(OnAddCard);
         }
 
         async Task ExecuteLoadCardsCommand()
@@ -65,11 +63,6 @@ namespace CoachingCards.ViewModels
                 SetProperty(ref _selectedCard, value);
                 OnCardSelected(value);
             }
-        }
-
-        private async void OnAddCard(object obj)
-        {
-            await Shell.Current.GoToAsync(nameof(NewCardPage));
         }
 
         async void OnCardSelected(Card Card)
