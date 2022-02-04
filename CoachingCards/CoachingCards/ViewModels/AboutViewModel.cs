@@ -4,11 +4,11 @@ using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
-    public class AboutCardsViewModel : BaseViewModel
+    public class AboutViewModel : BaseViewModel
     {
-        public AboutCardsViewModel()
+        public AboutViewModel()
         {
-            Title = "About Cards";
+            Title = "Návod";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://www.mindartconcept.cz"));
         }
 
