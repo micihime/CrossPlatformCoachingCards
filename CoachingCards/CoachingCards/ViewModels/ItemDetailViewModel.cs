@@ -1,7 +1,5 @@
-﻿using CoachingCards.Models;
-using System;
+﻿using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
@@ -9,7 +7,7 @@ namespace CoachingCards.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
-        private string itemId;
+        private int itemId;
         private string text;
         private string description;
         public string Id { get; set; }
@@ -26,7 +24,7 @@ namespace CoachingCards.ViewModels
             set => SetProperty(ref description, value);
         }
 
-        public string ItemId
+        public int ItemId
         {
             get
             {
@@ -39,7 +37,7 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        public async void LoadItemId(string itemId)
+        public async void LoadItemId(int itemId)
         {
             try
             {
