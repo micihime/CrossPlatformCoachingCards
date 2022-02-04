@@ -13,34 +13,35 @@ namespace CoachingCards.ViewModels
         private string action;
         private bool isLeft;
 
-        public int Id { get; set; }
+        public int Id { get; private set; }
 
         public string Heading
         {
             get => heading;
-            set => SetProperty(ref heading, value);
+            private set => SetProperty(ref heading, value);
         }
 
         public string Text
         {
             get => text;
-            set => SetProperty(ref text, value);
+            private set => SetProperty(ref text, value);
         }
 
         public string Action
         {
             get => action;
-            set => SetProperty(ref action, value);
+            private set => SetProperty(ref action, value);
         }
 
-        public bool IsLeft { get; set; }
+        public bool IsLeft
+        {
+            get => isLeft;
+            private set { isLeft = value; }
+        }
 
         public int CardId
         {
-            get
-            {
-                return cardId;
-            }
+            get => cardId;
             set
             {
                 cardId = value;

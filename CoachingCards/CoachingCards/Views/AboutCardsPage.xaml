@@ -6,7 +6,7 @@
 
     <ScrollView Grid.Row="1">
         <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-            <Label Text="O kartách " FontSize="Title"/>
+            <Label Text="O kartách" FontSize="Title"/>
             <Label Text="Držíte v rukách první koučovací karty svého druhu vytvořené podle MindArt Conceptu. Koučovací karty pro ty, kteří chtějí osobnostní růst, ale nevědí, jak začít. Slouží k rozpřemýšlení. Pomohou připravit vaše myšlení na další váš posun v osobnostním růstu. Určitě také pomohou k udržování a rozvoji již získaných znalostí o sobě samém a osvojených dovedností. " FontSize="16" Padding="0,0,0,0"/>
             <Label Text="Karty nenahradí služby kouče a terapeuta." FontSize="16" FontAttributes="Bold" Padding="0,0,0,0"/>
             <Label Text="Karty vychází z našich praktických poznatků z koučování a terapií. " FontSize="16" Padding="0,0,0,0"/>
