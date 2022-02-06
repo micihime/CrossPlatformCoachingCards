@@ -1,4 +1,5 @@
 ﻿using CoachingCards.Models;
+using CoachingCards.Services;
 using CoachingCards.Views;
 using System;
 using System.Collections.ObjectModel;
@@ -11,6 +12,7 @@ namespace CoachingCards.ViewModels
     public class CardsViewModel : BaseViewModel
     {
         private Card _selectedCard;
+        public IDataStore<Card> DataStore => DependencyService.Get<IDataStore<Card>>();
 
         public ObservableCollection<Card> Cards { get; }
         public Command LoadCardsCommand { get; }

@@ -4,10 +4,14 @@
              x:Class="CoachingCards.Views.CardDetailPage"
              Title="{Binding Title}">
 
-    <StackLayout Spacing="20" Padding="15">
-        <Label Text="{Binding Heading}" FontSize="Title" />
-        <Label Text="{Binding Text}" FontSize="Medium"/>
-        <Label Text="{Binding Action}" FontSize="Medium" FontAttributes="Italic" />
-    </StackLayout>
+    <ScrollView>
+
+        <StackLayout Spacing="20" Padding="15">
+            <Label Text="{Binding Heading}" FontSize="Title" />
+            <Label Text="{Binding Text}" FontSize="Medium"/>
+            <Label Text="{Binding Action}" FontSize="Medium" FontAttributes="Italic" />
+        </StackLayout>
     
+    </ScrollView>
+
 </ContentPage>

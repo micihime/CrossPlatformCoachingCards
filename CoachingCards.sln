@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoachingCards.Android", "Co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoachingCards.iOS", "CoachingCards\CoachingCards.iOS\CoachingCards.iOS.csproj", "{BDB82196-D14D-4863-96B7-02CDA6F4A41E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoachingCards", "CoachingCards\CoachingCards\CoachingCards.csproj", "{53912D04-077C-4B1B-BBCB-3035CB0F79BD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoachingCards", "CoachingCards\CoachingCards\CoachingCards.csproj", "{53912D04-077C-4B1B-BBCB-3035CB0F79BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

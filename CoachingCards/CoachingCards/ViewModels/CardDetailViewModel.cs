@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CoachingCards.Models;
+using CoachingCards.Services;
+using System;
 using System.Diagnostics;
 using Xamarin.Forms;
 
@@ -7,6 +9,8 @@ namespace CoachingCards.ViewModels
     [QueryProperty(nameof(CardId), nameof(CardId))]
     public class CardDetailViewModel : BaseViewModel
     {
+        public IDataStore<Card> DataStore => DependencyService.Get<IDataStore<Card>>();
+
         private int cardId;
         private string heading;
         private string text;

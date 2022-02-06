@@ -1,16 +1,13 @@
-﻿using CoachingCards.Models;
-using CoachingCards.Services;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        public IDataStore<Card> DataStore => DependencyService.Get<IDataStore<Card>>();
+        //public IDataStore<Card> DataStore => DependencyService.Get<IDataStore<Card>>();
 
         bool isBusy = false;
         public bool IsBusy
