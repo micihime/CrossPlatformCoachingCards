@@ -143,4 +143,22 @@
       <Name>CoachingCards</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\back.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backgroundL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backgroundR.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\empty.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\front.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\separator.png" />
+  </ItemGroup>
 </Project>

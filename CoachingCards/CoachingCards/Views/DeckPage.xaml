@@ -1,35 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoachingCards.Views.DeckPage">
-    
+             x:Class="CoachingCards.Views.DeckPage"
+             IconImageSource="back.png">
+
     <ContentPage.Content>
-        <ScrollView>
-            <StackLayout x:Name="CardDeck" Spacing="20" Padding="15" BackgroundColor="Red">
-                
-                <Label x:Name="CardHeading" 
+        <Grid Padding="0">
+            <Image x:Name="CardDeckBackground" Aspect="AspectFill" Source="back.png" />
+            <ScrollView>
+                <StackLayout x:Name="CardDeck" Spacing="20" Padding="15">
+
+                    <Label x:Name="CardHeading" 
                     Text="{Binding Heading}" 
                     FontSize="Title" />
 
-                <Label x:Name="CardText" 
+                    <Label x:Name="CardText" 
                     Text="{Binding Text}" 
                     FontSize="Medium"/>
 
-                <Label x:Name="CardAction" 
+                    <Label x:Name="CardAction" 
                     Text="{Binding Action}" 
                     FontSize="Medium" 
                     FontAttributes="Italic" />
 
-                <!--<StackLayout.GestureRecognizers>
-                <TapGestureRecognizer 
-                                NumberOfTapsRequired="1"
-                                Command="{Binding Source={RelativeSource AncestorType={x:Type local:CardsViewModel}}, Path=CardTapped}"		
-                                CommandParameter="{Binding .}">
-                </TapGestureRecognizer>
-            </StackLayout.GestureRecognizers>-->
-                <Button x:Name="testButt" Text="CARD" Clicked="testButt_Clicked"></Button>
-            </StackLayout>
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Tapped="TapGestureRecognizer_Tapped"
+                                NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </StackLayout.GestureRecognizers>
+                    <!--<Button x:Name="testButt" Text="CARD" Clicked="testButt_Clicked"></Button>-->
+                </StackLayout>
 
-        </ScrollView>
+            </ScrollView>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>

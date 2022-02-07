@@ -11,6 +11,7 @@ namespace CoachingCards.Views
         #region DECK
         private const string empty = "";
         private static StackLayout cardDeck;
+        private static Image cardDeckBackground;
         private static Label cardHeading;
         private static Label cardText;
         private static Label cardAction;
@@ -32,8 +33,14 @@ namespace CoachingCards.Views
             cardHeading = CardHeading;
             cardText = CardText;
             cardAction = CardAction;
+            cardDeckBackground = CardDeckBackground;
 
             cards = CardList.GetNewDeck();
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+            CardManipulation();
         }
         private void testButt_Clicked(object sender, System.EventArgs e)
         {
@@ -95,7 +102,8 @@ namespace CoachingCards.Views
 
             showBack = false;
 
-            cardDeck.BackgroundColor = Color.Lavender;
+            //cardDeck.BackgroundColor = Color.Lavender;
+            cardDeckBackground.Source = cards[0].IsLeft ? "backgroundL.png" : "backgroundR.png";
             //separator.SetBackgroundColor(Android.Graphics.Color.Black);
 
             cardHeading.Text = cards[0].Heading;
@@ -110,7 +118,9 @@ namespace CoachingCards.Views
             cards.RemoveAt(0); //toss
             showBack = true;
 
-            cardDeck.BackgroundColor = Color.Orange;
+            //cardDeck.BackgroundColor = Color.Orange;
+            cardDeckBackground.Source = "back.png";
+
             //separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
             cardHeading.Text = empty;
@@ -120,7 +130,9 @@ namespace CoachingCards.Views
 
         private static void EmptyDeck()
         {
-            cardDeck.BackgroundColor = Color.White;
+            //cardDeck.BackgroundColor = Color.White;
+            cardDeckBackground.Source = "empty.png";
+
             //separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
             cardHeading.Text = empty;
@@ -134,7 +146,9 @@ namespace CoachingCards.Views
 
             showBack = true;
 
-            cardDeck.BackgroundColor = Color.Orange;
+            //cardDeck.BackgroundColor = Color.Orange;
+            cardDeckBackground.Source = "back.png";
+
             //separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
             cardHeading.Text = empty;
