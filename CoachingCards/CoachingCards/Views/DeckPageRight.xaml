@@ -13,17 +13,17 @@
                         Text="{Binding Heading}" 
                         FontSize="Title" />
 
-                    <Image x:Name="Separator1" Source="separator3.png" />
+                    <!--<Image x:Name="Separator1" Source="separator3.png" />-->
 
                     <Label x:Name="CardText" 
                         Text="{Binding Text}" 
-                        FontSize="Medium"/>
+                        FontSize="20"/>
 
-                    <Image x:Name="Separator2" Source="separator3.png" />
+                    <!--<Image x:Name="Separator2" Source="separator3.png" />-->
 
                     <Label x:Name="CardAction" 
                         Text="{Binding Action}" 
-                        FontSize="Medium" 
+                        FontSize="20" 
                         FontAttributes="Italic" />
 
                     <StackLayout.GestureRecognizers>
