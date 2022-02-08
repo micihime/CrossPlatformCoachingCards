@@ -9,6 +9,7 @@ namespace CoachingCards.Views
     public partial class DeckPage : ContentPage
     {
         #region DECK
+
         private const string empty = "";
         private const string emptyDeckBackgroundImage = "empty.png";
         private const string backgroundImage = "back.png";
@@ -53,7 +54,24 @@ namespace CoachingCards.Views
             CardManipulation();
         }
 
-        #region PUBLIC METHODS
+        private static void ResetGame()
+        {
+            cards = CardList.GetNewDeck();
+
+            //animateCard(animShuffleDeck);
+
+            showBack = true;
+
+            cardDeckBackground.Source = backgroundImage; //cardDeck.BackgroundColor = Color.Orange;
+            separator1.Source = null;
+            separator2.Source = null;
+
+            cardHeading.Text = empty;
+            cardText.Text = empty;
+            cardAction.Text = empty;
+        }
+
+        #region PRIVATE METHODS
 
         public static void CardManipulation()
         {
@@ -62,9 +80,6 @@ namespace CoachingCards.Views
             else
                 ToggleCard();
         }
-        #endregion
-
-        #region PRIVATE METHODS
 
         //private static void animateCard(Animation anim)
         //{
@@ -115,23 +130,6 @@ namespace CoachingCards.Views
         private static void EmptyDeck()
         {
             cardDeckBackground.Source = emptyDeckBackgroundImage;  //cardDeck.BackgroundColor = Color.White;
-            separator1.Source = null;
-            separator2.Source = null;
-
-            cardHeading.Text = empty;
-            cardText.Text = empty;
-            cardAction.Text = empty;
-        }
-
-        private static void ResetGame()
-        {
-            cards = CardList.GetNewDeck();
-
-            //animateCard(animShuffleDeck);
-
-            showBack = true;
-
-            cardDeckBackground.Source = backgroundImage; //cardDeck.BackgroundColor = Color.Orange;
             separator1.Source = null;
             separator2.Source = null;
 

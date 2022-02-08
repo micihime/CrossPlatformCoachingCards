@@ -13,9 +13,13 @@
                     Text="{Binding Heading}" 
                     FontSize="Title" />
 
+                    <Image x:Name="Separator1" Source="separator2.png" />
+
                     <Label x:Name="CardText" 
                     Text="{Binding Text}" 
                     FontSize="Medium"/>
+
+                    <Image x:Name="Separator2" Source="separator2.png" />
 
                     <Label x:Name="CardAction" 
                     Text="{Binding Action}" 

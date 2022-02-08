@@ -10,17 +10,21 @@
                 <StackLayout x:Name="CardDeck" Spacing="20" Padding="15">
 
                     <Label x:Name="CardHeading" 
-                    Text="{Binding Heading}" 
-                    FontSize="Title" />
+                        Text="{Binding Heading}" 
+                        FontSize="Title" />
+
+                    <Image x:Name="Separator1" Source="separator3.png" />
 
                     <Label x:Name="CardText" 
-                    Text="{Binding Text}" 
-                    FontSize="Medium"/>
+                        Text="{Binding Text}" 
+                        FontSize="Medium"/>
+
+                    <Image x:Name="Separator2" Source="separator3.png" />
 
                     <Label x:Name="CardAction" 
-                    Text="{Binding Action}" 
-                    FontSize="Medium" 
-                    FontAttributes="Italic" />
+                        Text="{Binding Action}" 
+                        FontSize="Medium" 
+                        FontAttributes="Italic" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
