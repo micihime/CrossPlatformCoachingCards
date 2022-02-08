@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoachingCards.Views.DeckPage">
+             x:Class="CoachingCards.Views.DeckPageLeft">
 
     <ContentPage.Content>
         <Grid Padding="0">
@@ -10,21 +10,17 @@
                 <StackLayout x:Name="CardDeck" Spacing="20" Padding="15">
 
                     <Label x:Name="CardHeading" 
-                        Text="{Binding Heading}" 
-                        FontSize="Title" />
-                    
-                    <Image x:Name="Separator1" Source="separator.png" />
+                    Text="{Binding Heading}" 
+                    FontSize="Title" />
 
                     <Label x:Name="CardText" 
-                        Text="{Binding Text}" 
-                        FontSize="Medium"/>
-                    
-                    <Image x:Name="Separator2" Source="separator.png" />
+                    Text="{Binding Text}" 
+                    FontSize="Medium"/>
 
                     <Label x:Name="CardAction" 
-                        Text="{Binding Action}" 
-                        FontSize="Medium" 
-                        FontAttributes="Italic" />
+                    Text="{Binding Action}" 
+                    FontSize="Medium" 
+                    FontAttributes="Italic" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 

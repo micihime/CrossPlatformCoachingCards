@@ -80,12 +80,20 @@
     -->
 
     <FlyoutItem Title="Hrát" Icon="icon_feed.png">
-        <ShellContent Route="CardsPage" ContentTemplate="{DataTemplate local:DeckPage}" />
+        <ShellContent Route="Full" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
-    
-    <FlyoutItem Title="Hrát2" Icon="icon_feed.png">
+
+    <FlyoutItem Title="Hrát" Icon="icon_feed.png">
+        <ShellContent Route="LeftHemisphere" ContentTemplate="{DataTemplate local:DeckPageLeft}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Hrát" Icon="icon_feed.png">
+        <ShellContent Route="RightHemisphere" ContentTemplate="{DataTemplate local:DeckPageRight}" />
+    </FlyoutItem>
+
+    <!--<FlyoutItem Title="Hrát2" Icon="icon_feed.png">
         <ShellContent Route="CardsPage" ContentTemplate="{DataTemplate local:CardsPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
     <FlyoutItem Title="Návod" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />

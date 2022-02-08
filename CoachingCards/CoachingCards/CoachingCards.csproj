@@ -17,6 +17,12 @@
     <Compile Update="Views\CardsPage.xaml.cs">
       <DependentUpon>CardsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\DeckPageLeft.xaml.cs">
+      <DependentUpon>DeckPageLeft.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\DeckPageRight.xaml.cs">
+      <DependentUpon>DeckPageRight.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>

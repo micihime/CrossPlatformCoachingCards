@@ -6,20 +6,12 @@ using Xamarin.Forms.Xaml;
 namespace CoachingCards.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class DeckPage : ContentPage
+    public partial class DeckPageRight : ContentPage
     {
         #region DECK
         private const string empty = "";
-        private const string emptyDeckBackgroundImage = "empty.png";
-        private const string backgroundImage = "back.png";
-        private const string backgroundImageLeft = "backgroundL.png";
-        private const string backgroundImageRight = "backgroundR.png";
-        private const string separatorImage = "separator.png";
-
+        private static StackLayout cardDeck;
         private static Image cardDeckBackground;
-        private static Image separator1;
-        private static Image separator2;
-
         private static Label cardHeading;
         private static Label cardText;
         private static Label cardAction;
@@ -33,17 +25,15 @@ namespace CoachingCards.Views
         }
         #endregion
 
-        public DeckPage()
+        public DeckPageRight()
         {
             InitializeComponent();
 
-            cardDeckBackground = CardDeckBackground;
-            separator1 = Separator1;
-            separator2 = Separator2;
-
+            cardDeck = CardDeck;
             cardHeading = CardHeading;
             cardText = CardText;
             cardAction = CardAction;
+            cardDeckBackground = CardDeckBackground;
 
             ResetGame();
         }
@@ -87,9 +77,9 @@ namespace CoachingCards.Views
 
             showBack = false;
 
-            cardDeckBackground.Source = cards[0].IsLeft ? backgroundImageLeft : backgroundImageRight; //cardDeck.BackgroundColor = Color.Lavender;
-            separator1.Source = separatorImage;
-            separator2.Source = separatorImage;
+            //cardDeck.BackgroundColor = Color.Lavender;
+            cardDeckBackground.Source = cards[0].IsLeft ? "backgroundL.png" : "backgroundR.png";
+            //separator.SetBackgroundColor(Android.Graphics.Color.Black);
 
             cardHeading.Text = cards[0].Heading;
             cardText.Text = cards[0].Text;
@@ -103,9 +93,10 @@ namespace CoachingCards.Views
             cards.RemoveAt(0); //toss
             showBack = true;
 
-            cardDeckBackground.Source = backgroundImage; //cardDeck.BackgroundColor = Color.Orange;
-            separator1.Source = null;
-            separator2.Source = null;
+            //cardDeck.BackgroundColor = Color.Orange;
+            cardDeckBackground.Source = "back.png";
+
+            //separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
             cardHeading.Text = empty;
             cardText.Text = empty;
@@ -114,9 +105,10 @@ namespace CoachingCards.Views
 
         private static void EmptyDeck()
         {
-            cardDeckBackground.Source = emptyDeckBackgroundImage;  //cardDeck.BackgroundColor = Color.White;
-            separator1.Source = null;
-            separator2.Source = null;
+            //cardDeck.BackgroundColor = Color.White;
+            cardDeckBackground.Source = "empty.png";
+
+            //separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
             cardHeading.Text = empty;
             cardText.Text = empty;
@@ -125,15 +117,16 @@ namespace CoachingCards.Views
 
         private static void ResetGame()
         {
-            cards = CardList.GetNewDeck();
-
             //animateCard(animShuffleDeck);
+
+            cards = CardList.GetNewDeckRightHemisphere();
 
             showBack = true;
 
-            cardDeckBackground.Source = backgroundImage; //cardDeck.BackgroundColor = Color.Orange;
-            separator1.Source = null;
-            separator2.Source = null;
+            //cardDeck.BackgroundColor = Color.Orange;
+            cardDeckBackground.Source = "back.png";
+
+            //separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
 
             cardHeading.Text = empty;
             cardText.Text = empty;
