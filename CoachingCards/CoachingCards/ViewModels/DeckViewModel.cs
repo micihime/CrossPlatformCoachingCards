@@ -1,6 +1,8 @@
 ﻿using CoachingCards.Models;
+using System;
 using System.Collections.Generic;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
@@ -118,6 +120,8 @@ namespace CoachingCards.ViewModels
 
         public DeckViewModel()
         {
+            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
+
             showBack = true;
             Heading = Text = Action = string.Empty;
             Background = backgroundImage;
@@ -129,6 +133,8 @@ namespace CoachingCards.ViewModels
 
         public DeckViewModel(GameMode gameMode)
         {
+            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
+
             showBack = true;
             Heading = Text = Action = string.Empty;
             Background = backgroundImage;
@@ -171,39 +177,10 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        //private void ShowTopCard()
-        //{
-        //    showBack = false;
-
-        //    cardLayout.SetBackgroundResource(cards[0].Background);
-        //    separator.SetBackgroundColor(Android.Graphics.Color.Black);
-
-        //    cardTextView.SetText(HtmlCompat.FromHtml(cards[0].RenderText(), 0), TextView.BufferType.Normal);
-        //    cardActionTextView.SetText(HtmlCompat.FromHtml(cards[0].Action, 0), TextView.BufferType.Normal);
-
-        //}
-
-        //private void TossTopCard()
-        //{
-        //    cards.RemoveAt(0); //toss
-        //    showBack = true;
-
-        //    cardLayout.SetBackgroundResource(cardBack);
-        //    separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
-
-        //    cardTextView.SetText(textEmpty);
-        //    cardActionTextView.SetText(textEmpty);
-
-        //}
-
-        //private void EmptyDeck()
-        //{
-        //    cardLayout.SetBackgroundResource(cardEmpty);
-        //    separator.SetBackgroundColor(Android.Graphics.Color.Transparent);
-
-        //    cardTextView.SetText(textEmpty);
-        //    cardActionTextView.SetText(textEmpty);
-        //}
+        private void Accelerometer_ShakeDetected(object sender, EventArgs e)
+        {
+            OnToggleCard();
+        }
 
         //private static void ResetGame()
         //{

@@ -65,7 +65,7 @@ namespace CoachingCards.Models
 
         public static List<Card> GetNewDeck()
         {
-            return cardTexts.Take(2).ToList();//.OrderBy(a => Guid.NewGuid()).ToList();
+            return cardTexts;//.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
         public static List<Card> GetNewDeckLeftHemisphere()
