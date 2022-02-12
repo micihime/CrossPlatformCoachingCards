@@ -79,7 +79,11 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <FlyoutItem Title="Hrát 1" Icon="icon_feed.png">
+    <FlyoutItem Title="Hrát" Icon="icon_feed.png">
+        <ShellContent Route="DeckPage" ContentTemplate="{DataTemplate local:DeckPage}" />
+    </FlyoutItem>
+    
+    <!--<FlyoutItem Title="Hrát 1" Icon="icon_feed.png">
         <ShellContent Route="Full" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
 
@@ -89,17 +93,13 @@
 
     <FlyoutItem Title="Hrát 3" Icon="icon_feed.png">
         <ShellContent Route="RightHemisphere" ContentTemplate="{DataTemplate local:DeckPageRight}" />
-    </FlyoutItem>
-
-    <!--<FlyoutItem Title="Hrát2" Icon="icon_feed.png">
-        <ShellContent Route="CardsPage" ContentTemplate="{DataTemplate local:CardsPage}" />
-    </FlyoutItem>-->
+    </FlyoutItem>    
 
     <FlyoutItem Title="Návod" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
     <FlyoutItem Title="O kartách" Icon="icon_feed.png">
         <ShellContent Route="AboutCards" ContentTemplate="{DataTemplate local:AboutCardsPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
 </Shell>

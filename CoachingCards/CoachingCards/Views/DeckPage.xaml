@@ -1,41 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoachingCards.Views.DeckPage">
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:CoachingCards.ViewModels"
+             x:Class="CoachingCards.Views.DeckPage"
+             x:DataType="viewmodels:DeckViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:DeckViewModel/>
+    </ContentPage.BindingContext>
 
     <ContentPage.Content>
         <Grid Padding="0">
-            <Image x:Name="CardDeckBackground" Aspect="AspectFill" Source="back.png" />
+            <Image Aspect="AspectFill" Source="{Binding Background}" />
             <ScrollView>
-                <StackLayout x:Name="CardDeck" Spacing="20" Padding="15">
-
-                    <Label x:Name="CardHeading" 
-                        Text="{Binding Heading}" 
-                        FontSize="Title" />
-                    
-                    <!--<Image x:Name="Separator1" Source="separator.png" />-->
-
-                    <Label x:Name="CardText" 
-                        Text="{Binding Text}" 
-                        FontSize="17"/>
-                    
-                    <!--<Image x:Name="Separator2" Source="separator.png" />-->
-
-                    <Label x:Name="CardAction" 
-                        Text="{Binding Action}" 
-                        FontSize="17" 
-                        FontAttributes="Italic" />
+                <StackLayout Spacing="20" Padding="15">
+                    <Label Text="{Binding Heading}" FontSize="Title" />
+                    <Label Text="{Binding Text}" FontSize="Medium"/>
+                    <Image Source="{Binding Separator}" />
+                    <Label Text="{Binding Action}" FontSize="Medium" FontAttributes="Italic" />
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
-                            Tapped="TapGestureRecognizer_Tapped"
-                                NumberOfTapsRequired="1">
+                        Command="{Binding ToggleCard}"
+                        NumberOfTapsRequired="1">
                         </TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>
-                    <!--<Button x:Name="testButt" Text="CARD" Clicked="testButt_Clicked"></Button>-->
                 </StackLayout>
-
             </ScrollView>
         </Grid>
     </ContentPage.Content>
+    
 </ContentPage>

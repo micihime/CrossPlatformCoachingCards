@@ -1,5 +1,4 @@
-﻿using CoachingCards.Views;
-using System;
+﻿using System;
 using Xamarin.Forms;
 
 namespace CoachingCards
@@ -9,7 +8,6 @@ namespace CoachingCards
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute(nameof(CardDetailPage), typeof(CardDetailPage));
         }
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
