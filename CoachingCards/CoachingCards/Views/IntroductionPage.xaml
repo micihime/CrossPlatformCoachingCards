@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:viewmodels="clr-namespace:CoachingCards.ViewModels"
+             x:Class="CoachingCards.Views.IntroductionPage"   
+             x:DataType="viewmodels:IntroductionViewModel">
+
+    <ContentPage.BindingContext>
+        <viewmodels:IntroductionViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="{Binding Heading}" FontSize="Title"/>
+                <Label Text="{Binding Paragraph1}" FontSize="20" />
+                <Label Text="{Binding Paragraph2}" FontSize="20" />
+                <Label Text="{Binding Paragraph3}" FontSize="20" />
+                <Button Text="Previous" 
+                        IsEnabled="{Binding PreviousVisible}"
+                        Command="{Binding Previous}" />
+                <Button Text="Next"
+                        IsEnabled="{Binding NextVisible}"
+                        Command="{Binding Next}" />
+
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

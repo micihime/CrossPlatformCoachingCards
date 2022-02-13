@@ -1,8 +1,5 @@
 ﻿using CoachingCards.Services;
-using CoachingCards.Views;
-using System;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace CoachingCards
 {

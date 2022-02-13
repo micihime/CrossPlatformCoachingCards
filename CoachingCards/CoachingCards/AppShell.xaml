@@ -79,23 +79,23 @@
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
 
-    <FlyoutItem Title="Hrát" Icon="icon_feed.png">
-        <ShellContent Route="DeckPage" ContentTemplate="{DataTemplate local:DeckPage}" />
+    <FlyoutItem Title="Návod" Icon="icon_about.png">
+        <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
     </FlyoutItem>
     
-    <!--<FlyoutItem Title="Hrát 1" Icon="icon_feed.png">
-        <ShellContent Route="Full" ContentTemplate="{DataTemplate local:DeckPage}" />
+    <FlyoutItem Title="Všechny karty" Icon="icon_feed.png">
+        <ShellContent Route="DeckPage" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Hrát 2" Icon="icon_feed.png">
-        <ShellContent Route="LeftHemisphere" ContentTemplate="{DataTemplate local:DeckPageLeft}" />
+    <!--<FlyoutItem Title="Levá hemisféra" Icon="icon_feed.png">
+        <ShellContent Route="DeckPage" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Hrát 3" Icon="icon_feed.png">
-        <ShellContent Route="RightHemisphere" ContentTemplate="{DataTemplate local:DeckPageRight}" />
-    </FlyoutItem>    
+    <FlyoutItem Title="Pravá hemisféra" Icon="icon_feed.png">
+        <ShellContent Route="DeckPage" ContentTemplate="{DataTemplate local:DeckPage}" />
+    </FlyoutItem>-->
 
-    <FlyoutItem Title="Návod" Icon="icon_about.png">
+    <!--<FlyoutItem Title="Návod" Icon="icon_about.png">
         <ShellContent Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </FlyoutItem>
     <FlyoutItem Title="O kartách" Icon="icon_feed.png">

@@ -25,18 +25,5 @@ namespace CoachingCards.Views
             //Accelerometer.ShakeDetected -= this.OnShaked;
             base.OnDisappearing();
         }
-
-        //private void OnShaked(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        // your actions on shake go here, eg open a page 
-        //        onshakeDetect.Text = "SHAKED!";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        // your exception handler here
-        //    }
-        //}
     }
 }
