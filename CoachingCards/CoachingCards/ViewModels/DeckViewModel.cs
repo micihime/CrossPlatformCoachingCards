@@ -1,4 +1,5 @@
 ﻿using CoachingCards.Models;
+using MvvmHelpers;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -7,7 +8,7 @@ using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
-    public class DeckViewModel : BindableObject
+    public class DeckViewModel : BaseViewModel
     {
         #region DECK RESOURCES
 
@@ -44,40 +45,19 @@ namespace CoachingCards.ViewModels
         public string Heading
         {
             get => heading;
-            set
-            {
-                if (value == heading)
-                    return;
-
-                heading = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref heading, value);
         }
 
         public string Text
         {
             get => text;
-            set
-            {
-                if (value == text)
-                    return;
-
-                text = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref text, value);
         }
 
         public string Action
         {
             get => action;
-            set
-            {
-                if (value == action)
-                    return;
-
-                action = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref action, value);
         }
         #endregion
 
@@ -85,34 +65,14 @@ namespace CoachingCards.ViewModels
 
         public string Background
         {
-            get
-            {
-                return background;//isLeft ? backgroundImageLeft : backgroundImageRight;
-            }
-            set
-            {
-                if (value == background)
-                    return;
-
-                background = value;
-                OnPropertyChanged();
-            }
+            get => background;//isLeft ? backgroundImageLeft : backgroundImageRight;
+            set => SetProperty(ref background, value);
         }
 
         public string Separator
         {
-            get
-            {
-                return separator;
-            }
-            set
-            {
-                if (value == separator)
-                    return;
-
-                separator = value;
-                OnPropertyChanged();
-            }
+            get => separator;
+            set => SetProperty(ref separator, value);
         }
         #endregion
 

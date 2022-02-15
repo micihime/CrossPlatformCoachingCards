@@ -1,4 +1,4 @@
-﻿using CoachingCards.Services;
+﻿using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CoachingCards
@@ -9,8 +9,8 @@ namespace CoachingCards
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
+            VersionTracking.Track();
+            //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 

@@ -1,11 +1,12 @@
 ﻿using CoachingCards.Models;
+using MvvmHelpers;
 using System.Collections.Generic;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
-    public class IntroductionViewModel : BindableObject
+    public class IntroductionViewModel : BaseViewModel
     {
         #region PRIVATE FIELDS
 
@@ -25,79 +26,37 @@ namespace CoachingCards.ViewModels
         public string Heading
         {
             get => heading;
-            set
-            {
-                if (value == heading)
-                    return;
-
-                heading = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref heading, value);
         }
 
         public string Paragraph1
         {
             get => paragraph1;
-            set
-            {
-                if (value == paragraph1)
-                    return;
-
-                paragraph1 = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref paragraph1, value);
         }
 
         public string Paragraph2
         {
             get => paragraph2;
-            set
-            {
-                if (value == paragraph2)
-                    return;
-
-                paragraph2 = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref paragraph2, value);
         }
 
         public string Paragraph3
         {
             get => paragraph3;
-            set
-            {
-                if (value == paragraph3)
-                    return;
-
-                paragraph3 = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref paragraph3, value);
         }
 
         public bool NextVisible
         {
             get => canGoNext;
-            set
-            {
-                if (value == canGoNext)
-                    return;
-
-                canGoNext = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref canGoNext, value);
         }
 
         public bool PreviousVisible
         {
             get => canGoPrevious;
-            set
-            {
-                if (value == canGoPrevious)
-                    return;
-
-                canGoPrevious = value;
-                OnPropertyChanged();
-            }
+            set => SetProperty(ref canGoPrevious, value);
         }
         #endregion
 
