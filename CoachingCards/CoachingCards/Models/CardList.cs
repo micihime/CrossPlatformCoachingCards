@@ -64,34 +64,37 @@ namespace CoachingCards.Models
 
         #region PUBLIC METHODS
 
-        public static List<Card> GetNewDeck()
-        {
-            return cardTexts.OrderBy(a => Guid.NewGuid()).ToList();
-        }
-
-        public static List<Card> GetNewDeckLeftHemisphere()
-        {
-            return cardTexts.Take(22).OrderBy(a => Guid.NewGuid()).ToList(); //Koučovací karty – levá hemisféra 1-22 
-        }
-
-        public static List<Card> GetNewDeckRightHemisphere()
-        {
-            return cardTexts.Skip(22).OrderBy(a => Guid.NewGuid()).ToList(); //Koučovací karty – pravá hemisféra 23-49
-        }
-
         public static List<Card> GetNewDeck(GameMode mode)
         {
             switch (mode)
             {
                 case GameMode.Full:
-                    return GetNewDeck();
+                    return GetNewDeckFull();
                 case GameMode.LeftHemisphere:
                     return GetNewDeckLeftHemisphere();
                 case GameMode.RightHemisphere:
                     return GetNewDeckRightHemisphere();
+                default:
+                    return GetNewDeckFull();
             }
+        }
+        #endregion
 
-            return null;
+        #region PRIVATE METHODS
+
+        private static List<Card> GetNewDeckFull()
+        {
+            return cardTexts.OrderBy(a => Guid.NewGuid()).ToList();
+        }
+
+        private static List<Card> GetNewDeckLeftHemisphere()
+        {
+            return cardTexts.Take(22).OrderBy(a => Guid.NewGuid()).ToList(); //Koučovací karty – levá hemisféra 1-22 
+        }
+
+        private static List<Card> GetNewDeckRightHemisphere()
+        {
+            return cardTexts.Skip(22).OrderBy(a => Guid.NewGuid()).ToList(); //Koučovací karty – pravá hemisféra 23-49
         }
         #endregion
     }

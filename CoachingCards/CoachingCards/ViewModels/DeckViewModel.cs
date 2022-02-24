@@ -90,20 +90,8 @@ namespace CoachingCards.ViewModels
             Background = backgroundImage;
             Separator = string.Empty;
 
-            switch (StaticHelper.Mode)
-            {
-                case GameMode.Full:
-                    deck = CardList.GetNewDeck();
-                    break;
-                case GameMode.LeftHemisphere:
-                    deck = CardList.GetNewDeckLeftHemisphere();
-                    break;
-                case GameMode.RightHemisphere:
-                    deck = CardList.GetNewDeckRightHemisphere();
-                    break;
-                default:
-                    break;
-            }
+            deck = CardList.GetNewDeck(StaticHelper.Mode);
+
             ToggleCard = new Command(OnToggleCard);
         }
 
