@@ -8,8 +8,11 @@ using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
 {
+    [QueryProperty(nameof(Parameter), nameof(Parameter))]
     public class DeckViewModel : BaseViewModel
     {
+        public string Parameter { get; set; }
+
         #region DECK RESOURCES
 
         private const string emptyDeckBackgroundImage = "empty.png";
@@ -87,7 +90,20 @@ namespace CoachingCards.ViewModels
             Background = backgroundImage;
             Separator = string.Empty;
 
-            deck = CardList.GetNewDeck();
+            switch (StaticHelper.Mode)
+            {
+                case GameMode.Full:
+                    deck = CardList.GetNewDeck();
+                    break;
+                case GameMode.LeftHemisphere:
+                    deck = CardList.GetNewDeckLeftHemisphere();
+                    break;
+                case GameMode.RightHemisphere:
+                    deck = CardList.GetNewDeckRightHemisphere();
+                    break;
+                default:
+                    break;
+            }
             ToggleCard = new Command(OnToggleCard);
         }
 
