@@ -8,28 +8,44 @@
     <ContentPage.BindingContext>
         <viewmodels:IntroductionViewModel/>
     </ContentPage.BindingContext>
-    
-    <ContentPage.Content>
-        <ScrollView>
-            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
-                <Label Text="{Binding Heading}" FontSize="Title"/>
-                <Label Text="{Binding Paragraph1}" FontSize="20" />
-                <Label Text="{Binding Paragraph2}" FontSize="20" />
-                <Label Text="{Binding Paragraph3}" FontSize="20" />
-                
-                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                    <Button Text="Previous" 
-                        IsEnabled="{Binding PreviousVisible}"
-                        Command="{Binding Previous}" />
-                    <Button Text="Next"
-                        IsEnabled="{Binding NextVisible}"
-                        Command="{Binding Next}" />
-                </StackLayout>
 
-                <Button x:Name="playButton"
-                        Text="Skip"
-                        Command="{Binding Play}" />
-            </StackLayout>
-        </ScrollView>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <ScrollView Grid.Row="0"
+               Grid.ColumnSpan="2">
+                <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                    <Label Text="{Binding Heading}" FontSize="Title"/>
+                    <Label Text="{Binding Paragraph1}" FontSize="20" />
+                    <Label Text="{Binding Paragraph2}" FontSize="20" />
+                    <Label Text="{Binding Paragraph3}" FontSize="20" />
+                </StackLayout>
+            </ScrollView>
+
+            <Button Grid.Row="1"
+                    Grid.Column="0"
+                    Text="Previous" 
+                    IsEnabled="{Binding PreviousVisible}"
+                    Command="{Binding Previous}" />
+            <Button Grid.Row="1"
+                    Grid.Column="1"
+                    Text="Next"
+                    IsEnabled="{Binding NextVisible}"
+                    Command="{Binding Next}" />
+
+            <Button Grid.Row="2"
+                    Grid.ColumnSpan="2"
+                    Text="Skip"
+                    Command="{Binding Play}" />
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
