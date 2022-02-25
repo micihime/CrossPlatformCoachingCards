@@ -1,6 +1,8 @@
 ﻿using CoachingCards.Models;
 using MvvmHelpers;
+using MvvmHelpers.Commands;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -63,8 +65,8 @@ namespace CoachingCards.ViewModels
         #region COMMANDS
 
         public ICommand Next { get; }
-
         public ICommand Previous { get; }
+        public AsyncCommand Play { get; }
         #endregion
 
         #region CONSTRUCTOR
@@ -82,8 +84,9 @@ namespace CoachingCards.ViewModels
             NextVisible = CanGoNext();
             PreviousVisible = CanGoPrevious();
 
-            Next = new Command(OnNext, CanGoNext);
-            Previous = new Command(OnPrevious, CanGoPrevious);
+            Next = new MvvmHelpers.Commands.Command(OnNext, CanGoNext);
+            Previous = new MvvmHelpers.Commands.Command(OnPrevious, CanGoPrevious);
+            Play = new AsyncCommand(OnPlay);
         }
         #endregion
 
@@ -127,6 +130,11 @@ namespace CoachingCards.ViewModels
                 NextVisible = CanGoNext();
                 PreviousVisible = CanGoPrevious();
             }
+        }
+
+        async Task OnPlay()
+        {
+            await Shell.Current.GoToAsync("///Full");
         }
         #endregion
     }

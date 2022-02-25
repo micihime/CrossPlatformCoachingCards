@@ -16,13 +16,19 @@
                 <Label Text="{Binding Paragraph1}" FontSize="20" />
                 <Label Text="{Binding Paragraph2}" FontSize="20" />
                 <Label Text="{Binding Paragraph3}" FontSize="20" />
-                <Button Text="Previous" 
+                
+                <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                    <Button Text="Previous" 
                         IsEnabled="{Binding PreviousVisible}"
                         Command="{Binding Previous}" />
-                <Button Text="Next"
+                    <Button Text="Next"
                         IsEnabled="{Binding NextVisible}"
                         Command="{Binding Next}" />
+                </StackLayout>
 
+                <Button x:Name="playButton"
+                        Text="Skip"
+                        Command="{Binding Play}" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

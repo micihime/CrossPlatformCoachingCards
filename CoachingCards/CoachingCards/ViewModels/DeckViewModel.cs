@@ -105,7 +105,7 @@ namespace CoachingCards.ViewModels
             if (StaticHelper.FirstRun)
             {
                 StaticHelper.FirstRun = false;
-                await Application.Current.MainPage.DisplayAlert("Welcome!", "Welcome to Coaching Cards. Let's get started with tutorial.", "OK");
+                //await Application.Current.MainPage.DisplayAlert("Welcome!", "Welcome to Coaching Cards. Let's get started with tutorial.", "OK");
                 await Shell.Current.GoToAsync("///IntroductionPage");
             }
         }
