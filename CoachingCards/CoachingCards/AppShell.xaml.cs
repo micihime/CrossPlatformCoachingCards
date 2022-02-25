@@ -1,5 +1,4 @@
 ﻿using CoachingCards.Models;
-using System;
 using Xamarin.Forms;
 
 namespace CoachingCards
@@ -9,12 +8,6 @@ namespace CoachingCards
         public AppShell()
         {
             InitializeComponent();
-            //Routing.RegisterRoute(nameof(DeckPage), typeof(DeckPage));
-        }
-
-        private async void OnMenuItemClicked(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync("//LoginPage");
         }
 
         protected override void OnNavigating(ShellNavigatingEventArgs args)

@@ -1,7 +1,9 @@
 ﻿using CoachingCards.Models;
 using MvvmHelpers;
+using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -25,6 +27,8 @@ namespace CoachingCards.ViewModels
         #region COMMANDS
 
         public ICommand ToggleCard { get; }
+        public AsyncCommand FirstRunCommand { get; }
+
         #endregion
 
         #region PRIVATE FIELDS
@@ -92,7 +96,18 @@ namespace CoachingCards.ViewModels
 
             deck = CardList.GetNewDeck(StaticHelper.Mode);
 
-            ToggleCard = new Command(OnToggleCard);
+            ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
+            FirstRunCommand = new AsyncCommand(FirstRun);
+        }
+
+        async Task FirstRun()
+        {
+            if (StaticHelper.FirstRun)
+            {
+                StaticHelper.FirstRun = false;
+                await Application.Current.MainPage.DisplayAlert("Welcome!", "Welcome to Coaching Cards. Let's get started with tutorial.", "OK");
+                await Shell.Current.GoToAsync("///IntroductionPage");
+            }
         }
 
         public DeckViewModel(GameMode gameMode)
@@ -105,7 +120,7 @@ namespace CoachingCards.ViewModels
             Separator = string.Empty;
 
             deck = CardList.GetNewDeck(gameMode);
-            ToggleCard = new Command(OnToggleCard);
+            ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
         }
         #endregion
 

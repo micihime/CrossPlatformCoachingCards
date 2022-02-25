@@ -9,7 +9,7 @@ namespace CoachingCards
         public App()
         {
             InitializeComponent();
-            VersionTracking.Track();
+            //VersionTracking.Track();
             //DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
