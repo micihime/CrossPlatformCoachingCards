@@ -1,8 +1,10 @@
 ﻿using CoachingCards.Models;
+using CoachingCards.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -94,7 +96,7 @@ namespace CoachingCards.ViewModels
             Background = backgroundImage;
             Separator = string.Empty;
 
-            deck = CardList.GetNewDeck(StaticHelper.Mode);
+            deck = CardService.GetNewDeck(StaticHelper.Mode).ToList();
 
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
@@ -119,7 +121,7 @@ namespace CoachingCards.ViewModels
             Background = backgroundImage;
             Separator = string.Empty;
 
-            deck = CardList.GetNewDeck(gameMode);
+            deck = CardService.GetNewDeck(gameMode).ToList();
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
         }
         #endregion
