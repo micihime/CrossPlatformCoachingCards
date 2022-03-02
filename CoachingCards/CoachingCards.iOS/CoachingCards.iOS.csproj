@@ -162,9 +162,6 @@
     <BundleResource Include="Resources\empty.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\front.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\separator.png" />
   </ItemGroup>
 </Project>
