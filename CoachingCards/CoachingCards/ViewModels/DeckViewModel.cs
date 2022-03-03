@@ -163,21 +163,16 @@ namespace CoachingCards.ViewModels
             OnToggleCard();
         }
 
-        //private static void ResetGame()
-        //{
-        //    cards = CardList.GetNewDeck();
+        void ResetGame()
+        {
+            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
 
-        //    //animateCard(animShuffleDeck);
+            showBack = true;
+            Heading = Text = Action = string.Empty;
+            Background = backgroundImage;
+            Separator = string.Empty;
 
-        //    showBack = true;
-
-        //    cardDeckBackground.Source = backgroundImage; //cardDeck.BackgroundColor = Color.Orange;
-        //    //separator1.Source = null;
-        //    //separator2.Source = null;
-
-        //    cardHeading.Text = empty;
-        //    cardText.Text = empty;
-        //    cardAction.Text = empty;
-        //}
+            deck = CardService.GetNewDeck(StaticHelper.Mode).ToList();
+        }
     }
 }
