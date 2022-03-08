@@ -1,7 +1,10 @@
-﻿namespace CoachingCards.Models
+﻿using SQLite;
+
+namespace CoachingCards.Models
 {
     public class Card
     {
+        [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
 
         //textual properties

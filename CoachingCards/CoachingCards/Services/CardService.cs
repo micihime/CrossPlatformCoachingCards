@@ -12,7 +12,7 @@ namespace CoachingCards.Services
     {
         static SQLiteConnection db;
 
-        static List<Card> cards = new List<Card>
+        static readonly List<Card> cards = new List<Card>
         {
             new Card{ Heading = "1. Přijmi, změň, opusť", Text = "Potřebuješ se rozhodnout? Zkus si pomoct trojicí reakcí: přijmi, změň, opusť.\nPŘIJMI situaci takovou, jaká je.\nZMĚŇ sebe, svůj přístup, svůj úhel pohledu, své myšlení.\nOPUSŤ situaci, která pro tebe nemá jiné vhodné řešení.\n\nJakékoliv rozhodnutí se stane mnohem snazší a sebevědomější. Například: Zavádění novinky v práci. Nadávat na vedení ani na systém ti nepomůže. Buď: \n1. novinku prostě přijmeš takovou, jaká je,\n2. nebo změníš svůj přístup a z původní nevýhody pro sebe uděláš výhodu,\n3. nebo je to pro tebe neakceptovatelné, tudíž odcházíš.", Action = "Akce: Použij na své aktuální dilema.", IsLeft = true},
             new Card{ Heading = "2. Užitečné vs. zajímavé", Text = "Pro rychlou a k výsledku vedoucí komunikaci a pro efektivní uvažování rozlišuj užitečné od zajímavého a věnuj se jenom užitečnému. Užitečné je to, co vede k vytyčenému výsledku. Zajímavé je to, co cestu k výsledku prodlužuje.\n\nNapříklad: Marie kamarádce podrobně vypráví, jak si na kole zranila koleno (orientace na zajímavé). Ale když jde Marie k lékaři, tak mu sdělí: „Bolí mě koleno. Tady.“ (Orientace na užitečné).\n\nZefektivníš komunikaci i přemýšlení a ušetříš čas.\nNapříklad: Pracovní porady zkrátíš o 50 % až 75 % času, zaměříš se na výsledek, zbavíš se zdržovacích odboček atd.", Action = "Akce: Vyzkoušej jeden den vědomě rozlišovat užitečné od zajímavého a dál se věnuj pouze užitečnému.", IsLeft = true},
@@ -64,29 +64,45 @@ namespace CoachingCards.Services
             new Card{ Heading =  "48. Vůně", Text = "Rozpomeň se.", Action = "Akce: Vybav si 3 vůně z dětství.", IsLeft = false},
             new Card{ Heading =  "49. Jídla", Text = "Rozpomeň se.", Action = "Akce: Vybav si tři jídla z dětství, která z tvého jídelníčku zmizela.", IsLeft = false}
         };
+        static readonly List<Intro> introTexts = new List<Intro>()
+        {
+            new Intro{ ID = 1, Heading = "Vítejte!", Paragraph1 = "Držíte v rukách první koučovací karty svého druhu vytvořené podle MindArt Conceptu. Koučovací karty pro ty, kteří chtějí osobnostní růst, ale nevědí, jak začít.", Paragraph2 = "Klepnutím nebo zatresením si vytáhněte si jednu kartu denně, splňte úkol, je-li na ní nějaký.", Paragraph3 = "Nejlepších výsledků dosáhnete, pokud si budete zapisovat vytaženou kartu a k ní i samotný průběh vlastní akce. Na co jste díky její realizaci přišli? Co nového jste se díky ní o sobě dozvěděli?" },
+            new Intro{ ID = 2, Heading =  "O kartách", Paragraph1 = "Karty jsou rozděleny na dva druhy podle toho, kterou hemisféru podporují. Cílem je aktivitu obou hemisfér dostat do rovnováhy.", Paragraph2 = "Levá hemisféra je zaměřena na: analytické myšlení, logiku, detaily, fakta, pravidla.", Paragraph3 = "Pravá hemisféra je zaměřena na: tvořivost, intuici, souvislosti, symboly, významy." },
+            new Intro{ ID = 3,  Heading = "Poděkování", Paragraph1 = "Rádi bychom poděkovali všem našim klientům, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků.", Paragraph2 = "Veronika a Petr Pavelkovi, Institut osobnostního tréninku", Paragraph3 = "Karty nenahradí služby kouče a terapeuta." }
+        };
 
         static void Init()
         {
             if (db == null)
             {
-                //var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "MyData.db");
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData.db");
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
-
                 db.CreateTable<Card>();
+                db.CreateTable<Intro>();
+
                 var deck = db.Table<Card>().ToList();
                 if ((deck == null) || (deck.Count == 0))
-                {
-                    LoadData();
-                }
+                    LoadCardData();
+
+                var introList = db.Table<Intro>().ToList();
+                if ((introList == null) || (introList.Count == 0))
+                    LoadIntroData();
             }
         }
 
-        private static void LoadData()
+        private static void LoadCardData()
         {
             foreach (var card in cards)
             {
                 AddCard(card.Heading, card.Text, card.Action, card.IsLeft);
+            }
+        }
+
+        private static void LoadIntroData()
+        {
+            foreach (var introText in introTexts)
+            {
+                AddIntro(introText.Heading, introText.Paragraph1, introText.Paragraph2, introText.Paragraph3);
             }
         }
 
@@ -106,18 +122,42 @@ namespace CoachingCards.Services
             var rowsAffected = db.Insert(card);
         }
 
-        public static void RemoveCard(int id)
+        public static void AddIntro(string heading, string paragraph1, string paragraph2, string paragraph3)
         {
-            //Init();
-            db.Delete<Card>(id);
+            Init();
+
+            var intro = new Intro
+            {
+                //ID = id,
+                Heading = heading,
+                Paragraph1 = paragraph1,
+                Paragraph2 = paragraph2,
+                Paragraph3 = paragraph3
+            };
+
+            var rowsAffected = db.Insert(intro);
         }
 
-        //public static  void<IEnumerable<Card>> GetCards()
-        //{
-        //     Init();
-        //    var Card =  db.Table<Card>().ToList();
-        //    return Card;
-        //}
+        public static Card GetCardById(int id)
+        {
+            Init();
+            var card = db.Table<Card>().Where(x => x.ID == id).FirstOrDefault();
+            return card;
+        }
+
+        public static Intro GetIntroById(int id)
+        {
+            Init();
+            var intro = db.Table<Intro>().Where(x => x.ID == id).FirstOrDefault();
+            return intro;
+        }
+
+        public static IEnumerable<Intro> GetIntro()
+        {
+            Init();
+            var intro = db.Table<Intro>().ToList();
+            return intro;
+        }
 
         public static IEnumerable<Card> GetNewDeck(GameMode mode)
         {
@@ -144,15 +184,15 @@ namespace CoachingCards.Services
         private static IEnumerable<Card> GetNewDeckLeftHemisphere()
         {
             Init();
-            var deck = db.Table<Card>().ToList();
-            return deck.Where(x => x.IsLeft == true).OrderBy(a => Guid.NewGuid()).ToList();
+            var deck = db.Table<Card>().Where(x => x.IsLeft == true).ToList();
+            return deck.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
         private static IEnumerable<Card> GetNewDeckRightHemisphere()
         {
             Init();
-            var deck = db.Table<Card>().ToList();
-            return deck.Where(x => x.IsLeft == false).OrderBy(a => Guid.NewGuid()).ToList();
+            var deck = db.Table<Card>().Where(x => x.IsLeft == false).ToList();
+            return deck.OrderBy(a => Guid.NewGuid()).ToList();
         }
     }
 }

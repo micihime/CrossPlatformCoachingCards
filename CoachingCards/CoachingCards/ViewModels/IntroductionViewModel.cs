@@ -1,7 +1,9 @@
 ﻿using CoachingCards.Models;
+using CoachingCards.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -73,7 +75,7 @@ namespace CoachingCards.ViewModels
 
         public IntroductionViewModel()
         {
-            introPages = IntroList.GetIntro();
+            introPages = CardService.GetIntro().ToList();
 
             pageNr = 0;
             Heading = introPages[pageNr].Heading;
