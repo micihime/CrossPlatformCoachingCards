@@ -12,6 +12,8 @@ namespace CoachingCards.Services
     {
         static SQLiteConnection db;
 
+        #region TEXTS
+
         static readonly List<Card> cards = new List<Card>
         {
             new Card{ Heading = "1. Přijmi, změň, opusť", Text = "Potřebuješ se rozhodnout? Zkus si pomoct trojicí reakcí: přijmi, změň, opusť.\nPŘIJMI situaci takovou, jaká je.\nZMĚŇ sebe, svůj přístup, svůj úhel pohledu, své myšlení.\nOPUSŤ situaci, která pro tebe nemá jiné vhodné řešení.\n\nJakékoliv rozhodnutí se stane mnohem snazší a sebevědomější. Například: Zavádění novinky v práci. Nadávat na vedení ani na systém ti nepomůže. Buď: \n1. novinku prostě přijmeš takovou, jaká je,\n2. nebo změníš svůj přístup a z původní nevýhody pro sebe uděláš výhodu,\n3. nebo je to pro tebe neakceptovatelné, tudíž odcházíš.", Action = "Akce: Použij na své aktuální dilema.", IsLeft = true},
@@ -64,63 +66,50 @@ namespace CoachingCards.Services
             new Card{ Heading =  "48. Vůně", Text = "Rozpomeň se.", Action = "Akce: Vybav si 3 vůně z dětství.", IsLeft = false},
             new Card{ Heading =  "49. Jídla", Text = "Rozpomeň se.", Action = "Akce: Vybav si tři jídla z dětství, která z tvého jídelníčku zmizela.", IsLeft = false}
         };
+
         static readonly List<Intro> introTexts = new List<Intro>()
         {
             new Intro{ ID = 1, Heading = "Vítejte!", Paragraph1 = "Držíte v rukách první koučovací karty svého druhu vytvořené podle MindArt Conceptu. Koučovací karty pro ty, kteří chtějí osobnostní růst, ale nevědí, jak začít.", Paragraph2 = "Klepnutím nebo zatresením si vytáhněte si jednu kartu denně, splňte úkol, je-li na ní nějaký.", Paragraph3 = "Nejlepších výsledků dosáhnete, pokud si budete zapisovat vytaženou kartu a k ní i samotný průběh vlastní akce. Na co jste díky její realizaci přišli? Co nového jste se díky ní o sobě dozvěděli?" },
             new Intro{ ID = 2, Heading =  "O kartách", Paragraph1 = "Karty jsou rozděleny na dva druhy podle toho, kterou hemisféru podporují. Cílem je aktivitu obou hemisfér dostat do rovnováhy.", Paragraph2 = "Levá hemisféra je zaměřena na: analytické myšlení, logiku, detaily, fakta, pravidla.", Paragraph3 = "Pravá hemisféra je zaměřena na: tvořivost, intuici, souvislosti, symboly, významy." },
             new Intro{ ID = 3,  Heading = "Poděkování", Paragraph1 = "Rádi bychom poděkovali všem našim klientům, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků.", Paragraph2 = "Veronika a Petr Pavelkovi, Institut osobnostního tréninku", Paragraph3 = "Karty nenahradí služby kouče a terapeuta." }
         };
+        #endregion
 
         static void Init()
         {
             if (db == null)
             {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData4.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
                 db.CreateTable<Card>();
                 db.CreateTable<Intro>();
+                db.CreateTable<Deck>();
 
-                var deck = db.Table<Card>().ToList();
-                if ((deck == null) || (deck.Count == 0))
-                    LoadCardData();
+                var cardList = db.Table<Card>().ToList();
+                if ((cardList == null) || (cardList.Count == 0))
+                    db.InsertAll(cards);
 
                 var introList = db.Table<Intro>().ToList();
                 if ((introList == null) || (introList.Count == 0))
-                    LoadIntroData();
+                    db.InsertAll(introList);
+
+                var deck = db.Table<Deck>().ToList();
+                if ((deck == null) || (deck.Count == 0))
+                {
+                    var cards = db.Table<Card>().ToList();
+                    var deckList = new List<Deck>();
+
+                    for (int i = 1; i <= cards.Count; i++)
+                    {
+                        deckList.Add(new Deck { ID = i, CardID = 0 });
+                    }
+
+                    db.InsertAll(deckList);
+                }
             }
         }
 
-        private static void LoadCardData()
-        {
-            foreach (var card in cards)
-            {
-                AddCard(card.Heading, card.Text, card.Action, card.IsLeft);
-            }
-        }
-
-        private static void LoadIntroData()
-        {
-            foreach (var introText in introTexts)
-            {
-                AddIntro(introText.Heading, introText.Paragraph1, introText.Paragraph2, introText.Paragraph3);
-            }
-        }
-
-        public static void AddCard(string heading, string text, string action, bool isLeft)
-        {
-            Init();
-
-            var card = new Card
-            {
-                //ID = id,
-                Heading = heading,
-                Text = text,
-                Action = action,
-                IsLeft = isLeft
-            };
-
-            var rowsAffected = db.Insert(card);
-        }
+        #region INTRO
 
         public static void AddIntro(string heading, string paragraph1, string paragraph2, string paragraph3)
         {
@@ -138,11 +127,11 @@ namespace CoachingCards.Services
             var rowsAffected = db.Insert(intro);
         }
 
-        public static Card GetCardById(int id)
+        public static IEnumerable<Intro> GetIntro()
         {
             Init();
-            var card = db.Table<Card>().Where(x => x.ID == id).FirstOrDefault();
-            return card;
+            var intro = db.Table<Intro>().ToList();
+            return intro;
         }
 
         public static Intro GetIntroById(int id)
@@ -151,48 +140,129 @@ namespace CoachingCards.Services
             var intro = db.Table<Intro>().Where(x => x.ID == id).FirstOrDefault();
             return intro;
         }
+        #endregion
 
-        public static IEnumerable<Intro> GetIntro()
+        #region CARDS
+
+        public static void AddCard(string heading, string text, string action, bool isLeft)
         {
             Init();
-            var intro = db.Table<Intro>().ToList();
-            return intro;
+
+            var card = new Card
+            {
+                //ID = id,
+                Heading = heading,
+                Text = text,
+                Action = action,
+                IsLeft = isLeft
+            };
+
+            var rowsAffected = db.Insert(card);
         }
 
-        public static IEnumerable<Card> GetNewDeck(GameMode mode)
+        public static Card GetCardById(int cardId)
         {
+            Init();
+            var card = db.Table<Card>().Where(x => x.ID == cardId).FirstOrDefault();
+            return card;
+        }
+
+        public static Card GetCardByDeckId(int deckId)
+        {
+            Init();
+            var deck = db.Table<Deck>().Where(x => x.ID == deckId).FirstOrDefault();
+            if (deck != null)
+                return GetCardById(deck.CardID);
+            return null;
+        }
+        #endregion
+
+        #region DECK
+
+        public static bool IsDeckEmpty()
+        {
+            Init();
+
+            ////check all items
+            //var isEmpty = true;
+            //var deck = db.Table<Deck>().ToList();
+            //foreach (var item in deck)
+            //{
+            //    if (item.CardID != 0)
+            //        isEmpty = false;
+            //}
+            //return isEmpty;
+
+            //check only first item
+            var card = db.Table<Deck>().Where(x => x.ID == 1).FirstOrDefault();
+            return (card.CardID == 0) ? true : false;
+        }
+
+        public static void CreateNewDeck(GameMode mode)
+        {
+            Init();
+            ClearDeck();
+
+            var randCardIds = new List<int>();
             switch (mode)
             {
                 case GameMode.Full:
-                    return GetNewDeckFull();
+                    randCardIds = GetNewDeckFull();
+                    break;
                 case GameMode.LeftHemisphere:
-                    return GetNewDeckLeftHemisphere();
+                    randCardIds = GetNewDeckFull(); //GetNewDeckLeftHemisphere();
+                    break;
                 case GameMode.RightHemisphere:
-                    return GetNewDeckRightHemisphere();
+                    randCardIds = GetNewDeckFull(); //GetNewDeckRightHemisphere();
+                    break;
                 default:
-                    return GetNewDeckFull();
+                    randCardIds = GetNewDeckFull();
+                    break;
             }
+
+            var deck = db.Table<Deck>().ToList();
+            for (int i = 1; i <= deck.Count; i++)
+            {
+
+                deck[i].CardID = randCardIds[i];
+            }
+            db.UpdateAll(deck);
+
+            StaticHelper.CurrentDeckId = StaticHelper.MinDeckId = db.Table<Deck>().OrderBy(p => p.ID).First().ID; //minimum
+            StaticHelper.MaxDeckId = db.Table<Deck>().OrderByDescending(p => p.ID).First().ID; //maximum
         }
 
-        private static IEnumerable<Card> GetNewDeckFull()
+        public static void ClearDeck()
         {
-            Init();
-            var deck = db.Table<Card>().ToList();
-            return deck.OrderBy(a => Guid.NewGuid()).ToList();
+            var deck = db.Table<Deck>().ToList();
+            foreach (var item in deck)
+            {
+                item.CardID = 0;
+            }
+            db.UpdateAll(deck);
+            //db.DeleteAll<Deck>();
         }
 
-        private static IEnumerable<Card> GetNewDeckLeftHemisphere()
+        private static List<int> GetNewDeckFull()
         {
             Init();
-            var deck = db.Table<Card>().Where(x => x.IsLeft == true).ToList();
-            return deck.OrderBy(a => Guid.NewGuid()).ToList();
+            var randCardIds = db.Table<Card>().Select(x => x.ID).ToList();
+            return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
-        private static IEnumerable<Card> GetNewDeckRightHemisphere()
+        private static IEnumerable<int> GetNewDeckLeftHemisphere()
         {
             Init();
-            var deck = db.Table<Card>().Where(x => x.IsLeft == false).ToList();
-            return deck.OrderBy(a => Guid.NewGuid()).ToList();
+            var randCardIds = db.Table<Card>().Where(x => x.IsLeft == true).Select(x => x.ID).ToList();
+            return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
+
+        private static IEnumerable<int> GetNewDeckRightHemisphere()
+        {
+            Init();
+            var randCardIds = db.Table<Card>().Where(x => x.IsLeft == false).Select(x => x.ID).ToList();
+            return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
+        }
+        #endregion
     }
 }

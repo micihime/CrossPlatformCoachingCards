@@ -3,8 +3,6 @@ using CoachingCards.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -26,7 +24,7 @@ namespace CoachingCards.ViewModels
         private const string separatorImage = "separator.png";
         #endregion
 
-        #region COMMANDS
+        #region DECLARING COMMANDS
 
         public ICommand ToggleCard { get; }
         public AsyncCommand FirstRunCommand { get; }
@@ -35,7 +33,7 @@ namespace CoachingCards.ViewModels
 
         #region PRIVATE FIELDS
 
-        private List<Card> deck;
+        private Card card;
 
         private bool showBack;
         private string heading;
@@ -87,7 +85,7 @@ namespace CoachingCards.ViewModels
         {
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
 
-            if (StaticHelper.CurrentCard == 0)
+            if (StaticHelper.CurrentDeckId == 0)
                 ResetGame();
             else
                 ShowCard();
@@ -100,7 +98,7 @@ namespace CoachingCards.ViewModels
         {
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
 
-            if (StaticHelper.CurrentCard == 0)
+            if (StaticHelper.CurrentDeckId == 0)
                 ResetGame();
             else
                 ShowCard();
@@ -126,7 +124,7 @@ namespace CoachingCards.ViewModels
         {
             if (IsEmpty())
             {
-                StaticHelper.CurrentCard = 0; //reset
+                StaticHelper.CurrentDeckId = 0; //reset
                 ShowEmptyDeck();
             }
             else
@@ -135,7 +133,7 @@ namespace CoachingCards.ViewModels
                     ShowCard();
                 else //toss top card
                 {
-                    StaticHelper.CurrentCard++; //toss
+                    StaticHelper.CurrentDeckId++; //toss
                     ShowCardBack();
                 }
             }
@@ -151,7 +149,7 @@ namespace CoachingCards.ViewModels
         {
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
             ShowCardBack();
-            deck = CardService.GetNewDeck(StaticHelper.Mode).ToList();
+            CardService.CreateNewDeck(StaticHelper.Mode);
         }
 
         private void ShowCardBack()
@@ -165,10 +163,11 @@ namespace CoachingCards.ViewModels
         private void ShowCard()
         {
             showBack = false; //!showBack;
-            Heading = deck[StaticHelper.CurrentCard].Heading;
-            Text = deck[StaticHelper.CurrentCard].Text;
-            Action = deck[StaticHelper.CurrentCard].Action;
-            Background = deck[StaticHelper.CurrentCard].IsLeft ? backgroundImageLeft : backgroundImageRight;
+            card = CardService.GetCardByDeckId(StaticHelper.CurrentDeckId);
+            Heading = card.Heading;
+            Text = card.Text;
+            Action = card.Action;
+            Background = card.IsLeft ? backgroundImageLeft : backgroundImageRight;
             Separator = separatorImage;
         }
 
@@ -182,7 +181,7 @@ namespace CoachingCards.ViewModels
 
         private bool IsEmpty()
         {
-            return (StaticHelper.CurrentCard == deck.Count) ? true : false;
+            return (StaticHelper.CurrentDeckId == StaticHelper.MaxDeckId) ? true : false;
         }
     }
 }
