@@ -36,10 +36,6 @@ namespace CoachingCards.ViewModels
         #region PRIVATE FIELDS
 
         private List<Card> deck;
-        bool IsEmpty
-        {
-            get => deck == null || deck.Count == 0;
-        }
 
         private bool showBack;
         private string heading;
@@ -91,16 +87,30 @@ namespace CoachingCards.ViewModels
         {
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
 
-            showBack = true;
-            Heading = Text = Action = string.Empty;
-            Background = backgroundImage;
-            Separator = string.Empty;
-
-            deck = CardService.GetNewDeck(StaticHelper.Mode).ToList();
+            if (StaticHelper.CurrentCard == 0)
+                ResetGame();
+            else
+                ShowCard();
 
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
         }
+
+        public DeckViewModel(GameMode gameMode)
+        {
+            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
+
+            if (StaticHelper.CurrentCard == 0)
+                ResetGame();
+            else
+                ShowCard();
+
+            ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
+            FirstRunCommand = new AsyncCommand(FirstRun);
+        }
+        #endregion
+
+        #region COMMANDS
 
         async Task FirstRun()
         {
@@ -112,48 +122,21 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        public DeckViewModel(GameMode gameMode)
-        {
-            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
-
-            showBack = true;
-            Heading = Text = Action = string.Empty;
-            Background = backgroundImage;
-            Separator = string.Empty;
-
-            deck = CardService.GetNewDeck(gameMode).ToList();
-            ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
-        }
-        #endregion
-
         void OnToggleCard()
         {
-            if (IsEmpty)
+            if (IsEmpty())
             {
-                showBack = true; //!showBack;
-                Heading = Text = Action = string.Empty;
-                Background = emptyDeckBackgroundImage;
-                Separator = string.Empty;
+                StaticHelper.CurrentCard = 0; //reset
+                ShowEmptyDeck();
             }
             else
             {
                 if (showBack) //show top card
-                {
-                    showBack = false; //!showBack;
-                    Heading = deck[0].Heading;
-                    Text = deck[0].Text;
-                    Action = deck[0].Action;
-                    Background = deck[0].IsLeft ? backgroundImageLeft : backgroundImageRight;
-                    Separator = separatorImage;
-                }
+                    ShowCard();
                 else //toss top card
                 {
-                    deck.RemoveAt(0); //toss
-
-                    showBack = true; //!showBack;
-                    Heading = Text = Action = string.Empty;
-                    Background = backgroundImage;
-                    Separator = string.Empty;
+                    StaticHelper.CurrentCard++; //toss
+                    ShowCardBack();
                 }
             }
         }
@@ -162,17 +145,44 @@ namespace CoachingCards.ViewModels
         {
             OnToggleCard();
         }
+        #endregion
 
         void ResetGame()
         {
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
+            ShowCardBack();
+            deck = CardService.GetNewDeck(StaticHelper.Mode).ToList();
+        }
 
+        private void ShowCardBack()
+        {
             showBack = true;
             Heading = Text = Action = string.Empty;
             Background = backgroundImage;
             Separator = string.Empty;
+        }
 
-            deck = CardService.GetNewDeck(StaticHelper.Mode).ToList();
+        private void ShowCard()
+        {
+            showBack = false; //!showBack;
+            Heading = deck[StaticHelper.CurrentCard].Heading;
+            Text = deck[StaticHelper.CurrentCard].Text;
+            Action = deck[StaticHelper.CurrentCard].Action;
+            Background = deck[StaticHelper.CurrentCard].IsLeft ? backgroundImageLeft : backgroundImageRight;
+            Separator = separatorImage;
+        }
+
+        private void ShowEmptyDeck()
+        {
+            showBack = true; //!showBack;
+            Heading = Text = Action = string.Empty;
+            Background = emptyDeckBackgroundImage;
+            Separator = string.Empty;
+        }
+
+        private bool IsEmpty()
+        {
+            return (StaticHelper.CurrentCard == deck.Count) ? true : false;
         }
     }
 }
