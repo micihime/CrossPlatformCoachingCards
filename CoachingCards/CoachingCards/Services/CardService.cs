@@ -12,6 +12,14 @@ namespace CoachingCards.Services
     {
         static SQLiteConnection db;
 
+        #region CONST
+
+        const string CURRENT_DECK_ID = "CurrentDeckId";
+        const string MIN_DECK_ID = "MinDeckId";
+        const string MAX_DECK_ID = "MaxDeckId";
+        const string GAME_MODE = "GameMode";
+        #endregion
+
         #region TEXTS
 
         static readonly List<Card> cards = new List<Card>
@@ -73,17 +81,26 @@ namespace CoachingCards.Services
             new Intro{ ID = 2, Heading =  "O kartách", Paragraph1 = "Karty jsou rozděleny na dva druhy podle toho, kterou hemisféru podporují. Cílem je aktivitu obou hemisfér dostat do rovnováhy.", Paragraph2 = "Levá hemisféra je zaměřena na: analytické myšlení, logiku, detaily, fakta, pravidla.", Paragraph3 = "Pravá hemisféra je zaměřena na: tvořivost, intuici, souvislosti, symboly, významy." },
             new Intro{ ID = 3,  Heading = "Poděkování", Paragraph1 = "Rádi bychom poděkovali všem našim klientům, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků.", Paragraph2 = "Veronika a Petr Pavelkovi, Institut osobnostního tréninku", Paragraph3 = "Karty nenahradí služby kouče a terapeuta." }
         };
+
+        static readonly List<AppSetting> appSettings = new List<AppSetting>()
+        {
+            new AppSetting{ Key = CURRENT_DECK_ID, Value = 0 },
+            //new AppSetting{ Key = MIN_DECK_ID, Value = 0 },
+            //new AppSetting{ Key = MAX_DECK_ID, Value = cards.Count },
+            //new AppSetting{ Key = GAME_MODE, Value = ((int)GameMode.Full) }
+        };
         #endregion
 
         static void Init()
         {
             if (db == null)
             {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData4.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData8.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
                 db.CreateTable<Card>();
                 db.CreateTable<Intro>();
                 db.CreateTable<Deck>();
+                db.CreateTable<AppSetting>();
 
                 var cardList = db.Table<Card>().ToList();
                 if ((cardList == null) || (cardList.Count == 0))
@@ -91,7 +108,7 @@ namespace CoachingCards.Services
 
                 var introList = db.Table<Intro>().ToList();
                 if ((introList == null) || (introList.Count == 0))
-                    db.InsertAll(introList);
+                    db.InsertAll(introTexts);
 
                 var deck = db.Table<Deck>().ToList();
                 if ((deck == null) || (deck.Count == 0))
@@ -106,6 +123,10 @@ namespace CoachingCards.Services
 
                     db.InsertAll(deckList);
                 }
+
+                var settingsList = db.Table<AppSetting>().ToList();
+                if ((settingsList == null) || (settingsList.Count == 0))
+                    db.InsertAll(appSettings);
             }
         }
 
@@ -221,23 +242,20 @@ namespace CoachingCards.Services
             }
 
             var deck = db.Table<Deck>().ToList();
-            for (int i = 1; i <= deck.Count; i++)
+            for (int i = 0; i < deck.Count; i++)
             {
 
                 deck[i].CardID = randCardIds[i];
             }
             db.UpdateAll(deck);
-
-            StaticHelper.CurrentDeckId = StaticHelper.MinDeckId = db.Table<Deck>().OrderBy(p => p.ID).First().ID; //minimum
-            StaticHelper.MaxDeckId = db.Table<Deck>().OrderByDescending(p => p.ID).First().ID; //maximum
         }
 
         public static void ClearDeck()
         {
             var deck = db.Table<Deck>().ToList();
-            foreach (var item in deck)
+            for (int i = 0; i < deck.Count; i++)
             {
-                item.CardID = 0;
+                deck[i].CardID = 0;
             }
             db.UpdateAll(deck);
             //db.DeleteAll<Deck>();
@@ -263,6 +281,37 @@ namespace CoachingCards.Services
             var randCardIds = db.Table<Card>().Where(x => x.IsLeft == false).Select(x => x.ID).ToList();
             return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
+        #endregion
+
+        #region APP SETTINGS
+
+        public static int GetMinDeckId() { return 1; }
+        //public static int SetMinDeckId() { }
+        public static int GetMaxDeckId() { return cards.Count; }
+        //public static int SetMaxDeckId() { }
+        public static int GetCurrentDeckId()
+        {
+            Init();
+            var appSetting = db.Table<AppSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
+            return appSetting.Value;
+        }
+        public static bool SetCurrentDeckId(int val)
+        {
+            Init();
+            try
+            {
+                var appSetting = db.Table<AppSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
+                appSetting.Value = val;
+                db.Update(appSetting);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+        //public static int GetGameMode() { }
+        //public static int SetGameMode() { }
         #endregion
     }
 }

@@ -83,22 +83,7 @@ namespace CoachingCards.ViewModels
 
         public DeckViewModel()
         {
-            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
-
-            if (StaticHelper.CurrentDeckId == 0)
-                ResetGame();
-            else
-                ShowCard();
-
-            ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
-            FirstRunCommand = new AsyncCommand(FirstRun);
-        }
-
-        public DeckViewModel(GameMode gameMode)
-        {
-            Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
-
-            if (StaticHelper.CurrentDeckId == 0)
+            if (CardService.GetCurrentDeckId() == 0)
                 ResetGame();
             else
                 ShowCard();
@@ -123,17 +108,16 @@ namespace CoachingCards.ViewModels
         void OnToggleCard()
         {
             if (IsEmpty())
-            {
-                StaticHelper.CurrentDeckId = 0; //reset
                 ShowEmptyDeck();
-            }
             else
             {
                 if (showBack) //show top card
+                {
+                    CardService.SetCurrentDeckId(CardService.GetCurrentDeckId() + 1);
                     ShowCard();
+                }
                 else //toss top card
                 {
-                    StaticHelper.CurrentDeckId++; //toss
                     ShowCardBack();
                 }
             }
@@ -147,6 +131,7 @@ namespace CoachingCards.ViewModels
 
         void ResetGame()
         {
+            Accelerometer.ShakeDetected -= Accelerometer_ShakeDetected;
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
             ShowCardBack();
             CardService.CreateNewDeck(StaticHelper.Mode);
@@ -163,7 +148,7 @@ namespace CoachingCards.ViewModels
         private void ShowCard()
         {
             showBack = false; //!showBack;
-            card = CardService.GetCardByDeckId(StaticHelper.CurrentDeckId);
+            card = CardService.GetCardByDeckId(CardService.GetCurrentDeckId());
             Heading = card.Heading;
             Text = card.Text;
             Action = card.Action;
@@ -181,7 +166,8 @@ namespace CoachingCards.ViewModels
 
         private bool IsEmpty()
         {
-            return (StaticHelper.CurrentDeckId == StaticHelper.MaxDeckId) ? true : false;
+            return (CardService.GetCurrentDeckId() == CardService.GetMaxDeckId() //- 1
+                ) ? true : false;
         }
     }
 }
