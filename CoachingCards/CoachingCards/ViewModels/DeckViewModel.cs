@@ -134,7 +134,7 @@ namespace CoachingCards.ViewModels
             Accelerometer.ShakeDetected -= Accelerometer_ShakeDetected;
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
             ShowCardBack();
-            CardService.CreateNewDeck(StaticHelper.Mode);
+            CardService.CreateNewDeck();
         }
 
         private void ShowCardBack()

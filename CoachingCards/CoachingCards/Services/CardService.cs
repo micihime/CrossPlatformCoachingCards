@@ -15,8 +15,6 @@ namespace CoachingCards.Services
         #region CONST
 
         const string CURRENT_DECK_ID = "CurrentDeckId";
-        const string MIN_DECK_ID = "MinDeckId";
-        const string MAX_DECK_ID = "MaxDeckId";
         const string GAME_MODE = "GameMode";
         #endregion
 
@@ -87,7 +85,7 @@ namespace CoachingCards.Services
             new AppSetting{ Key = CURRENT_DECK_ID, Value = 0 },
             //new AppSetting{ Key = MIN_DECK_ID, Value = 0 },
             //new AppSetting{ Key = MAX_DECK_ID, Value = cards.Count },
-            //new AppSetting{ Key = GAME_MODE, Value = ((int)GameMode.Full) }
+            new AppSetting{ Key = GAME_MODE, Value = ((int)GameMode.Full) }
         };
         #endregion
 
@@ -95,7 +93,7 @@ namespace CoachingCards.Services
         {
             if (db == null)
             {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData8.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData9.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
                 db.CreateTable<Card>();
                 db.CreateTable<Intro>();
@@ -219,22 +217,24 @@ namespace CoachingCards.Services
             return (card.CardID == 0) ? true : false;
         }
 
-        public static void CreateNewDeck(GameMode mode)
+        public static void CreateNewDeck()
         {
             Init();
             ClearDeck();
 
+            var mode = GetCurrentGameMode();
             var randCardIds = new List<int>();
+
             switch (mode)
             {
-                case GameMode.Full:
+                case (int)GameMode.Full:
                     randCardIds = GetNewDeckFull();
                     break;
-                case GameMode.LeftHemisphere:
-                    randCardIds = GetNewDeckFull(); //GetNewDeckLeftHemisphere();
+                case (int)GameMode.LeftHemisphere:
+                    randCardIds = GetNewDeckLeftHemisphere();
                     break;
-                case GameMode.RightHemisphere:
-                    randCardIds = GetNewDeckFull(); //GetNewDeckRightHemisphere();
+                case (int)GameMode.RightHemisphere:
+                    randCardIds = GetNewDeckRightHemisphere();
                     break;
                 default:
                     randCardIds = GetNewDeckFull();
@@ -242,9 +242,8 @@ namespace CoachingCards.Services
             }
 
             var deck = db.Table<Deck>().ToList();
-            for (int i = 0; i < deck.Count; i++)
+            for (int i = 0; i < GetMaxDeckId(); i++) //when mode is not full, the max deck id is different than deck.Count
             {
-
                 deck[i].CardID = randCardIds[i];
             }
             db.UpdateAll(deck);
@@ -268,14 +267,14 @@ namespace CoachingCards.Services
             return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
-        private static IEnumerable<int> GetNewDeckLeftHemisphere()
+        private static List<int> GetNewDeckLeftHemisphere()
         {
             Init();
             var randCardIds = db.Table<Card>().Where(x => x.IsLeft == true).Select(x => x.ID).ToList();
             return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
-        private static IEnumerable<int> GetNewDeckRightHemisphere()
+        private static List<int> GetNewDeckRightHemisphere()
         {
             Init();
             var randCardIds = db.Table<Card>().Where(x => x.IsLeft == false).Select(x => x.ID).ToList();
@@ -286,15 +285,32 @@ namespace CoachingCards.Services
         #region APP SETTINGS
 
         public static int GetMinDeckId() { return 1; }
-        //public static int SetMinDeckId() { }
-        public static int GetMaxDeckId() { return cards.Count; }
-        //public static int SetMaxDeckId() { }
+
+        public static int GetMaxDeckId()
+        {
+            var mode = GetCurrentGameMode();
+
+            switch (mode)
+            {
+                case (int)GameMode.Full:
+                    return cards.Count;
+                case (int)GameMode.LeftHemisphere:
+                    return cards.Where(x => x.IsLeft == true).Count<Card>();
+                case (int)GameMode.RightHemisphere:
+                    return cards.Where(x => x.IsLeft == false).Count<Card>();
+                default:
+                    return cards.Count;
+            }
+
+        }
+
         public static int GetCurrentDeckId()
         {
             Init();
             var appSetting = db.Table<AppSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
             return appSetting.Value;
         }
+
         public static bool SetCurrentDeckId(int val)
         {
             Init();
@@ -310,8 +326,29 @@ namespace CoachingCards.Services
                 return false;
             }
         }
-        //public static int GetGameMode() { }
-        //public static int SetGameMode() { }
+
+        public static int GetCurrentGameMode()
+        {
+            Init();
+            var appSetting = db.Table<AppSetting>().Where(x => x.Key == GAME_MODE).FirstOrDefault();
+            return appSetting.Value;
+        }
+
+        public static bool SetCurrentGameMode(int val)
+        {
+            Init();
+            try
+            {
+                var appSetting = db.Table<AppSetting>().Where(x => x.Key == GAME_MODE).FirstOrDefault();
+                appSetting.Value = val;
+                db.Update(appSetting);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
         #endregion
     }
 }
