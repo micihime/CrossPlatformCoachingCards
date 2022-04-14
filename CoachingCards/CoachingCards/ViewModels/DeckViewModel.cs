@@ -167,7 +167,7 @@ namespace CoachingCards.ViewModels
         private bool IsEmpty()
         {
             return (CardService.GetCurrentDeckId() == CardService.GetMaxDeckId() //- 1
-                ) ? true : false;
+                );
         }
     }
 }

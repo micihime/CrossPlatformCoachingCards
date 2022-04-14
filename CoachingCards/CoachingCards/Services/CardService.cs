@@ -143,7 +143,7 @@ namespace CoachingCards.Services
                 Paragraph3 = paragraph3
             };
 
-            var rowsAffected = db.Insert(intro);
+            db.Insert(intro); //returns rowsAffected
         }
 
         public static IEnumerable<Intro> GetIntro()
@@ -176,7 +176,7 @@ namespace CoachingCards.Services
                 IsLeft = isLeft
             };
 
-            var rowsAffected = db.Insert(card);
+            db.Insert(card); //returns number of affected rows
         }
 
         public static Card GetCardById(int cardId)
@@ -214,7 +214,7 @@ namespace CoachingCards.Services
 
             //check only first item
             var card = db.Table<Deck>().Where(x => x.ID == 1).FirstOrDefault();
-            return (card.CardID == 0) ? true : false;
+            return (card.CardID == 0);
         }
 
         public static void CreateNewDeck()
@@ -223,7 +223,7 @@ namespace CoachingCards.Services
             ClearDeck();
 
             var mode = GetCurrentGameMode();
-            var randCardIds = new List<int>();
+            List<int> randCardIds;
 
             switch (mode)
             {
