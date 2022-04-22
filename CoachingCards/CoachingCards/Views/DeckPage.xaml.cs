@@ -1,4 +1,5 @@
-﻿using CoachingCards.ViewModels;
+﻿using CoachingCards.Services;
+using CoachingCards.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +22,12 @@ namespace CoachingCards.Views
             //Accelerometer.ShakeDetected += this.OnShaked;
             Accelerometer.Start(SensorSpeed.Default);
             base.OnAppearing();
+
+            if (CardService.GetCurrentDeckId() == 0)
+                vm.ResetGame();
+            else
+                vm.ShowCard();
+
             await vm.FirstRunCommand.ExecuteAsync();
         }
 

@@ -2,6 +2,7 @@
 using CoachingCards.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
+using Plugin.LocalNotification;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -83,11 +84,6 @@ namespace CoachingCards.ViewModels
 
         public DeckViewModel()
         {
-            if (CardService.GetCurrentDeckId() == 0)
-                ResetGame();
-            else
-                ShowCard();
-
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
         }
@@ -99,8 +95,19 @@ namespace CoachingCards.ViewModels
         {
             if (StaticHelper.FirstRun)
             {
+                var notification = new NotificationRequest
+                {
+                    BadgeNumber = 1,
+                    Title = "Pripomienka",
+                    Description = "Pripominam hranie!",
+                    Schedule = new NotificationRequestSchedule
+                    {
+                        NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
+                        NotifyRepeatInterval = new TimeSpan(1, 0, 0, 0, 0)
+                    }
+                };
+                NotificationCenter.Current.Show(notification);
                 StaticHelper.FirstRun = false;
-                //await Application.Current.MainPage.DisplayAlert("Welcome!", "Welcome to Coaching Cards. Let's get started with tutorial.", "OK");
                 await Shell.Current.GoToAsync("///IntroductionPage");
             }
         }
@@ -129,7 +136,7 @@ namespace CoachingCards.ViewModels
         }
         #endregion
 
-        void ResetGame()
+        public void ResetGame()
         {
             Accelerometer.ShakeDetected -= Accelerometer_ShakeDetected;
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
@@ -145,7 +152,7 @@ namespace CoachingCards.ViewModels
             Separator = string.Empty;
         }
 
-        private void ShowCard()
+        public void ShowCard()
         {
             showBack = false; //!showBack;
             card = CardService.GetCardByDeckId(CardService.GetCurrentDeckId());
@@ -166,8 +173,7 @@ namespace CoachingCards.ViewModels
 
         private bool IsEmpty()
         {
-            return (CardService.GetCurrentDeckId() == CardService.GetMaxDeckId() //- 1
-                );
+            return CardService.GetCurrentDeckId() == CardService.GetMaxDeckId();
         }
     }
 }

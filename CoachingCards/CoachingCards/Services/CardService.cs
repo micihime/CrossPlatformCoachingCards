@@ -93,7 +93,7 @@ namespace CoachingCards.Services
         {
             if (db == null)
             {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData9.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "MyData10.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
                 db.CreateTable<Card>();
                 db.CreateTable<Intro>();
