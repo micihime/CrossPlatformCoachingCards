@@ -107,7 +107,9 @@ namespace CoachingCards.ViewModels
                     }
                 };
                 NotificationCenter.Current.Show(notification);
+
                 StaticHelper.FirstRun = false;
+
                 await Shell.Current.GoToAsync("///IntroductionPage");
             }
         }
@@ -120,7 +122,8 @@ namespace CoachingCards.ViewModels
             {
                 if (showBack) //show top card
                 {
-                    CardService.SetCurrentDeckId(CardService.GetCurrentDeckId() + 1);
+                    StaticHelper.CurrentDeckId++;
+                    //CardService.SetCurrentDeckId(CardService.GetCurrentDeckId() + 1);
                     ShowCard();
                 }
                 else //toss top card
@@ -155,7 +158,8 @@ namespace CoachingCards.ViewModels
         public void ShowCard()
         {
             showBack = false; //!showBack;
-            card = CardService.GetCardByDeckId(CardService.GetCurrentDeckId());
+            //card = CardService.GetCardByDeckId(CardService.GetCurrentDeckId());
+            card = CardService.GetCardByDeckId(StaticHelper.CurrentDeckId);
             Heading = card.Heading;
             Text = card.Text;
             Action = card.Action;
@@ -173,7 +177,8 @@ namespace CoachingCards.ViewModels
 
         private bool IsEmpty()
         {
-            return CardService.GetCurrentDeckId() == CardService.GetMaxDeckId();
+            //return CardService.GetCurrentDeckId() == CardService.GetMaxDeckId();
+            return StaticHelper.CurrentDeckId == CardService.GetMaxDeckId();
         }
     }
 }

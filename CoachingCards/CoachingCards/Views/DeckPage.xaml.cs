@@ -1,4 +1,4 @@
-﻿using CoachingCards.Services;
+﻿using CoachingCards.Models;
 using CoachingCards.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -23,7 +23,8 @@ namespace CoachingCards.Views
             Accelerometer.Start(SensorSpeed.Default);
             base.OnAppearing();
 
-            if (CardService.GetCurrentDeckId() == 0)
+            //if (CardService.GetCurrentDeckId() == 0)
+            if (StaticHelper.CurrentDeckId == 0)
                 vm.ResetGame();
             else
                 vm.ShowCard();
