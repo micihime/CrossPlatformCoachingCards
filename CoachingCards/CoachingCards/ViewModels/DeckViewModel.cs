@@ -25,26 +25,27 @@ namespace CoachingCards.ViewModels
         private const string separatorImage = "separator.png";
         #endregion
 
-        #region DECLARING COMMANDS
-
-        public ICommand ToggleCard { get; }
-        public AsyncCommand FirstRunCommand { get; }
-
-        #endregion
-
         #region PRIVATE FIELDS
 
         private Card card;
-
         private bool showBack;
         private string heading;
         private string text;
         private string action;
         private string background;
         private string separator;
+        private string pageTitle;
         #endregion
 
+        #region PROPERTIES
+
         #region TEXT PROPERTIES
+
+        public string PageTitle
+        {
+            get => pageTitle;
+            set => SetProperty(ref pageTitle, value);
+        }
 
         public string Heading
         {
@@ -80,10 +81,21 @@ namespace CoachingCards.ViewModels
         }
         #endregion
 
+        #endregion
+
+        #region DECLARING COMMANDS
+
+        public ICommand ToggleCard { get; }
+        public AsyncCommand FirstRunCommand { get; }
+
+        #endregion
+
         #region CONSTRUCTORS
 
         public DeckViewModel()
         {
+            pageTitle = ((GameMode)CardService.GetCurrentGameMode()).ToString();
+            //LoadCurrentState();
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
         }
@@ -139,6 +151,8 @@ namespace CoachingCards.ViewModels
         }
         #endregion
 
+        #region HELPERS
+
         public void ResetGame()
         {
             Accelerometer.ShakeDetected -= Accelerometer_ShakeDetected;
@@ -180,5 +194,6 @@ namespace CoachingCards.ViewModels
             //return CardService.GetCurrentDeckId() == CardService.GetMaxDeckId();
             return StaticHelper.CurrentDeckId == CardService.GetMaxDeckId();
         }
+        #endregion
     }
 }

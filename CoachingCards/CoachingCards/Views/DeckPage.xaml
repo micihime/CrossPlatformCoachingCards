@@ -3,12 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:CoachingCards.ViewModels"
              x:Class="CoachingCards.Views.DeckPage"
-             x:DataType="viewmodels:DeckViewModel">
+             x:DataType="viewmodels:DeckViewModel"
+             Title="{Binding PageTitle}">
 
     <ContentPage.BindingContext>
         <viewmodels:DeckViewModel/>
     </ContentPage.BindingContext>
-
+    
     <ContentPage.Content>
         <Grid Padding="0">
             <Image Aspect="AspectFill" Source="{Binding Background}" />
