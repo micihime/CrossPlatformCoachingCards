@@ -5,12 +5,6 @@
        Title="CoachingCards"
        x:Class="CoachingCards.AppShell">
 
-    <!--
-        The overall app visual hierarchy is defined here, along with navigation.
-    
-        https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/
-    -->
-
     <Shell.Resources>
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
@@ -73,26 +67,26 @@
         </ResourceDictionary>
     </Shell.Resources>
 
-    <!-- 
-        When the Flyout is visible this defines the content to display in the flyout.
-        FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
-        https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
-    -->
-
-    <!--<FlyoutItem Title="Všechny karty" Icon="icon_feed.png">
-        <ShellContent Route="DeckPage" ContentTemplate="{DataTemplate local:DeckPage}" />
-    </FlyoutItem>-->
-    <FlyoutItem Title="Všechny karty">
+    <FlyoutItem Title="Všechny karty" Icon="icon_cards.png">
             <ShellContent Route="Full" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Levá hemisféra">
+    <FlyoutItem Title="Levá hemisféra" Icon="icon_cards.png">
             <ShellContent Route="LeftHemisphere" ContentTemplate="{DataTemplate local:DeckPage}" />
         </FlyoutItem>
-    <FlyoutItem Title="Pravá hemisféra">
+    <FlyoutItem Title="Pravá hemisféra" Icon="icon_cards.png">
             <ShellContent Route="RightHemisphere" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Návod" Icon="icon_about.png">
+    <FlyoutItem Title="O hre" Icon="icon_about.png">
         <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Jak získat z hry víc" Icon="icon_help.png">
+        <ShellContent Route="GainMore" ContentTemplate="{DataTemplate local:GainMore}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Variace hry" Icon="icon_help.png">
+        <ShellContent Route="GameVariations" ContentTemplate="{DataTemplate local:GameVariations}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Autori" Icon="icon_help.png">
+        <ShellContent Route="Authors" ContentTemplate="{DataTemplate local:Authors}" />
     </FlyoutItem>
 
 </Shell>

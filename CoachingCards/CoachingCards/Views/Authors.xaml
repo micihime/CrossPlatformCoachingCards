@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoachingCards.Views.Authors"
+             Title="Autori">
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" Padding="30,24,30,24" Spacing="10">
+                <Label Text="Rádi bychom poděkovali všem našim klientům, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků.  " FontSize="Title"/>
+                <Label Text="Veronika a Petr Pavelkovi, Institut osobnostního tréninku " FontSize="20" />
+                <Label Text="Karty nenahradí služby kouče a terapeuta." FontSize="20" />
+                <Label Text="Karty vychází z našich praktických poznatků z koučování a terapií." FontSize="20" />
+                <Label Text="Karty vydává MindArt Concept " FontSize="20" />
+                <Label Text="Autoři textu: Veronika a Petr Pavelkovi " FontSize="20" />
+                <Label Text="Ilustrace: Mgr. Magdalena Krejčí" FontSize="20" />
+                <Label Text="Všechna práva vyhrazena © 2022" FontSize="20" />
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
