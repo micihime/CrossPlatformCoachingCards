@@ -94,7 +94,7 @@ namespace CoachingCards.ViewModels
 
         public DeckViewModel()
         {
-            pageTitle = ((GameMode)CardService.GetCurrentGameMode()).ToString();
+            pageTitle = StaticHelper.GameModeToString((GameMode)CardService.GetCurrentGameMode());
             //LoadCurrentState();
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);

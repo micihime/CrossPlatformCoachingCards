@@ -15,5 +15,20 @@ namespace CoachingCards.Models
             get => Preferences.Get(nameof(FirstRun), true);
             set => Preferences.Set(nameof(FirstRun), value);
         }
+
+        public static string GameModeToString(GameMode mode)
+        {
+            switch (mode)
+            {
+                case GameMode.Full:
+                    return "Všechny karty";
+                case GameMode.LeftHemisphere:
+                    return "Levá hemisféra";
+                case GameMode.RightHemisphere:
+                    return "Pravá hemisféra";
+                default:
+                    return null;
+            }
+        }
     }
 }
