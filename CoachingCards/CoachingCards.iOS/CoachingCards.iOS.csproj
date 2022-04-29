@@ -167,4 +167,10 @@
   <ItemGroup>
     <BundleResource Include="Resources\separator.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_cards.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_help.png" />
+  </ItemGroup>
 </Project>
