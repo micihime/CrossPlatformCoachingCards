@@ -30,5 +30,20 @@ namespace CoachingCards.Models
                     return null;
             }
         }
+
+        public static string GameModeToString(int mode)
+        {
+            switch (mode)
+            {
+                case (int)GameMode.Full:
+                    return "Všechny karty";
+                case (int)GameMode.LeftHemisphere:
+                    return "Levá hemisféra";
+                case (int)GameMode.RightHemisphere:
+                    return "Pravá hemisféra";
+                default:
+                    return null;
+            }
+        }
     }
 }
