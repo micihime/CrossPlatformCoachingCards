@@ -88,7 +88,10 @@
     <FlyoutItem Title="Autori" Icon="icon_help.png">
         <ShellContent Route="Authors" ContentTemplate="{DataTemplate local:Authors}" />
     </FlyoutItem>-->
-    <FlyoutItem Title="Odber novinek" Icon="icon_about.png">
+    <FlyoutItem Title="Odber novinek" Icon="icon_help.png">
         <ShellContent Route="SubscribePage" ContentTemplate="{DataTemplate local:SubscribePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Nastavení" Icon="icon_about.png">
+        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
 </Shell>
