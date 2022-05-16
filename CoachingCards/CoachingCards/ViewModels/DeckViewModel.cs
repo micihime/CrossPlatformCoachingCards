@@ -110,8 +110,8 @@ namespace CoachingCards.ViewModels
                 var notification = new NotificationRequest
                 {
                     BadgeNumber = 1,
-                    Title = "Pripomienka",
-                    Description = "Pripominam hranie!",
+                    Title = "Koučovací karty",
+                    Description = "Jaká bude tvá dnešní karta?",
                     Schedule = new NotificationRequestSchedule
                     {
                         NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
