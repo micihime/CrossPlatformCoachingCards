@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CoachingCards.Views.SubscribePage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Prihlás sa na odber noviniek!"
+                FontSize="Large" />
+            
+            <Label Text="Jméno:" />
+            <Entry Text="{Binding Name}" />
+            
+            <Label Text="Email:" />
+            <Entry Text="{Binding Email}" />
+
+            <Button Text="Odeslat"
+                    Command="{Binding Subscribe}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -79,7 +79,7 @@
     <FlyoutItem Title="O hre" Icon="icon_about.png">
         <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Jak získat z hry víc" Icon="icon_help.png">
+    <!--<FlyoutItem Title="Jak získat z hry víc" Icon="icon_help.png">
         <ShellContent Route="GainMore" ContentTemplate="{DataTemplate local:GainMore}" />
     </FlyoutItem>
     <FlyoutItem Title="Variace hry" Icon="icon_help.png">
@@ -87,6 +87,8 @@
     </FlyoutItem>
     <FlyoutItem Title="Autori" Icon="icon_help.png">
         <ShellContent Route="Authors" ContentTemplate="{DataTemplate local:Authors}" />
+    </FlyoutItem>-->
+    <FlyoutItem Title="Odber novinek" Icon="icon_about.png">
+        <ShellContent Route="SubscribePage" ContentTemplate="{DataTemplate local:SubscribePage}" />
     </FlyoutItem>
-
 </Shell>
