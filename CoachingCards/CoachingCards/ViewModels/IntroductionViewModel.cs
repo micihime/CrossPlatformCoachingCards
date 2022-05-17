@@ -96,12 +96,12 @@ namespace CoachingCards.ViewModels
 
         bool CanGoNext()
         {
-            return (pageNr == (introPages.Count - 1)) ? false : true;
+            return pageNr != (introPages.Count - 1);
         }
 
         bool CanGoPrevious()
         {
-            return (pageNr == 0) ? false : true;
+            return !(pageNr == 0);
         }
 
         void OnNext()
