@@ -3,12 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CoachingCards.Views.SettingsPage">
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout>            
             <Label Text="Pripomínka hraní"
                 FontSize="Large" />
-
+            <Switch IsToggled="true"/>
+            
             <Label Text="Opakovat"
                 FontSize="Large" />
+            <Picker FontSize="Medium">
+            </Picker>
+            
+            <Label Text="Odber novinek"
+                FontSize="Large" />
+            <Switch IsToggled="true"/>
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
