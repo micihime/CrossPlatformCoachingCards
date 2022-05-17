@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace CoachingCards.ViewModels
 {
@@ -42,34 +42,39 @@ namespace CoachingCards.ViewModels
 
         #region DECLARING COMMANDS
 
-        public ICommand Subscribe { get; }
+        public AsyncCommand Subscribe { get; }
         #endregion
 
         public SubscribeViewModel()
         {
-            Subscribe = new Command(OnSubscribe);
+            Subscribe = new AsyncCommand(OnSubscribe);
         }
 
-        public void OnSubscribe()
+        public async Task OnSubscribe()
         {
-            var client = new HttpClient { BaseAddress = new Uri(apiUrl) };
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            client.DefaultRequestHeaders.Add("x-mailerlite-apikey", apiToken);
+            try
+            {
+                var client = new HttpClient { BaseAddress = new Uri(apiUrl) };
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                client.DefaultRequestHeaders.Add("x-mailerlite-apikey", apiToken);
 
-            var values = new Dictionary<string, string>
+                var values = new Dictionary<string, string>
             {
               {"name", name}, {"email", email}
             };
-            var json = JsonConvert.SerializeObject(values);
-            var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
+                var json = JsonConvert.SerializeObject(values);
+                var content = new StringContent(json.ToString(), Encoding.UTF8, "application/json");
 
-            var response = client.PostAsync(apiEndpoint, content).Result;
+                var response = client.PostAsync(apiEndpoint, content).Result;
 
-            if (response.IsSuccessStatusCode)
-            {
+                if (response.IsSuccessStatusCode)
+                    await App.Current.MainPage.DisplayAlert("Dekujeme!", "Uspesne ste sa zapisali do nasho newslettra!", "OK");
+                else
+                    await App.Current.MainPage.DisplayAlert("UPOZORNENI", "Prihlasenie do newslettra nebolo uspesne :( Skuste prosim neskor.", "OK");
             }
-            else
+            catch (Exception)
             {
+                await App.Current.MainPage.DisplayAlert("UPOZORNENI", "Prihlasenie do newslettra nebolo uspesne :( Skuste prosim neskor.", "OK");
             }
         }
     }

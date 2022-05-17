@@ -70,7 +70,7 @@ namespace CoachingCards.ViewModels
 
         public string Background
         {
-            get => background;//isLeft ? backgroundImageLeft : backgroundImageRight;
+            get => background;
             set => SetProperty(ref background, value);
         }
 
