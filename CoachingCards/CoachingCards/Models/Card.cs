@@ -14,5 +14,8 @@ namespace CoachingCards.Models
 
         public bool IsLeft { get; set; } //hemisphere
 
+        //private bool showBack;
+        //private string background;
+        //private string separator;
     }
 }

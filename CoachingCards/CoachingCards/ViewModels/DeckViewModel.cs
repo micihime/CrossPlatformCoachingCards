@@ -29,9 +29,6 @@ namespace CoachingCards.ViewModels
 
         private Card card;
         private bool showBack;
-        private string heading;
-        private string text;
-        private string action;
         private string background;
         private string separator;
         private string pageTitle;
@@ -49,20 +46,20 @@ namespace CoachingCards.ViewModels
 
         public string Heading
         {
-            get => heading;
-            set => SetProperty(ref heading, value);
+            get => card.Heading;
+            set { card.Heading = value; OnPropertyChanged(); } //SetProperty(ref card.Heading, value);
         }
 
         public string Text
         {
-            get => text;
-            set => SetProperty(ref text, value);
+            get => card.Text;
+            set { card.Text = value; OnPropertyChanged(); } //SetProperty(ref card.Text, value);
         }
 
         public string Action
         {
-            get => action;
-            set => SetProperty(ref action, value);
+            get => card.Action;
+            set { card.Action = value; OnPropertyChanged(); } //SetProperty(ref card.Action, value);
         }
         #endregion
 
@@ -95,9 +92,17 @@ namespace CoachingCards.ViewModels
         public DeckViewModel()
         {
             pageTitle = StaticHelper.GameModeToString(CardService.GetCurrentGameMode());
-            //LoadCurrentState();
+            LoadCurrentState();
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
+        }
+
+        private void LoadCurrentState()
+        {
+            card = new Card();
+            //if game is in progress
+
+            //if it is new game
         }
         #endregion
 
