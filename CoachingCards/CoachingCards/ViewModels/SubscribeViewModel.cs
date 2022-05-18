@@ -14,7 +14,7 @@ namespace CoachingCards.ViewModels
     {
         #region CONSTANTS
 
-        private const string apiUrl = "https://api.mailerlite.com";
+        private const string api = "https://api.mailerlite.com";
         private const string apiEndpoint = "/api/v2/subscribers";
         private const string apiMediaType = "application/json";
         private const string apiTokenKey = "x-mailerlite-apikey";
@@ -62,14 +62,11 @@ namespace CoachingCards.ViewModels
         {
             try
             {
-                var client = new HttpClient { BaseAddress = new Uri(apiUrl) };
+                var client = new HttpClient { BaseAddress = new Uri(api) };
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(apiMediaType));
                 client.DefaultRequestHeaders.Add(apiTokenKey, apiToken);
 
-                var values = new Dictionary<string, string>
-                {
-                    {"name", name}, {"email", email}
-                };
+                var values = new Dictionary<string, string> { { "name", name }, { "email", email } };
                 var json = JsonConvert.SerializeObject(values);
                 var content = new StringContent(json.ToString(), Encoding.UTF8, apiMediaType);
 
