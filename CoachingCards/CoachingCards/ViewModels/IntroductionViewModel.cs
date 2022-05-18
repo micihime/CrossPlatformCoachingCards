@@ -14,7 +14,7 @@ namespace CoachingCards.ViewModels
     {
         #region PRIVATE FIELDS
 
-        private List<Intro> introPages;
+        private readonly List<Intro> introPages;
         private int pageNr;
 
         private string heading;
@@ -94,15 +94,9 @@ namespace CoachingCards.ViewModels
 
         #region COMMANDS IMPLEMENTATION
 
-        bool CanGoNext()
-        {
-            return pageNr != (introPages.Count - 1);
-        }
+        bool CanGoNext() { return pageNr != (introPages.Count - 1); }
 
-        bool CanGoPrevious()
-        {
-            return !(pageNr == 0);
-        }
+        bool CanGoPrevious() { return pageNr != 0; }
 
         void OnNext()
         {
@@ -134,10 +128,7 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        async Task OnPlay()
-        {
-            await Shell.Current.GoToAsync("///Full");
-        }
+        async Task OnPlay() { await Shell.Current.GoToAsync("///Full"); }
         #endregion
     }
 }
