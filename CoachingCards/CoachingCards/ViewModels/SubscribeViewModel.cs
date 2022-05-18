@@ -68,13 +68,13 @@ namespace CoachingCards.ViewModels
                 var response = client.PostAsync(apiEndpoint, content).Result;
 
                 if (response.IsSuccessStatusCode)
-                    await App.Current.MainPage.DisplayAlert("Dekujeme!", "Uspesne ste sa zapisali do nasho newslettra!", "OK");
+                    await App.Current.MainPage.DisplayAlert("Děkujeme!", "Přihlášení k odběru novinek bylo úspěšné.", "OK");
                 else
-                    await App.Current.MainPage.DisplayAlert("UPOZORNENI", "Prihlasenie do newslettra nebolo uspesne :( Skuste prosim neskor.", "OK");
+                    await App.Current.MainPage.DisplayAlert("UPOZORNENI", "Nepodařilo se vás přihlásit k odběru novinek. Prosíme zkuste to později.", "OK");
             }
             catch (Exception)
             {
-                await App.Current.MainPage.DisplayAlert("UPOZORNENI", "Prihlasenie do newslettra nebolo uspesne :( Skuste prosim neskor.", "OK");
+                await App.Current.MainPage.DisplayAlert("UPOZORNENI", "Nepodařilo se vás přihlásit k odběru novinek. Prosíme zkuste to později.", "OK");
             }
         }
     }
