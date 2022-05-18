@@ -118,7 +118,7 @@ namespace CoachingCards.ViewModels
                         NotifyRepeatInterval = new TimeSpan(1, 0, 0, 0, 0)
                     }
                 };
-                NotificationCenter.Current.Show(notification);
+                await NotificationCenter.Current.Show(notification);
 
                 StaticHelper.FirstRun = false;
 
@@ -135,7 +135,6 @@ namespace CoachingCards.ViewModels
                 if (showBack) //show top card
                 {
                     StaticHelper.CurrentDeckId++;
-                    //CardService.SetCurrentDeckId(CardService.GetCurrentDeckId() + 1);
                     ShowCard();
                 }
                 else //toss top card
@@ -171,8 +170,7 @@ namespace CoachingCards.ViewModels
 
         public void ShowCard()
         {
-            showBack = false; //!showBack;
-            //card = CardService.GetCardByDeckId(CardService.GetCurrentDeckId());
+            showBack = false;
             card = CardService.GetCardByDeckId(StaticHelper.CurrentDeckId);
             Heading = card.Heading;
             Text = card.Text;
@@ -183,7 +181,7 @@ namespace CoachingCards.ViewModels
 
         private void ShowEmptyDeck()
         {
-            showBack = true; //!showBack;
+            showBack = true;
             Heading = Text = Action = string.Empty;
             Background = emptyDeckBackgroundImage;
             Separator = string.Empty;
@@ -191,7 +189,6 @@ namespace CoachingCards.ViewModels
 
         private bool IsEmpty()
         {
-            //return CardService.GetCurrentDeckId() == CardService.GetMaxDeckId();
             return StaticHelper.CurrentDeckId == CardService.GetMaxDeckId();
         }
         #endregion
