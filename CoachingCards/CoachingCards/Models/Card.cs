@@ -13,9 +13,12 @@ namespace CoachingCards.Models
         public string Action { get; set; }
 
         public bool IsLeft { get; set; } //hemisphere
+    }
 
-        //private bool showBack;
-        //private string background;
-        //private string separator;
+    public class CardExtended : Card
+    {
+        public bool ShowBack { get; set; }
+        public string Background { get; set; }
+        public string Separator { get; set; }
     }
 }

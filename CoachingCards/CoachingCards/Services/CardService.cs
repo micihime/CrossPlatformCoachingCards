@@ -186,6 +186,20 @@ namespace CoachingCards.Services
             return card;
         }
 
+        public static CardExtended GetCardExtendedById(int cardId)
+        {
+            var card = GetCardById(cardId);
+            CardExtended cardExtended = new CardExtended
+            {
+                ID = card.ID,
+                Heading = card.Heading,
+                Text = card.Text,
+                Action = card.Action,
+                IsLeft = card.IsLeft
+            };
+            return cardExtended;
+        }
+
         public static Card GetCardByDeckId(int deckId)
         {
             Init();
@@ -193,6 +207,20 @@ namespace CoachingCards.Services
             if (deck != null)
                 return GetCardById(deck.CardID);
             return null;
+        }
+
+        public static CardExtended GetCardExtendedByDeckId(int deckId)
+        {
+            var card = GetCardByDeckId(deckId);
+            CardExtended cardExtended = new CardExtended
+            {
+                ID = card.ID,
+                Heading = card.Heading,
+                Text = card.Text,
+                Action = card.Action,
+                IsLeft = card.IsLeft
+            };
+            return cardExtended;
         }
         #endregion
 

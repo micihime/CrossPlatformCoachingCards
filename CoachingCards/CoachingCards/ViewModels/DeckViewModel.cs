@@ -27,22 +27,19 @@ namespace CoachingCards.ViewModels
 
         #region PRIVATE FIELDS
 
-        private Card card;
-        private bool showBack;
-        private string background;
-        private string separator;
+        private CardExtended card;
         private string pageTitle;
         #endregion
 
         #region PROPERTIES
-
-        #region TEXT PROPERTIES
 
         public string PageTitle
         {
             get => pageTitle;
             set => SetProperty(ref pageTitle, value);
         }
+
+        #region CARD PROPERTIES
 
         public string Heading
         {
@@ -61,20 +58,17 @@ namespace CoachingCards.ViewModels
             get => card.Action;
             set { card.Action = value; OnPropertyChanged(); } //SetProperty(ref card.Action, value);
         }
-        #endregion
-
-        #region IMAGE PROPERTIES
 
         public string Background
         {
-            get => background;
-            set => SetProperty(ref background, value);
+            get => card.Background;
+            set { card.Background = value; OnPropertyChanged(); } //SetProperty(ref background, value);
         }
 
         public string Separator
         {
-            get => separator;
-            set => SetProperty(ref separator, value);
+            get => card.Separator;
+            set { card.Separator = value; OnPropertyChanged(); } //SetProperty(ref separator, value);
         }
         #endregion
 
@@ -84,7 +78,6 @@ namespace CoachingCards.ViewModels
 
         public ICommand ToggleCard { get; }
         public AsyncCommand FirstRunCommand { get; }
-
         #endregion
 
         #region CONSTRUCTORS
@@ -92,17 +85,9 @@ namespace CoachingCards.ViewModels
         public DeckViewModel()
         {
             pageTitle = StaticHelper.GameModeToString(CardService.GetCurrentGameMode());
-            LoadCurrentState();
+            card = new CardExtended();
             ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
-        }
-
-        private void LoadCurrentState()
-        {
-            card = new Card();
-            //if game is in progress
-
-            //if it is new game
         }
         #endregion
 
@@ -137,7 +122,7 @@ namespace CoachingCards.ViewModels
                 ShowEmptyDeck();
             else
             {
-                if (showBack) //show top card
+                if (card.ShowBack) //show top card
                 {
                     StaticHelper.CurrentDeckId++;
                     ShowCard();
@@ -167,7 +152,7 @@ namespace CoachingCards.ViewModels
 
         private void ShowCardBack()
         {
-            showBack = true;
+            card.ShowBack = true;
             Heading = Text = Action = string.Empty;
             Background = backgroundImage;
             Separator = string.Empty;
@@ -175,8 +160,8 @@ namespace CoachingCards.ViewModels
 
         public void ShowCard()
         {
-            showBack = false;
-            card = CardService.GetCardByDeckId(StaticHelper.CurrentDeckId);
+            card = CardService.GetCardExtendedByDeckId(StaticHelper.CurrentDeckId);
+            card.ShowBack = false;
             Heading = card.Heading;
             Text = card.Text;
             Action = card.Action;
@@ -186,7 +171,7 @@ namespace CoachingCards.ViewModels
 
         private void ShowEmptyDeck()
         {
-            showBack = true;
+            card.ShowBack = true;
             Heading = Text = Action = string.Empty;
             Background = emptyDeckBackgroundImage;
             Separator = string.Empty;
