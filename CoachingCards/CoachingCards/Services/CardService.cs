@@ -23,17 +23,17 @@ namespace CoachingCards.Services
         static readonly List<Card> cards = new List<Card>
         {
             new Card{ Heading = "1. Přijmi, změň, opusť", Text = "Potřebuješ se rozhodnout? Zkus si pomoct trojicí reakcí: přijmi, změň, opusť.\nPŘIJMI situaci takovou, jaká je.\nZMĚŇ sebe, svůj přístup, svůj úhel pohledu, své myšlení.\nOPUSŤ situaci, která pro tebe nemá jiné vhodné řešení.\n\nJakékoliv rozhodnutí se stane mnohem snazší a sebevědomější. Například: Zavádění novinky v práci. Nadávat na vedení ani na systém ti nepomůže. Buď: \n1. novinku prostě přijmeš takovou, jaká je,\n2. nebo změníš svůj přístup a z původní nevýhody pro sebe uděláš výhodu,\n3. nebo je to pro tebe neakceptovatelné, tudíž odcházíš.", Action = "Akce: Použij na své aktuální dilema.", IsLeft = true},
-            new Card{ Heading = "2. Užitečné vs. zajímavé", Text = "Pro rychlou a k výsledku vedoucí komunikaci a pro efektivní uvažování rozlišuj užitečné od zajímavého a věnuj se jenom užitečnému. Užitečné je to, co vede k vytyčenému výsledku. Zajímavé je to, co cestu k výsledku prodlužuje.\n\nNapříklad: Marie kamarádce podrobně vypráví, jak si na kole zranila koleno (orientace na zajímavé). Ale když jde Marie k lékaři, tak mu sdělí: „Bolí mě koleno. Tady.“ (Orientace na užitečné).\n\nZefektivníš komunikaci i přemýšlení a ušetříš čas.\nNapříklad: Pracovní porady zkrátíš o 50 % až 75 % času, zaměříš se na výsledek, zbavíš se zdržovacích odboček atd.", Action = "Akce: Vyzkoušej jeden den vědomě rozlišovat užitečné od zajímavého a dál se věnuj pouze užitečnému.", IsLeft = true},
+           new Card{ Heading = "2. Užitečné vs. zajímavé", Text = "Pro rychlou a k výsledku vedoucí komunikaci a pro efektivní uvažování rozlišuj užitečné od zajímavého a věnuj se jenom užitečnému. Užitečné je to, co vede k vytyčenému výsledku. Zajímavé je to, co cestu k výsledku prodlužuje.\n\nNapříklad: Marie kamarádce podrobně vypráví, jak si na kole zranila koleno (orientace na zajímavé). Ale když jde Marie k lékaři, tak mu sdělí: „Bolí mě koleno. Tady.“ (Orientace na užitečné).\n\nZefektivníš komunikaci i přemýšlení a ušetříš čas.\nNapříklad: Pracovní porady zkrátíš o 50 % až 75 % času, zaměříš se na výsledek, zbavíš se zdržovacích odboček atd.", Action = "Akce: Vyzkoušej jeden den vědomě rozlišovat užitečné od zajímavého a dál se věnuj pouze užitečnému.", IsLeft = true},
             new Card{ Heading = "3. Sféry vlivu",Text =  "Ovlivňuj to, co ovlivnit můžeš. To je to, co tvoříš. To jsi ty.\n\nNeztrácej energii tím, co ovlivnit nemůžeš.\n\nA hlavně se soustřeď na to, abys dokázal tyto dvě kategorie rozlišit.\n\nNapříklad: Svého šéfa, politika, rodiče ovlivnit nemůžeš. Můžeš ale ovlivnit svůj postoj k nim, svůj úhel pohledu.", Action = "Akce: Jeden den veškeré situace kolem sebe posuzuj, zda jsou přímo tebou ovlivnitelné, či nikoliv. Věnuj se jen těm, které můžeš přímo ovlivnit. Všimni si množství ušetřené energie a času.", IsLeft = true},
             new Card{ Heading = "4. Tady a teď se zdroji, které máš", Text = "Uvědom si, že vše, co v životě činíš, děláš nejlépe, jak umíš. Tady a teď se zdroji, které máš. Věř v sebe, ve své schopnosti a nereviduj svá minulá rozhodnutí.\n\nJakýkoliv pohled zpět je vždy „po bitvě generálem“. Pouč se z historie.", Action = "Akce: Vezmi jedno své životní rozhodnutí typu: jak by se odehrával můj život, kdyby to tehdy bylo jinak. Tentokrát si ale věcně a konkrétně uvědom, jaké tehdy byly tvé zdroje (což jsou i informace), a ruku na srdce, jaké by bylo tvé rozhodnutí znovu za stejných okolností?", IsLeft = true},
             new Card{ Heading = "5. Vidíme mozkem", Text = "Očima ve skutečnosti nevidíme. Na svět se díváme mozkem.\n\nVše, co k nám přichází, projde skrz síto našich myšlenek, zkušeností a návyků. Klasickým příkladem je sklenice, která může být pro jednoho poloplná a pro jiného poloprázdná.", Action = "Akce: Podebatuj s někým o svých prioritách, bez kterých se nedá žít.", IsLeft = true},
             new Card{ Heading = "6. Fáze učení mozku:", Text = "Proces osvojování si nového návyku má čtyři fáze:\n1.nevědomá a nezkušená\n – starý zvyk / automatismus\n2. vědomá, nezkušená\n – získá se po prvních 21 opakováních\n3. vědomá, zkušená\n – získá se po dalších 1 000 opakováních (fáze 1 021 opakování zabere přibližně 90 dnů)\n4.nevědomá, zkušená\n – nový návyk / automatismus", Action = "Akce: Když se ti něco hned nepovede, nenadávej si za to. Naopak si polož ruku na rameno a řekni si: „Žádný učený z nebe nespadl. Vytvářím nový návyk.“ A původní „To jsem ale de..l.“ nahraď „Někdy se to prostě nepovede, a co?“.", IsLeft = true},
-            new Card{ Heading = "7. Každý mozek je jiný",Text =  "Každé vnímání světa je jiné.\n\nNikdo nemá tvé zkušenosti, tvé zvyky, tvé myšlenky, tvé zdroje. Nikdo ti nerozumí tak dokonale jako ty. Jsi jediný odborník na svůj život.\n\nŘešení všech svých dilemat znáš. Jen je vytáhnout z hlubin mysli na světlo.", Action = "Akce: Podívej se, v kolika zásadních otázkách se společnost dělí do různých názorových skupin.Najdeš jedno téma, v němž jsou všichni zajedno?", IsLeft = true},
+            new Card{ Heading = "7. Každý mozek je jiný", Text =  "Každé vnímání světa je jiné.\n\nNikdo nemá tvé zkušenosti, tvé zvyky, tvé myšlenky, tvé zdroje. Nikdo ti nerozumí tak dokonale jako ty. Jsi jediný odborník na svůj život.\n\nŘešení všech svých dilemat znáš. Jen je vytáhnout z hlubin mysli na světlo.", Action = "Akce: Podívej se, v kolika zásadních otázkách se společnost dělí do různých názorových skupin.Najdeš jedno téma, v němž jsou všichni zajedno?", IsLeft = true},
             new Card{ Heading = "8. Zvyk je železná košile", Text = "I když je těžká, svléknout se dá.\n\nJe dobré mít někoho, kdo ti pomůže „sundat“ starý nežádoucí zvyk a pomůže ti „obléct“ nový žádoucí návyk, který ukotvíš ve svém životě.", Action = "Akce: Vypiš si(zlo)zvyky, kterých se chceš zbavit. Napiš si také návyky, které by stály za osvojení. Co všechno díky nim získáš?", IsLeft = true},
             new Card{ Heading = "9. Prioritizace", Text = "Prioritizuj podle míry důležitosti pro sebe.\n\nJe - li to, čeho chceš dosáhnout, pro tebe v danou chvíli opravdu důležité, dej tomu absolutní prioritu. Mozek snáze pochopí, že to myslíš vážně.\n\nNapříklad: Mám v úterý odpoledne sezení s koučem a do toho mi zavolá kamarád s nabídkou badmintonu. Svým výběrem dávám mozku jasně najevo, co je pro mě v danou chvíli důležité. Opakovanou volbou toto pochopitelně podpořím.", Action = "Akce: Co je tvou jasnou prioritou, která je nadřazená vždy a všemu? Co by mělo být tvou prioritou, a není?", IsLeft = true},
             new Card{ Heading =  "10. Nevyžádané rady – informační dieta", Text = "Nesmírně osvěžující informační dieta působí blahodárně na všech úrovních žití. Dopřej si pauzu od médií, sociálních sítí, telefonátů, reklam, schůzek. Buď jen ty, bez tlaku na to, co máš a nemáš dělat apod.\nPo takové informační dietě určitě pocítíš lehkost a svěžest.Tohle má pro tebe ještě jeden efekt.Naučíš se efektivněji žádat o radu, když to skutečně budeš potřebovat.", Action = "Akce: Jeden den přistupuj ke všem informacím, které na tebe automaticky míří, a nejsou tebou výslovně vyžádány(TV, rádio, podcasty, články, zpravodajství, sociální sítě atd.), jako k nevyžádaným radám a odmítni je, nekompromisně, slušně a důsledně.Nevyžádané rady se od tebe budou odrážet jako od zrcadla. Bude to pro tebe nesmírně osvobozující a očistný proces.", IsLeft = true},
             new Card{ Heading =  "11. Inventura úspěchů", Text = "Naše přání bereme jako nedosažitelný sen do chvíle, než si ho splníme. Pak již bagatelizujeme jeho náročnost. I to, kolik úsilí nás stála realizace. Rychle zapomínáme na trnitou cestu, která nás mnohé naučila. Místo toho, abychom se z ní dlouhodobě poučili, říkáme „tak strašné/ náročné to zase nebylo“.", Action = "Akce: Vypiš si své dosavadní úspěchy.Co považuješ za své životní úspěchy? Jaké konkrétní úsilí tě jejich dosažení stálo? Jaké zlomové okamžiky tě na cestě za nimi čekaly?", IsLeft = true},
-            new Card{ Heading =  "12. Opuštění komfortní zóny",Text =  "Dělat věci nově, jinak, neobvykle.\nNapříklad: Zvolit jinou cestu do práce, vystoupit třeba o stanici dříve a zbytek dojít pěšky. Dát si ráno studenou sprchu. Nakoupit v jiném obchodě než obvykle. K obědu si dát něco dosud neochutnaného. Po příchodu z práce udělat doma jako první něco úplně jiného než obyčejně. Dát si výzvu týdne a splnit ji. Zkrátka udělej cokoliv, co vybočuje z tvého běžného chování. Otestuj své vlastní hranice, dogmata a tabu.", Action = "Akce: Na nějaký čas přestaň dělat nějakou věc, která je pro tebe pohodlná, nebo naopak udělej něco jinak, nově.Pro začátek postačí i drobné změny v zažitých denních rituálech. Zapiš si nebo sdílej, co „šíleného“ se ti povedlo udělat, jak to na tebe zapůsobilo a své pocity při tom a potom.", IsLeft = true},
+            new Card{ Heading =  "12. Opuštění komfortní zóny",Text = "Dělat věci nově, jinak, neobvykle.\nNapříklad: Zvolit jinou cestu do práce, vystoupit třeba o stanici dříve a zbytek dojít pěšky. Dát si ráno studenou sprchu. Nakoupit v jiném obchodě než obvykle. K obědu si dát něco dosud neochutnaného. Po příchodu z práce udělat doma jako první něco úplně jiného než obyčejně. Dát si výzvu týdne a splnit ji. Zkrátka udělej cokoliv, co vybočuje z tvého běžného chování. Otestuj své vlastní hranice, dogmata a tabu.", Action = "Akce: Na nějaký čas přestaň dělat nějakou věc, která je pro tebe pohodlná, nebo naopak udělej něco jinak, nově.Pro začátek postačí i drobné změny v zažitých denních rituálech. Zapiš si nebo sdílej, co „šíleného“ se ti povedlo udělat, jak to na tebe zapůsobilo a své pocity při tom a potom.", IsLeft = true},
             new Card{ Heading =  "13. Přání v posledním týdnu života", Text = "Také máš na všechno hromadu času? Vždyť to ještě vydrží nebo udělám to zítra, za týden, po dovolené. Není na co čekat na kdy odkládat.Nikdy nevíme, kolik nám ještě zbývá času.", Action = "Akce: Napiš na papír svá přání, která si chceš splnit, kdyby ti zbýval poslední týden života.Text nech pár dnů uležet a pak se k němu vrať.Vrať se k němu ještě jednou za několik týdnů.Velké překvapení tě nemine.", IsLeft = true},
             new Card{ Heading =  "14. Ne předponě ne",Text =  "Povšimni si, jak často začínají naše věty záporem. „Nepůjdeš ven?“ „Nemáš čas?“ „Nehodilo by se ti to?“ „Nedáš si něco dobrého na zub?“\n\nCo tak toho „NE“ trochu ubrat? Nejde v žádném případě o to, vyhnat slovo „ne“ ze svého života. To určitě ne.Ne je potřebné, stejně jako ano, když ho použiješ v pravý čas. Jde o zmírnění záporného postoje ke každodenním činnostem, který tak často vyjadřujeme větami uvozenými právě negací.", Action = "Akce: Neustále, vždy a všude, v práci i doma zkoušej odstraňovat negaci ze slovníku i myšlení.Soustřeď se a vědomě se opravuj.", IsLeft = true},
             new Card{ Heading =  "15. Pochvala vs. ocenění", Text = "Pravé ocenění je na rozdíl od neurčité pochvaly konkrétní. Takže vím přesně, za co druhého oceňuji. Mělo by být upřímné, tedy věřím tomu, co říkám. Ocenění klade důraz na úsilí toho, kdo je oceňován. Ocenění si všímá právě samotné tvorby, změny a vynaložené práce. Při oceňování upozadíme své ego, zásadně nehodnotíme. Ano, může se nám práce druhého líbit, ale ocenění je co nejobjektivnější, takže vlastní hodnotící soud potlačíme.\n\nNapříklad: Malý chlapec v lese postavil domeček pro skřítky. Nekonkrétní pochvala: „Ty jsi ale šikovný chlapeček.“ Konkrétní ocenění: „To ti muselo dát hodně práce. A kde jsi sehnal tu zelenou šišku? Vždyť tady jsou jen hnědé.“ Naučíš-li se oceňovat druhé, dokážeš pak ocenit i sebe. A neboj se, není to domýšlivost. Oceňuješ přece konkrétní práci a ta si to zaslouží.", Action = "Akce: Zkus jeden den místo nekonkrétní chvály a subjektivního hodnocení druhé oceňovat.", IsLeft = true},
@@ -111,10 +111,10 @@ namespace CoachingCards.Services
                 var deck = db.Table<Deck>().ToList();
                 if ((deck == null) || (deck.Count == 0))
                 {
-                    var cards = db.Table<Card>().ToList();
+                    var allCards = db.Table<Card>().ToList();
                     var deckList = new List<Deck>();
 
-                    for (int i = 1; i <= cards.Count; i++)
+                    for (int i = 1; i <= allCards.Count; i++)
                     {
                         deckList.Add(new Deck { ID = i, CardID = 0 });
                     }
@@ -229,17 +229,6 @@ namespace CoachingCards.Services
         public static bool IsDeckEmpty()
         {
             Init();
-
-            ////check all items
-            //var isEmpty = true;
-            //var deck = db.Table<Deck>().ToList();
-            //foreach (var item in deck)
-            //{
-            //    if (item.CardID != 0)
-            //        isEmpty = false;
-            //}
-            //return isEmpty;
-
             //check only first item
             var card = db.Table<Deck>().Where(x => x.ID == 1).FirstOrDefault();
             return (card.CardID == 0);
@@ -285,7 +274,6 @@ namespace CoachingCards.Services
                 deck[i].CardID = 0;
             }
             db.UpdateAll(deck);
-            //db.DeleteAll<Deck>();
         }
 
         private static List<int> GetNewDeckFull()
@@ -298,22 +286,21 @@ namespace CoachingCards.Services
         private static List<int> GetNewDeckLeftHemisphere()
         {
             Init();
-            var randCardIds = db.Table<Card>().Where(x => x.IsLeft == true).Select(x => x.ID).ToList();
+            var randCardIds = db.Table<Card>().Where(x => x.IsLeft).Select(x => x.ID).ToList();
             return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
 
         private static List<int> GetNewDeckRightHemisphere()
         {
             Init();
-            var randCardIds = db.Table<Card>().Where(x => x.IsLeft == false).Select(x => x.ID).ToList();
+            var randCardIds = db.Table<Card>().Where(x => !x.IsLeft).Select(x => x.ID).ToList();
             return randCardIds.OrderBy(a => Guid.NewGuid()).ToList();
         }
         #endregion
 
         #region APP SETTINGS
 
-        public static int GetMinDeckId() { return 1; }
-
+        public static int MinDeckId => 1;
         public static int GetMaxDeckId()
         {
             var mode = GetCurrentGameMode();
@@ -323,9 +310,9 @@ namespace CoachingCards.Services
                 case (int)GameMode.Full:
                     return cards.Count;
                 case (int)GameMode.LeftHemisphere:
-                    return cards.Where(x => x.IsLeft == true).Count<Card>();
+                    return cards.Count(x => x.IsLeft);
                 case (int)GameMode.RightHemisphere:
-                    return cards.Where(x => x.IsLeft == false).Count<Card>();
+                    return cards.Count(x => !x.IsLeft);
                 default:
                     return cards.Count;
             }
@@ -349,7 +336,7 @@ namespace CoachingCards.Services
                 db.Update(appSetting);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -372,7 +359,7 @@ namespace CoachingCards.Services
                 db.Update(appSetting);
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

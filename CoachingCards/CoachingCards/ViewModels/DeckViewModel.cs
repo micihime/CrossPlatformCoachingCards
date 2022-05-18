@@ -44,31 +44,31 @@ namespace CoachingCards.ViewModels
         public string Heading
         {
             get => card.Heading;
-            set { card.Heading = value; OnPropertyChanged(); } //SetProperty(ref card.Heading, value);
+            set { card.Heading = value; OnPropertyChanged(); }
         }
 
         public string Text
         {
             get => card.Text;
-            set { card.Text = value; OnPropertyChanged(); } //SetProperty(ref card.Text, value);
+            set { card.Text = value; OnPropertyChanged(); }
         }
 
         public string Action
         {
             get => card.Action;
-            set { card.Action = value; OnPropertyChanged(); } //SetProperty(ref card.Action, value);
+            set { card.Action = value; OnPropertyChanged(); }
         }
 
         public string Background
         {
             get => card.Background;
-            set { card.Background = value; OnPropertyChanged(); } //SetProperty(ref background, value);
+            set { card.Background = value; OnPropertyChanged(); }
         }
 
         public string Separator
         {
             get => card.Separator;
-            set { card.Separator = value; OnPropertyChanged(); } //SetProperty(ref separator, value);
+            set { card.Separator = value; OnPropertyChanged(); }
         }
         #endregion
 

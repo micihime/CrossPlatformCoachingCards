@@ -19,11 +19,9 @@ namespace CoachingCards.Views
 
         protected override async void OnAppearing()
         {
-            //Accelerometer.ShakeDetected += this.OnShaked;
             Accelerometer.Start(SensorSpeed.Default);
             base.OnAppearing();
 
-            //if (CardService.GetCurrentDeckId() == 0)
             if (StaticHelper.CurrentDeckId == 0)
                 vm.ResetGame();
             else
@@ -35,7 +33,6 @@ namespace CoachingCards.Views
         protected override void OnDisappearing()
         {
             Accelerometer.Stop();
-            //Accelerometer.ShakeDetected -= this.OnShaked;
             base.OnDisappearing();
         }
     }

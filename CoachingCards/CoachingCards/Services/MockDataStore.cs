@@ -18,7 +18,7 @@ namespace CoachingCards.Services
 
         public async Task<bool> UpdateAsync(Card item)
         {
-            var oldItem = items.Where((Card arg) => arg.ID == item.ID).FirstOrDefault();
+            var oldItem = items.FirstOrDefault((Card arg) => arg.ID == item.ID);
             items.Remove(oldItem);
             items.Add(item);
 
@@ -27,7 +27,7 @@ namespace CoachingCards.Services
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var oldItem = items.Where((Card arg) => arg.ID == id).FirstOrDefault();
+            var oldItem = items.FirstOrDefault((Card arg) => arg.ID == id);
             items.Remove(oldItem);
 
             return await Task.FromResult(true);
