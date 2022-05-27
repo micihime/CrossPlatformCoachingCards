@@ -1,7 +1,6 @@
 ﻿using CoachingCards.Models;
 using CoachingCards.Services;
 using MvvmHelpers;
-using MvvmHelpers.Commands;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -76,7 +75,7 @@ namespace CoachingCards.ViewModels
         #region DECLARING COMMANDS
 
         public ICommand ToggleCardCommand { get; }
-        public AsyncCommand FirstRunCommand { get; }
+        //public AsyncCommand FirstRunCommand { get; }
         #endregion
 
         #region CONSTRUCTORS
@@ -86,7 +85,7 @@ namespace CoachingCards.ViewModels
             pageTitle = StaticHelper.GameModeToString(CardService.GetCurrentGameMode());
             card = new CardExtended();
             ToggleCardCommand = new MvvmHelpers.Commands.Command(OnToggleCard);
-            FirstRunCommand = new AsyncCommand(FirstRun);
+            //FirstRunCommand = new AsyncCommand(FirstRun);
         }
         #endregion
 
@@ -96,29 +95,17 @@ namespace CoachingCards.ViewModels
         {
             Accelerometer.Start(SensorSpeed.Default);
 
-            if (StaticHelper.CurrentDeckId == 0)
-                ResetGame();
-            else
-                ShowCurrentCard();
+            if (StaticHelper.FirstRun)
+                await FirstRun(); //FirstRunCommand.ExecuteAsync();
 
-            await FirstRunCommand.ExecuteAsync();
+            LoadGame();
         }
 
         public void OnDisappearing() { Accelerometer.Stop(); }
 
-        async Task FirstRun()
-        {
-            if (StaticHelper.FirstRun)
-            {
-                await StaticHelper.ScheduleNotif();
-                StaticHelper.FirstRun = false;
-                await Shell.Current.GoToAsync("///IntroductionPage");
-            }
-        }
+        public void OnToggleCard() { ToggleCard(); } //called on tap + on shake
 
-        void OnToggleCard() { ToggleCard(); } //called on tap + on shake
-
-        private void Accelerometer_ShakeDetected(object sender, EventArgs e)
+        public void Accelerometer_ShakeDetected(object sender, EventArgs e)
         {
             OnToggleCard();
         }
@@ -126,7 +113,26 @@ namespace CoachingCards.ViewModels
 
         #region HELPERS
 
-        public void ResetGame()
+        private async Task FirstRun()
+        {
+            await StaticHelper.ScheduleNotif();
+            StaticHelper.FirstRun = false;
+            await Shell.Current.GoToAsync("///IntroductionPage");
+        }
+
+        private void LoadGame()
+        {
+            if (StaticHelper.CurrentDeckId == 0)
+                ResetGame();
+            else if (IsEmpty())
+                ShowEmptyDeck();
+            else if (card.IsBacksideUp) //show current card
+                ShowCurrentCard();
+            else //toss top card
+                ShowCardBack();
+        }
+
+        private void ResetGame()
         {
             Accelerometer.ShakeDetected -= Accelerometer_ShakeDetected;
             Accelerometer.ShakeDetected += Accelerometer_ShakeDetected;
@@ -144,7 +150,7 @@ namespace CoachingCards.ViewModels
 
         private void TurnCard()
         {
-            if (card.IsBacksideUp) //show top card
+            if (card.IsBacksideUp) //show new card - incrementing current deck id
                 ShowNewCard();
             else //toss top card
                 ShowCardBack();
