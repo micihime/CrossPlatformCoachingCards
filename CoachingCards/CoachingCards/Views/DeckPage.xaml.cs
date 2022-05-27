@@ -1,6 +1,4 @@
-﻿using CoachingCards.Models;
-using CoachingCards.ViewModels;
-using Xamarin.Essentials;
+﻿using CoachingCards.ViewModels;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,21 +17,14 @@ namespace CoachingCards.Views
 
         protected override async void OnAppearing()
         {
-            Accelerometer.Start(SensorSpeed.Default);
             base.OnAppearing();
-
-            if (StaticHelper.CurrentDeckId == 0)
-                vm.ResetGame();
-            else
-                vm.ShowCard();
-
-            await vm.FirstRunCommand.ExecuteAsync();
+            await vm.OnAppearing();
         }
 
         protected override void OnDisappearing()
         {
-            Accelerometer.Stop();
             base.OnDisappearing();
+            vm.OnDisappearing();
         }
     }
 }

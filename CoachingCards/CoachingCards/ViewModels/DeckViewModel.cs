@@ -92,6 +92,23 @@ namespace CoachingCards.ViewModels
 
         #region COMMANDS
 
+        public async Task OnAppearing()
+        {
+            Accelerometer.Start(SensorSpeed.Default);
+
+            if (StaticHelper.CurrentDeckId == 0)
+                ResetGame();
+            else
+                ShowCard();
+
+            await FirstRunCommand.ExecuteAsync();
+        }
+
+        public void OnDisappearing()
+        {
+            Accelerometer.Stop();
+        }
+
         async Task FirstRun()
         {
             if (StaticHelper.FirstRun)
