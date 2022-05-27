@@ -99,7 +99,7 @@ namespace CoachingCards.ViewModels
             if (StaticHelper.CurrentDeckId == 0)
                 ResetGame();
             else
-                ShowCard();
+                ShowCurrentCard();
 
             await FirstRunCommand.ExecuteAsync();
         }
@@ -121,21 +121,16 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        void OnToggleCard()
+        void OnToggleCard() //called on tap + on shake
         {
             if (IsEmpty())
                 ShowEmptyDeck();
             else
             {
                 if (card.ShowBack) //show top card
-                {
-                    StaticHelper.CurrentDeckId++;
-                    ShowCard();
-                }
+                    ShowNewCard();
                 else //toss top card
-                {
                     ShowCardBack();
-                }
             }
         }
 
@@ -163,7 +158,7 @@ namespace CoachingCards.ViewModels
             Separator = string.Empty;
         }
 
-        public void ShowCard()
+        public void ShowCurrentCard()
         {
             card = CardService.GetCardExtendedByDeckId(StaticHelper.CurrentDeckId);
             card.ShowBack = false;
@@ -172,6 +167,12 @@ namespace CoachingCards.ViewModels
             Action = card.Action;
             Background = card.IsLeft ? backgroundImageLeft : backgroundImageRight;
             Separator = separatorImage;
+        }
+
+        public void ShowNewCard()
+        {
+            StaticHelper.CurrentDeckId++;
+            ShowCurrentCard();
         }
 
         private void ShowEmptyDeck()
