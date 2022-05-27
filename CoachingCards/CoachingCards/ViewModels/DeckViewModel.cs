@@ -102,10 +102,11 @@ namespace CoachingCards.ViewModels
                     BadgeNumber = 1,
                     Title = "Koučovací karty",
                     Description = "Jaká bude tvá dnešní karta?",
+                    NotificationId = 1,
                     Schedule = new NotificationRequestSchedule
                     {
+                        RepeatType = NotificationRepeat.Daily,
                         NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
-                        NotifyRepeatInterval = new TimeSpan(1, 0, 0, 0, 0)
                     }
                 };
                 await NotificationCenter.Current.Show(notification);
