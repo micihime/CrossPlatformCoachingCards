@@ -2,7 +2,6 @@
 using CoachingCards.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
-using Plugin.LocalNotification;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -97,19 +96,7 @@ namespace CoachingCards.ViewModels
         {
             if (StaticHelper.FirstRun)
             {
-                var notification = new NotificationRequest
-                {
-                    BadgeNumber = 1,
-                    Title = "Koučovací karty",
-                    Description = "Jaká bude tvá dnešní karta?",
-                    NotificationId = 1,
-                    Schedule = new NotificationRequestSchedule
-                    {
-                        RepeatType = NotificationRepeat.Daily,
-                        NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
-                    }
-                };
-                await NotificationCenter.Current.Show(notification);
+                await StaticHelper.ScheduleNotif();
 
                 StaticHelper.FirstRun = false;
 
