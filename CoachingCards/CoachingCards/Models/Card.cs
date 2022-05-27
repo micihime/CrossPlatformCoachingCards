@@ -17,7 +17,7 @@ namespace CoachingCards.Models
 
     public class CardExtended : Card
     {
-        public bool ShowBack { get; set; }
+        public bool IsBacksideUp { get; set; } //is turned backside up
         public string Background { get; set; }
         public string Separator { get; set; }
     }

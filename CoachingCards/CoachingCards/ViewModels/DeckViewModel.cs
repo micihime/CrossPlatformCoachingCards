@@ -75,7 +75,7 @@ namespace CoachingCards.ViewModels
 
         #region DECLARING COMMANDS
 
-        public ICommand ToggleCard { get; }
+        public ICommand ToggleCardCommand { get; }
         public AsyncCommand FirstRunCommand { get; }
         #endregion
 
@@ -85,7 +85,7 @@ namespace CoachingCards.ViewModels
         {
             pageTitle = StaticHelper.GameModeToString(CardService.GetCurrentGameMode());
             card = new CardExtended();
-            ToggleCard = new MvvmHelpers.Commands.Command(OnToggleCard);
+            ToggleCardCommand = new MvvmHelpers.Commands.Command(OnToggleCard);
             FirstRunCommand = new AsyncCommand(FirstRun);
         }
         #endregion
@@ -104,35 +104,19 @@ namespace CoachingCards.ViewModels
             await FirstRunCommand.ExecuteAsync();
         }
 
-        public void OnDisappearing()
-        {
-            Accelerometer.Stop();
-        }
+        public void OnDisappearing() { Accelerometer.Stop(); }
 
         async Task FirstRun()
         {
             if (StaticHelper.FirstRun)
             {
                 await StaticHelper.ScheduleNotif();
-
                 StaticHelper.FirstRun = false;
-
                 await Shell.Current.GoToAsync("///IntroductionPage");
             }
         }
 
-        void OnToggleCard() //called on tap + on shake
-        {
-            if (IsEmpty())
-                ShowEmptyDeck();
-            else
-            {
-                if (card.ShowBack) //show top card
-                    ShowNewCard();
-                else //toss top card
-                    ShowCardBack();
-            }
-        }
+        void OnToggleCard() { ToggleCard(); } //called on tap + on shake
 
         private void Accelerometer_ShakeDetected(object sender, EventArgs e)
         {
@@ -150,9 +134,25 @@ namespace CoachingCards.ViewModels
             CardService.CreateNewDeck();
         }
 
+        private void ToggleCard()
+        {
+            if (IsEmpty())
+                ShowEmptyDeck();
+            else
+                TurnCard();
+        }
+
+        private void TurnCard()
+        {
+            if (card.IsBacksideUp) //show top card
+                ShowNewCard();
+            else //toss top card
+                ShowCardBack();
+        }
+
         private void ShowCardBack()
         {
-            card.ShowBack = true;
+            card.IsBacksideUp = true;
             Heading = Text = Action = string.Empty;
             Background = backgroundImage;
             Separator = string.Empty;
@@ -161,7 +161,7 @@ namespace CoachingCards.ViewModels
         public void ShowCurrentCard()
         {
             card = CardService.GetCardExtendedByDeckId(StaticHelper.CurrentDeckId);
-            card.ShowBack = false;
+            card.IsBacksideUp = false;
             Heading = card.Heading;
             Text = card.Text;
             Action = card.Action;
@@ -177,7 +177,7 @@ namespace CoachingCards.ViewModels
 
         private void ShowEmptyDeck()
         {
-            card.ShowBack = true;
+            card.IsBacksideUp = true;
             Heading = Text = Action = string.Empty;
             Background = emptyDeckBackgroundImage;
             Separator = string.Empty;
