@@ -16,7 +16,7 @@
 
                     <StackLayout.GestureRecognizers>
                         <TapGestureRecognizer 
-                        Command="{Binding ToggleCard}"
+                        Command="{Binding ToggleCardCommand}"
                         NumberOfTapsRequired="1">
                         </TapGestureRecognizer>
                     </StackLayout.GestureRecognizers>
