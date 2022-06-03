@@ -1,7 +1,4 @@
-﻿using Plugin.LocalNotification;
-using System;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 
 namespace CoachingCards.Models
 {
@@ -49,21 +46,21 @@ namespace CoachingCards.Models
             }
         }
 
-        public static async Task ScheduleNotif()
-        {
-            var notification = new NotificationRequest
-            {
-                BadgeNumber = 1,
-                Title = "Koučovací karty",
-                Description = "Jaká bude tvá dnešní karta?",
-                NotificationId = 1,
-                Schedule = new NotificationRequestSchedule
-                {
-                    RepeatType = NotificationRepeat.Daily,
-                    NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
-                }
-            };
-            await NotificationCenter.Current.Show(notification);
-        }
+        //public static async Task ScheduleNotif()
+        //{
+        //    var notification = new NotificationRequest
+        //    {
+        //        BadgeNumber = 1,
+        //        Title = "Koučovací karty",
+        //        Description = "Jaká bude tvá dnešní karta?",
+        //        NotificationId = 1,
+        //        Schedule = new NotificationRequestSchedule
+        //        {
+        //            RepeatType = NotificationRepeat.Daily,
+        //            NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
+        //        }
+        //    };
+        //    await NotificationCenter.Current.Show(notification);
+        //}
     }
 }
