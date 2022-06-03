@@ -20,6 +20,7 @@ namespace CoachingCards.ViewModels
                 SetProperty(ref _saveCommand, value);
             }
         }
+
         bool _notificationONOFF;
         public bool NotificationONOFF
         {
@@ -43,6 +44,7 @@ namespace CoachingCards.ViewModels
                 DependencyService.Get<ILocalNotificationService>().Cancel(0);
             }
         }
+
         DateTime _selectedDate = DateTime.Today;
         public DateTime SelectedDate
         {
@@ -55,6 +57,7 @@ namespace CoachingCards.ViewModels
                 SetProperty(ref _selectedDate, value);
             }
         }
+
         TimeSpan _selectedTime = DateTime.Now.TimeOfDay;
         public TimeSpan SelectedTime
         {
@@ -67,6 +70,7 @@ namespace CoachingCards.ViewModels
                 SetProperty(ref _selectedTime, value);
             }
         }
+
         string _messageText;
         public string MessageText
         {

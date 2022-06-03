@@ -110,13 +110,14 @@ namespace CoachingCards.Droid.DependencyServices
     {
 
         public const string LocalNotificationKey = "LocalNotification";
+        public const string CHANNEL_ID = "LocalNotification";
 
         public override void OnReceive(Context context, Intent intent)
         {
             var extra = intent.GetStringExtra(LocalNotificationKey);
             var notification = DeserializeNotification(extra);
             //Generating notification      
-            var builder = new NotificationCompat.Builder(Application.Context)
+            var builder = new NotificationCompat.Builder(Application.Context, CHANNEL_ID)
                 .SetContentTitle(notification.Title)
                 .SetContentText(notification.Body)
                 .SetSmallIcon(notification.IconId)
