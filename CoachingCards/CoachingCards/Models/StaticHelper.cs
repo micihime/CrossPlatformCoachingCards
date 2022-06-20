@@ -59,7 +59,8 @@ namespace CoachingCards.Models
                 NotificationId = 1,
                 Schedule = new NotificationRequestSchedule
                 {
-                    RepeatType = NotificationRepeat.Daily,
+                    RepeatType = NotificationRepeat.TimeInterval,
+                    NotifyRepeatInterval = new TimeSpan(24, 0, 0),
                     NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
                 }
             };
