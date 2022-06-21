@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 using Foundation;
 using UIKit;
 
@@ -23,9 +20,17 @@ namespace CoachingCards.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+
+            Plugin.LocalNotification.NotificationCenter.AskPermission();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override void WillEnterForeground(UIApplication uiApplication)
+        {
+            Plugin.LocalNotification.NotificationCenter.ResetApplicationIconBadgeNumber(uiApplication);
         }
     }
 }

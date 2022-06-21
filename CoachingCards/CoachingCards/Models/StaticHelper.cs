@@ -19,6 +19,30 @@ namespace CoachingCards.Models
             set => Preferences.Set(nameof(FirstRun), value);
         }
 
+        public static bool IsSubscribed
+        {
+            get => Preferences.Get(nameof(IsSubscribed), false);
+            set => Preferences.Set(nameof(IsSubscribed), value);
+        }
+
+        public static bool SubscribeNotifON
+        {
+            get => Preferences.Get(nameof(IsSubscribed), true);
+            set => Preferences.Set(nameof(IsSubscribed), value);
+        }
+
+        public static bool NotificationsON
+        {
+            get => Preferences.Get(nameof(NotificationsON), true);
+            set => Preferences.Set(nameof(NotificationsON), value);
+        }
+
+        public static DateTime NotificationTime
+        {
+            get => Preferences.Get(nameof(NotificationTime), new DateTime());
+            set => Preferences.Set(nameof(NotificationTime), value);
+        }
+
         public static string GameModeToString(GameMode mode)
         {
             switch (mode)
@@ -51,6 +75,8 @@ namespace CoachingCards.Models
 
         public static async Task ScheduleNotif()
         {
+            NotificationTime = DateTime.Now.AddSeconds(30);
+
             var notification = new NotificationRequest
             {
                 BadgeNumber = 1,
@@ -61,9 +87,32 @@ namespace CoachingCards.Models
                 {
                     RepeatType = NotificationRepeat.TimeInterval,
                     NotifyRepeatInterval = new TimeSpan(24, 0, 0),
-                    NotifyTime = DateTime.Now.AddSeconds(30), // Used for Scheduling local notification, if not specified notification will show immediately.
+                    NotifyTime = NotificationTime
                 }
             };
+            await NotificationCenter.Current.Show(notification);
+        }
+
+        public static async Task RescheduleNotif(DateTime scheduledTime)
+        {
+            NotificationCenter.Current.CancelAll();
+
+            NotificationTime = scheduledTime;
+
+            var notification = new NotificationRequest
+            {
+                BadgeNumber = 1,
+                Title = "Koučovací karty",
+                Description = "Jaká bude tvá dnešní karta?",
+                NotificationId = 1,
+                Schedule = new NotificationRequestSchedule
+                {
+                    RepeatType = NotificationRepeat.TimeInterval,
+                    NotifyRepeatInterval = new TimeSpan(24, 0, 0),
+                    NotifyTime = NotificationTime
+                }
+            };
+
             await NotificationCenter.Current.Show(notification);
         }
     }

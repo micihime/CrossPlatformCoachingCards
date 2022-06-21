@@ -1,15 +1,14 @@
-﻿using CoachingCards.Services;
+﻿using CoachingCards.Models;
 using MvvmHelpers;
 using System;
-using System.Globalization;
-using Xamarin.Forms;
+using System.Threading.Tasks;
 
 namespace CoachingCards.ViewModels
 {
     public class SettingsViewModel : BaseViewModel
     {
-        MvvmHelpers.Commands.Command _saveCommand;
-        public MvvmHelpers.Commands.Command SaveCommand
+        MvvmHelpers.Commands.AsyncCommand _saveCommand;
+        public MvvmHelpers.Commands.AsyncCommand SaveCommand
         {
             get
             {
@@ -21,95 +20,58 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        bool _notificationONOFF;
-        public bool NotificationONOFF
+        bool _notificationsON;
+        public bool NotificationsON
         {
             get
             {
-                return _notificationONOFF;
+                _notificationsON = StaticHelper.NotificationsON;
+                return _notificationsON;
             }
             set
             {
-                SetProperty(ref _notificationONOFF, value);
-                Switch_Toggled();
-            }
-        }
-        void Switch_Toggled()
-        {
-            if (NotificationONOFF == false)
-            {
-                MessageText = string.Empty;
-                SelectedTime = DateTime.Now.TimeOfDay;
-                SelectedDate = DateTime.Today;
-                //DependencyService.Get<ILocalNotificationService>().Cancel(0);
+                StaticHelper.NotificationsON = value;
+                SetProperty(ref _notificationsON, value);
+                //Switch_Toggled();
             }
         }
 
-        DateTime _selectedDate = DateTime.Today;
-        public DateTime SelectedDate
-        {
-            get
-            {
-                return _selectedDate;
-            }
-            set
-            {
-                SetProperty(ref _selectedDate, value);
-            }
-        }
+        //void Switch_Toggled()
+        //{
+        //    if (!NotificationsON)
+        //        SelectedTime = DateTime.Now.TimeOfDay;
+        //}
 
-        TimeSpan _selectedTime = DateTime.Now.TimeOfDay;
+        TimeSpan _selectedTime;
         public TimeSpan SelectedTime
         {
             get
             {
+                _selectedTime = StaticHelper.NotificationTime.TimeOfDay;
                 return _selectedTime;
             }
             set
             {
+                //set global in RescheduleNotif() method
                 SetProperty(ref _selectedTime, value);
             }
         }
 
-        string _messageText;
-        public string MessageText
-        {
-            get
-            {
-                return _messageText;
-            }
-            set
-            {
-                SetProperty(ref _messageText, value);
-            }
-        }
         public SettingsViewModel()
         {
-            SaveCommand = new MvvmHelpers.Commands.Command(() => SaveLocalNotification());
+            SaveCommand = new MvvmHelpers.Commands.AsyncCommand(() => SaveLocalNotificationAsync());
         }
-        void SaveLocalNotification()
+
+        async Task SaveLocalNotificationAsync()
         {
-            if (NotificationONOFF == true)
+            if (NotificationsON)
             {
-                var date = (SelectedDate.Date.Month.ToString("00") + "-" + SelectedDate.Date.Day.ToString("00") + "-" + SelectedDate.Date.Year.ToString());
-                var time = Convert.ToDateTime(SelectedTime.ToString()).ToString("HH:mm");
-                var dateTime = date + " " + time;
-                var selectedDateTime = DateTime.ParseExact(dateTime, "MM-dd-yyyy HH:mm", CultureInfo.InvariantCulture);
-                if (!string.IsNullOrEmpty(MessageText))
-                {
-                    //DependencyService.Get<ILocalNotificationService>().Cancel(0);
-                    //DependencyService.Get<ILocalNotificationService>().LocalNotification("Local Notification", MessageText, 0, selectedDateTime);
-                    App.Current.MainPage.DisplayAlert("LocalNotificationDemo", "Notification details saved successfully ", "Ok");
-                }
-                else
-                {
-                    App.Current.MainPage.DisplayAlert("LocalNotificationDemo", "Please enter meassage", "OK");
-                }
+                var time = Convert.ToDateTime(SelectedTime.ToString());
+                await StaticHelper.RescheduleNotif(time);
+                Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", $"Notification time set to {Convert.ToDateTime(SelectedTime.ToString()).ToString("HH:mm")}", "Ok");
             }
             else
-            {
-                App.Current.MainPage.DisplayAlert("LocalNotificationDemo", "Please switch on notification", "OK");
-            }
+                Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", "Please switch on notification", "OK");
         }
     }
 }
