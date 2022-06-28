@@ -36,24 +36,34 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        //void Switch_Toggled()
-        //{
-        //    if (!NotificationsON)
-        //        SelectedTime = DateTime.Now.TimeOfDay;
-        //}
-
         TimeSpan _selectedTime;
         public TimeSpan SelectedTime
         {
             get
             {
-                _selectedTime = StaticHelper.NotificationTime.TimeOfDay;
+                _selectedTime = StaticHelper.SelectedNotifTime.TimeOfDay;
                 return _selectedTime;
             }
             set
             {
-                //set global in RescheduleNotif() method
+                StaticHelper.SelectedNotifTime = Convert.ToDateTime(value.ToString());
                 SetProperty(ref _selectedTime, value);
+            }
+        }
+
+        bool _subscribeNotifON;
+        public bool SubscribeNotifON
+        {
+            get
+            {
+                _subscribeNotifON = StaticHelper.SubscribeNotifON;
+                return _subscribeNotifON;
+            }
+            set
+            {
+                StaticHelper.SubscribeNotifON = value;
+                SetProperty(ref _subscribeNotifON, value);
+                //Switch_Toggled();
             }
         }
 
@@ -68,10 +78,23 @@ namespace CoachingCards.ViewModels
             {
                 var time = Convert.ToDateTime(SelectedTime.ToString());
                 await StaticHelper.RescheduleNotif(time);
-                Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", $"Notification time set to {Convert.ToDateTime(SelectedTime.ToString()).ToString("HH:mm")}", "Ok");
+                await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", $"Notification time set to {Convert.ToDateTime(SelectedTime.ToString()):HH:mm}", "Ok");
             }
             else
-                Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", "Please switch on notification", "OK");
+            {
+                StaticHelper.CancelNotif();
+            }
+
+            if (SubscribeNotifON)
+            {
+                //TODO:
+            }
         }
+
+        //void Switch_Toggled()
+        //{
+        //    if (!NotificationsON)
+        //        SelectedTime = DateTime.Now.TimeOfDay;
+        //}
     }
 }

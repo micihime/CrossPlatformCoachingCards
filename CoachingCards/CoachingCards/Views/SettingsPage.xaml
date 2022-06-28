@@ -8,20 +8,27 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
                     <Label Text="Notifications ON/OFF" TextColor="Black" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                    <Switch IsToggled="{Binding NotificationONOFF}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+                    <Switch IsToggled="{Binding NotificationsON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                 </StackLayout>
             </Grid>
             <Grid Grid.Row="1">
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="SET TIME" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="Black" VerticalOptions="Center"/>
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" IsEnabled="{Binding NotificationsON}">
+                    <Label Text="       SET TIME" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="Black" VerticalOptions="Center"/>
                     <TimePicker HorizontalOptions="EndAndExpand" Time="{Binding SelectedTime}" TextColor="Black" BackgroundColor="Transparent" Format="t"/>
                 </StackLayout>
             </Grid>
             <Grid Grid.Row="2">
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Label Text="Notifications ON/OFF" TextColor="Black" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                    <Switch IsToggled="{Binding SubscribeNotifON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
+                </StackLayout>
+            </Grid>
+            <Grid Grid.Row="3">
                 <Button Text="Save" Command="{Binding SaveCommand}" FontSize="15" TextColor="Black" BackgroundColor="Purple"  HorizontalOptions="FillAndExpand" BorderRadius="15"/>
             </Grid>
         </Grid>

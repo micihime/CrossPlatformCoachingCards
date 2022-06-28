@@ -19,6 +19,22 @@ namespace CoachingCards.Models
             set => Preferences.Set(nameof(FirstRun), value);
         }
 
+        public static bool NotificationsON
+        {
+            get => Preferences.Get(nameof(NotificationsON), true);
+            set => Preferences.Set(nameof(NotificationsON), value);
+        }
+
+        public static DateTime SelectedNotifTime
+        {
+            get => Preferences.Get(nameof(SelectedNotifTime), new DateTime());
+            set => Preferences.Set(nameof(SelectedNotifTime), value);
+        }
+        public static DateTime NotificationTime
+        {
+            get => Preferences.Get(nameof(NotificationTime), new DateTime());
+            set => Preferences.Set(nameof(NotificationTime), value);
+        }
         public static bool IsSubscribed
         {
             get => Preferences.Get(nameof(IsSubscribed), false);
@@ -30,19 +46,6 @@ namespace CoachingCards.Models
             get => Preferences.Get(nameof(IsSubscribed), true);
             set => Preferences.Set(nameof(IsSubscribed), value);
         }
-
-        public static bool NotificationsON
-        {
-            get => Preferences.Get(nameof(NotificationsON), true);
-            set => Preferences.Set(nameof(NotificationsON), value);
-        }
-
-        public static DateTime NotificationTime
-        {
-            get => Preferences.Get(nameof(NotificationTime), new DateTime());
-            set => Preferences.Set(nameof(NotificationTime), value);
-        }
-
         public static string GameModeToString(GameMode mode)
         {
             switch (mode)
@@ -114,6 +117,11 @@ namespace CoachingCards.Models
             };
 
             await NotificationCenter.Current.Show(notification);
+        }
+
+        public static void CancelNotif()
+        {
+            NotificationCenter.Current.CancelAll();
         }
     }
 }
