@@ -119,9 +119,6 @@
     <BundleResource Include="Resources\icon_feed.png" />
     <BundleResource Include="Resources\icon_feed%402x.png" />
     <BundleResource Include="Resources\icon_feed%403x.png" />
-    <BundleResource Include="Resources\xamarin_logo.png" />
-    <BundleResource Include="Resources\xamarin_logo%402x.png" />
-    <BundleResource Include="Resources\xamarin_logo%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
@@ -171,5 +168,23 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\icon_help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\footer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\icon_variations.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image_card.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\image_think.png" />
   </ItemGroup>
 </Project>

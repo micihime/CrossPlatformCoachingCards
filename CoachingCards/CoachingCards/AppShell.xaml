@@ -78,9 +78,9 @@
     <!--<FlyoutItem Title="O hre" Icon="icon_about.png">
         <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
     </FlyoutItem>-->
-    <FlyoutItem Title="Jak získat z hry víc" Icon="icon_help.png">
-        <ShellContent Route="GainMore" ContentTemplate="{DataTemplate local:GainMore}" />
-    </FlyoutItem>
+    <!--<FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
+        <ShellContent Route="SubscribePage" ContentTemplate="{DataTemplate local:SubscribePage}" />
+    </FlyoutItem>-->
     
     <FlyoutItem Title="Všechny karty" Icon="icon_cards.png">
             <ShellContent Route="Full" ContentTemplate="{DataTemplate local:DeckPage}" />
@@ -91,15 +91,14 @@
     <FlyoutItem Title="Pravá hemisféra" Icon="icon_cards.png">
             <ShellContent Route="RightHemisphere" ContentTemplate="{DataTemplate local:DeckPage}" />
     </FlyoutItem>
-    
-    
+
+    <FlyoutItem Title="Jak získat z hry víc" Icon="icon_help.png">
+        <ShellContent Route="GainMore" ContentTemplate="{DataTemplate local:GainMore}" />
+    </FlyoutItem>
     <FlyoutItem Title="Variace hry" Icon="icon_about.png">
         <ShellContent Route="GameVariations" ContentTemplate="{DataTemplate local:GameVariations}" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
-        <ShellContent Route="SubscribePage" ContentTemplate="{DataTemplate local:SubscribePage}" />
-    </FlyoutItem>
     <FlyoutItem Title="Nastavení" Icon="icon_settings.png">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
