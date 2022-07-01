@@ -30,22 +30,13 @@ namespace CoachingCards.Models
             get => Preferences.Get(nameof(SelectedNotifTime), new DateTime());
             set => Preferences.Set(nameof(SelectedNotifTime), value);
         }
+
         public static DateTime NotificationTime
         {
             get => Preferences.Get(nameof(NotificationTime), new DateTime());
             set => Preferences.Set(nameof(NotificationTime), value);
         }
-        public static bool IsSubscribed
-        {
-            get => Preferences.Get(nameof(IsSubscribed), false);
-            set => Preferences.Set(nameof(IsSubscribed), value);
-        }
 
-        public static bool SubscribeNotifON
-        {
-            get => Preferences.Get(nameof(IsSubscribed), true);
-            set => Preferences.Set(nameof(IsSubscribed), value);
-        }
         public static string GameModeToString(GameMode mode)
         {
             switch (mode)

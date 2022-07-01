@@ -8,7 +8,6 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
@@ -22,14 +21,8 @@
                     <TimePicker HorizontalOptions="EndAndExpand" Time="{Binding SelectedTime}" TextColor="Black" BackgroundColor="Transparent" Format="t"/>
                 </StackLayout>
             </Grid>
-            <Grid Grid.Row="2">
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="Notifications ON/OFF" TextColor="Black" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
-                    <Switch IsToggled="{Binding SubscribeNotifON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
-                </StackLayout>
-            </Grid>
             <Grid Grid.Row="3">
-                <Button Text="Save" Command="{Binding SaveCommand}" FontSize="15" TextColor="Black" BackgroundColor="Purple"  HorizontalOptions="FillAndExpand" BorderRadius="15"/>
+                <Button Text="Save" Command="{Binding SaveCommand}" FontSize="15" TextColor="Black" HorizontalOptions="FillAndExpand" BorderRadius="15"/>
             </Grid>
         </Grid>
     </ContentPage.Content>

@@ -8,6 +8,7 @@ namespace CoachingCards.ViewModels
     public class SettingsViewModel : BaseViewModel
     {
         MvvmHelpers.Commands.AsyncCommand _saveCommand;
+
         public MvvmHelpers.Commands.AsyncCommand SaveCommand
         {
             get
@@ -21,6 +22,7 @@ namespace CoachingCards.ViewModels
         }
 
         bool _notificationsON;
+
         public bool NotificationsON
         {
             get
@@ -32,11 +34,11 @@ namespace CoachingCards.ViewModels
             {
                 StaticHelper.NotificationsON = value;
                 SetProperty(ref _notificationsON, value);
-                //Switch_Toggled();
             }
         }
 
         TimeSpan _selectedTime;
+
         public TimeSpan SelectedTime
         {
             get
@@ -48,22 +50,6 @@ namespace CoachingCards.ViewModels
             {
                 StaticHelper.SelectedNotifTime = Convert.ToDateTime(value.ToString());
                 SetProperty(ref _selectedTime, value);
-            }
-        }
-
-        bool _subscribeNotifON;
-        public bool SubscribeNotifON
-        {
-            get
-            {
-                _subscribeNotifON = StaticHelper.SubscribeNotifON;
-                return _subscribeNotifON;
-            }
-            set
-            {
-                StaticHelper.SubscribeNotifON = value;
-                SetProperty(ref _subscribeNotifON, value);
-                //Switch_Toggled();
             }
         }
 
@@ -84,17 +70,6 @@ namespace CoachingCards.ViewModels
             {
                 StaticHelper.CancelNotif();
             }
-
-            if (SubscribeNotifON)
-            {
-                //TODO:
-            }
         }
-
-        //void Switch_Toggled()
-        //{
-        //    if (!NotificationsON)
-        //        SelectedTime = DateTime.Now.TimeOfDay;
-        //}
     }
 }
