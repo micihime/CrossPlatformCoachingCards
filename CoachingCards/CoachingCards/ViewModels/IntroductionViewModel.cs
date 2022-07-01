@@ -68,7 +68,7 @@ namespace CoachingCards.ViewModels
 
         public ICommand Next { get; }
         public ICommand Previous { get; }
-        public AsyncCommand Play { get; }
+        public AsyncCommand Register { get; }
         #endregion
 
         #region CONSTRUCTOR
@@ -88,7 +88,7 @@ namespace CoachingCards.ViewModels
 
             Next = new MvvmHelpers.Commands.Command(OnNext, CanGoNext);
             Previous = new MvvmHelpers.Commands.Command(OnPrevious, CanGoPrevious);
-            Play = new AsyncCommand(OnPlay);
+            Register = new AsyncCommand(OnRegister);
         }
         #endregion
 
@@ -128,7 +128,7 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        async Task OnPlay() { await Shell.Current.GoToAsync("///Full"); }
+        async Task OnRegister() { await Shell.Current.GoToAsync("///Register"); }
         #endregion
     }
 }

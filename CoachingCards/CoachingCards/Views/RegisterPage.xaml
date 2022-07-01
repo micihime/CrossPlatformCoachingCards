@@ -2,16 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:CoachingCards.ViewModels"
-             x:Class="CoachingCards.Views.SubscribePage"   
-             x:DataType="viewmodels:SubscribeViewModel">
+             x:Class="CoachingCards.Views.RegisterPage"   
+             x:DataType="viewmodels:RegisterViewModel">
 
     <ContentPage.BindingContext>
-        <viewmodels:SubscribeViewModel/>
+        <viewmodels:RegisterViewModel/>
     </ContentPage.BindingContext>
     
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Prihlás sa na odber noviniek!"
+            <Label Text="Registruj sa do aplikácie:"
                 FontSize="Large" />
             
             <Label Text="Jméno:" />
@@ -21,7 +21,10 @@
             <Entry Text="{Binding Email}" />
 
             <Button Text="Odeslat"
-                    Command="{Binding Subscribe}" />
+                    Command="{Binding Register}" />
+
+            <Label Text="Link na podmienky TU."
+                FontSize="Large" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

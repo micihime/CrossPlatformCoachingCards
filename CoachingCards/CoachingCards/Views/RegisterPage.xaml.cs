@@ -5,14 +5,11 @@ using Xamarin.Forms.Xaml;
 namespace CoachingCards.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SubscribePage : ContentPage
+    public partial class RegisterPage : ContentPage
     {
-        //SubscribeViewModel vm;
-
-        public SubscribePage()
+        public RegisterPage()
         {
             InitializeComponent();
-            //BindingContext = vm = new SubscribeViewModel();
         }
     }
 }

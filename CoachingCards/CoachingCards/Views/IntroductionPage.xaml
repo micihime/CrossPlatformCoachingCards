@@ -45,7 +45,7 @@
             <Button Grid.Row="2"
                     Grid.ColumnSpan="2"
                     Text="Skip"
-                    Command="{Binding Play}" />
+                    Command="{Binding Register}" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>
