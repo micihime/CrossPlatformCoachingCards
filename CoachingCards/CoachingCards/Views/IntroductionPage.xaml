@@ -44,7 +44,7 @@
 
             <Button Grid.Row="2"
                     Grid.ColumnSpan="2"
-                    Text="Skip"
+                    Text="Register"
                     Command="{Binding Register}" />
         </Grid>
     </ContentPage.Content>

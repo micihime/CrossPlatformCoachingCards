@@ -128,7 +128,7 @@ namespace CoachingCards.ViewModels
             }
         }
 
-        async Task OnRegister() { await Shell.Current.GoToAsync("///Register"); }
+        async Task OnRegister() { await Shell.Current.GoToAsync("///RegisterPage"); }
         #endregion
     }
 }
