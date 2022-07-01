@@ -18,19 +18,16 @@ namespace CoachingCards
             {
                 CardService.SetCurrentGameMode((int)GameMode.Full);
                 StaticHelper.CurrentDeckId = 0;
-                //CardService.SetCurrentDeckId(0);
             }
             else if (args.Target.Location.OriginalString.ToLower().Contains(GameMode.LeftHemisphere.ToString().ToLower()))
             {
                 CardService.SetCurrentGameMode((int)GameMode.LeftHemisphere);
                 StaticHelper.CurrentDeckId = 0;
-                //CardService.SetCurrentDeckId(0);
             }
             else if (args.Target.Location.OriginalString.ToLower().Contains(GameMode.RightHemisphere.ToString().ToLower()))
             {
                 CardService.SetCurrentGameMode((int)GameMode.RightHemisphere);
                 StaticHelper.CurrentDeckId = 0;
-                //CardService.SetCurrentDeckId(0);
             }
         }
     }

@@ -75,7 +75,6 @@ namespace CoachingCards.ViewModels
         #region DECLARING COMMANDS
 
         public ICommand ToggleCardCommand { get; }
-        //public AsyncCommand FirstRunCommand { get; }
         #endregion
 
         #region CONSTRUCTORS
@@ -85,7 +84,6 @@ namespace CoachingCards.ViewModels
             pageTitle = StaticHelper.GameModeToString(CardService.GetCurrentGameMode());
             card = new CardExtended();
             ToggleCardCommand = new MvvmHelpers.Commands.Command(OnToggleCard);
-            //FirstRunCommand = new AsyncCommand(FirstRun);
         }
         #endregion
 
@@ -96,7 +94,7 @@ namespace CoachingCards.ViewModels
             Accelerometer.Start(SensorSpeed.Default);
 
             if (StaticHelper.FirstRun)
-                await FirstRun(); //FirstRunCommand.ExecuteAsync();
+                await FirstRun();
 
             LoadGame();
         }
@@ -115,9 +113,9 @@ namespace CoachingCards.ViewModels
 
         private async Task FirstRun()
         {
-            await StaticHelper.ScheduleNotif();
-            StaticHelper.FirstRun = false;
             await Shell.Current.GoToAsync("///IntroductionPage");
+            StaticHelper.FirstRun = false;
+            await StaticHelper.ScheduleNotif();
         }
 
         private void LoadGame()
