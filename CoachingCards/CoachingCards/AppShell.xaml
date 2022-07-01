@@ -75,9 +75,9 @@
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
 
-    <!--<FlyoutItem Title="O hre" Icon="icon_about.png">
+    <FlyoutItem Title="O hre" Icon="icon_about.png">
         <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
-    </FlyoutItem>-->
+    </FlyoutItem>
     <!--<FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
         <ShellContent Route="SubscribePage" ContentTemplate="{DataTemplate local:SubscribePage}" />
     </FlyoutItem>-->
