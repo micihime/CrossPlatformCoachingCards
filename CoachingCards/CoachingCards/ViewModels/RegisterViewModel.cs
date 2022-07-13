@@ -56,12 +56,12 @@ namespace CoachingCards.ViewModels
                 //TODO: save email
                 //TODO: save name
 
-                var response = await SubscribeService.Subscribe(name, email);
+                var response = await SubscribeService.SubscribeToGroup(name, email);
 
                 if (response.IsSuccessStatusCode)
                     await Shell.Current.GoToAsync("///Full");
                 else
-                    await App.Current.MainPage.DisplayAlert(failureHeading, $"Status code: {response.StatusCode}\nReason phrase: {response.ReasonPhrase}\nContent: {response.Content}\n", buttonText);
+                    await App.Current.MainPage.DisplayAlert(failureHeading, $"Name: {name}\nEmail: {email}\nStatus code: {response.StatusCode}\nReason phrase: {response.ReasonPhrase}\nContent: {response.Content.ReadAsStreamAsync()}\n", buttonText);
             }
             catch (Exception e)
             {
