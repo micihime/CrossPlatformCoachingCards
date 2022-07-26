@@ -21,6 +21,8 @@ namespace CoachingCards.ViewModels
         private string paragraph1;
         private string paragraph2;
         private string paragraph3;
+        private string paragraph4;
+        private string paragraph5;
         private bool canGoNext;
         private bool canGoPrevious;
         #endregion
@@ -49,6 +51,18 @@ namespace CoachingCards.ViewModels
         {
             get => paragraph3;
             set => SetProperty(ref paragraph3, value);
+        }
+
+        public string Paragraph4
+        {
+            get => paragraph4;
+            set => SetProperty(ref paragraph4, value);
+        }
+
+        public string Paragraph5
+        {
+            get => paragraph5;
+            set => SetProperty(ref paragraph5, value);
         }
 
         public bool NextVisible
@@ -82,6 +96,8 @@ namespace CoachingCards.ViewModels
             Paragraph1 = introPages[pageNr].Paragraph1;
             Paragraph2 = introPages[pageNr].Paragraph2;
             Paragraph3 = introPages[pageNr].Paragraph3;
+            Paragraph4 = introPages[pageNr].Paragraph4;
+            Paragraph5 = introPages[pageNr].Paragraph5;
 
             NextVisible = CanGoNext();
             PreviousVisible = CanGoPrevious();
@@ -107,6 +123,8 @@ namespace CoachingCards.ViewModels
                 Paragraph1 = introPages[pageNr].Paragraph1;
                 Paragraph2 = introPages[pageNr].Paragraph2;
                 Paragraph3 = introPages[pageNr].Paragraph3;
+                Paragraph4 = introPages[pageNr].Paragraph4;
+                Paragraph5 = introPages[pageNr].Paragraph5;
 
                 NextVisible = CanGoNext();
                 PreviousVisible = CanGoPrevious();
@@ -122,6 +140,8 @@ namespace CoachingCards.ViewModels
                 Paragraph1 = introPages[pageNr].Paragraph1;
                 Paragraph2 = introPages[pageNr].Paragraph2;
                 Paragraph3 = introPages[pageNr].Paragraph3;
+                Paragraph4 = introPages[pageNr].Paragraph4;
+                Paragraph5 = introPages[pageNr].Paragraph5;
 
                 NextVisible = CanGoNext();
                 PreviousVisible = CanGoPrevious();

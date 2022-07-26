@@ -13,7 +13,7 @@
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -28,6 +28,8 @@
                     <Label Text="{Binding Paragraph1}" FontSize="20" />
                     <Label Text="{Binding Paragraph2}" FontSize="20" />
                     <Label Text="{Binding Paragraph3}" FontSize="20" />
+                    <Label Text="{Binding Paragraph4}" FontSize="20" />
+                    <Label Text="{Binding Paragraph5}" FontSize="20" />
                 </StackLayout>
             </ScrollView>
 

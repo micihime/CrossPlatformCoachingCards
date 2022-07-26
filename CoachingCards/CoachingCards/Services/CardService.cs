@@ -75,9 +75,33 @@ namespace CoachingCards.Services
 
         static readonly List<Intro> introTexts = new List<Intro>()
         {
-            new Intro{ ID = 1, Heading = "Vítejte!", Paragraph1 = "Držíte v rukách první koučovací karty svého druhu vytvořené podle MindArt Conceptu. Koučovací karty pro ty, kteří chtějí osobnostní růst, ale nevědí, jak začít.", Paragraph2 = "Klepnutím nebo zatresením si vytáhněte si jednu kartu denně, splňte úkol, je-li na ní nějaký.", Paragraph3 = "Nejlepších výsledků dosáhnete, pokud si budete zapisovat vytaženou kartu a k ní i samotný průběh vlastní akce. Na co jste díky její realizaci přišli? Co nového jste se díky ní o sobě dozvěděli?" },
-            new Intro{ ID = 2, Heading =  "O kartách", Paragraph1 = "Karty jsou rozděleny na dva druhy podle toho, kterou hemisféru podporují. Cílem je aktivitu obou hemisfér dostat do rovnováhy.", Paragraph2 = "Levá hemisféra (modré karty) je zaměřena na: analytické myšlení, logiku, detaily, fakta, pravidla.", Paragraph3 = "Pravá hemisféra (červené karty) je zaměřena na: tvořivost, intuici, souvislosti, symboly, významy." },
-            new Intro{ ID = 3,  Heading = "Poděkování", Paragraph1 = "Rádi bychom poděkovali všem našim klientům, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků.", Paragraph2 = "Veronika a Petr Pavelkovi, Institut osobnostního tréninku", Paragraph3 = "Karty nenahradí služby kouče a terapeuta." }
+            new Intro
+            {
+                ID = 1, Heading = "Vítejte!",
+                Paragraph1 = "Držíte v rukách první koučovací karty svého druhu vytvořené podle MindArt Conceptu. Koučovací karty pro ty, kteří chtějí osobnostní růst, ale nevědí, jak začít.",
+                Paragraph2 = "Klepnutím nebo zatřesením si vytáhnete například jednu kartu denně a splňte akci.",
+                Paragraph3 = "Karty přispívají k uvědomění AHA momentů. Slouží k rozpřemýšlení. Pomáhají vám se více dozvědět o vás samotných. Napomáhají nastartovat proces synchronizace s vyšší úrovní vědomí. ",
+                Paragraph4 = "Aplikaci lze používat pouze s platnou registrací.",
+                Paragraph5 = "Karty nenahradí služby kouče a terapeuta."
+            },
+            new Intro
+            {
+                ID = 2, Heading =  "O kartách",
+                Paragraph1 = "Karty vychází z našich praktických poznatků z koučovacích konzultací, terapií a vedení kurzů pro profesionální terapeuty. Karty jsou rozděleny na dva okruhy podle toho, kterou mozkovou hemisféru více podporují. Cílem je aktivitu obou hemisfér dostat do rovnováhy.",
+                Paragraph2 = "Levá hemisféra (modré karty) je zaměřena na: analytické myšlení, logiku, detaily, fakta, pravidla, znalosti, slova, jazyk, vědu, data, čísla, vůli, míry, váhy, matematiku, bezpečí, názvy objektů, minulost a současnost.",
+                Paragraph3 = "Pravá hemisféra (červené karty) je zaměřena na: syntetické myšlení, tvořivost, možnosti, obecnost, intuici, souvislosti, symboly, významy, obrazy, umění, hudbu, rytmus, emoce, pocity, vtip, fantazii, chutě a vůně, filozofii, riziko, funkci objektů, současnost a budoucnost.",
+                Paragraph4 = "",
+                Paragraph5 = ""
+            },
+            new Intro
+            {
+                ID = 3,  Heading = "Poděkování",
+                Paragraph1 = "Rádi bychom poděkovali všem našim klientům a účastníkům MasterMindů, kteří nás úžasně inspirovali k tématům na kartách. Přejeme hodně zábavy, aha momentů a užitečných zážitků.",
+                Paragraph2 = "Veronika a Petr Pavelkovi",
+                Paragraph3 = "MindArt Concept",
+                Paragraph4 = "Všechna práva vyhrazena © 2022",
+                Paragraph5 = ""
+            }
         };
 
         static readonly List<AppSetting> appSettings = new List<AppSetting>()
@@ -93,7 +117,7 @@ namespace CoachingCards.Services
         {
             if (db == null)
             {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Tetepes2.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Tetepes3.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
                 db.CreateTable<Card>();
                 db.CreateTable<Intro>();
