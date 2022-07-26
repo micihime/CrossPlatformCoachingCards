@@ -1,29 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CoachingCards.Views.SettingsPage">
+             x:Class="CoachingCards.Views.SettingsPage"
+             Title="Nastavení">
+    
     <ContentPage.Content>
-        <Grid VerticalOptions="FillAndExpand" Padding="25,40,25,30" RowSpacing="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0">
+        <ScrollView>
+            <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical"  Padding="30,24,30,24" Spacing="10">
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="Notifications ON/OFF" TextColor="Black" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                    <Label Text="Upozornění ON/OFF" TextColor="Black" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
                     <Switch IsToggled="{Binding NotificationsON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                 </StackLayout>
-            </Grid>
-            <Grid Grid.Row="1">
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" IsEnabled="{Binding NotificationsON}">
-                    <Label Text="       SET TIME" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="Black" VerticalOptions="Center"/>
+
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
+                    <Label Text="       KDY?" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="Black" VerticalOptions="Center"/>
                     <TimePicker HorizontalOptions="EndAndExpand" Time="{Binding SelectedTime}" TextColor="Black" BackgroundColor="Transparent" Format="t"/>
                 </StackLayout>
-            </Grid>
-            <Grid Grid.Row="3">
+                
                 <Button Text="Save" Command="{Binding SaveCommand}" FontSize="15" TextColor="Black" HorizontalOptions="FillAndExpand" BorderRadius="15"/>
-            </Grid>
-        </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
