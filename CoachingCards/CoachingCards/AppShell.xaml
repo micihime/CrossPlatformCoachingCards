@@ -78,8 +78,13 @@
     <FlyoutItem Title="O hre" Icon="icon_about.png">
         <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
     </FlyoutItem>
+    
     <FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
         <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate local:RegisterPage}" />
+    </FlyoutItem>
+    
+    <FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
+        <ShellContent Route="DeregisterPage" ContentTemplate="{DataTemplate local:DeregisterPage}" />
     </FlyoutItem>
     
     <FlyoutItem Title="Všechny karty" Icon="icon_cards.png">

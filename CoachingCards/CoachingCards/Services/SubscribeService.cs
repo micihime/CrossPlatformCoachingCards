@@ -18,6 +18,7 @@ namespace CoachingCards.Services
         private const string apiToken = "1a2bf25bdfc8ea00654ec4e9c7ef5fd5";
 
         private const string apiEndpointSubscribe = "/api/v2/subscribers"; //https://developers.mailerlite.com/reference/create-a-subscriber
+
         private const string apiEndpointSubscribeToGroup = "/api/v2/groups/group_name/subscribers"; //https://developers.mailerlite.com/reference/groupsby_group_namesubscribers
 
         private const string nameKey = "name";
@@ -55,6 +56,16 @@ namespace CoachingCards.Services
         {
             var apiEndpoint = apiEndpointSubscribeToGroup.Replace(groupNameKey, $"{cardGroupKey}{cardNumber}");
             return Subscribe(name, email, apiEndpoint);
+        }
+
+        public static Task<HttpResponseMessage> UnsubscribeFromAll()
+        {
+            //TODO: retrieve email
+            //TODO: retrieve name
+
+            //retrieve all registrations
+
+            throw new NotImplementedException();
         }
     }
 }
