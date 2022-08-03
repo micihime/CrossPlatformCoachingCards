@@ -12,7 +12,7 @@
                     <Switch IsToggled="{Binding NotificationsON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                 </StackLayout>
 
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" IsVisible="{Binding NotificationsON}}">
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" IsVisible="{Binding NotificationsON}">
                     <Label Text="       KDY?" HorizontalOptions="StartAndExpand" FontSize="15" VerticalOptions="Center"/>
                     <TimePicker HorizontalOptions="EndAndExpand" Time="{Binding SelectedTime}" BackgroundColor="Transparent" Format="t"/>
                 </StackLayout>
