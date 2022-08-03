@@ -78,13 +78,8 @@
     <FlyoutItem Title="O hre" Icon="icon_about.png">
         <ShellContent Route="IntroductionPage" ContentTemplate="{DataTemplate local:IntroductionPage}" />
     </FlyoutItem>
-    
     <FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
         <ShellContent Route="RegisterPage" ContentTemplate="{DataTemplate local:RegisterPage}" />
-    </FlyoutItem>
-    
-    <FlyoutItem Title="Odber novinek" Icon="icon_variations.png">
-        <ShellContent Route="DeregisterPage" ContentTemplate="{DataTemplate local:DeregisterPage}" />
     </FlyoutItem>
     
     <FlyoutItem Title="Všechny karty" Icon="icon_cards.png">
@@ -103,12 +98,11 @@
     <FlyoutItem Title="Variace hry" Icon="icon_about.png">
         <ShellContent Route="GameVariations" ContentTemplate="{DataTemplate local:GameVariations}" />
     </FlyoutItem>
+    <FlyoutItem Title="Autori" Icon="icon_feed.png">
+        <ShellContent Route="Authors" ContentTemplate="{DataTemplate local:Authors}" />
+    </FlyoutItem>
 
     <FlyoutItem Title="Nastavení" Icon="icon_settings.png">
         <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Autori" Icon="icon_feed.png">
-        <ShellContent Route="Authors" ContentTemplate="{DataTemplate local:Authors}" />
     </FlyoutItem>
 </Shell>

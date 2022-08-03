@@ -1,6 +1,5 @@
 ﻿using CoachingCards.Models;
 using CoachingCards.Services;
-using CoachingCards.Views;
 using Xamarin.Forms;
 
 namespace CoachingCards
@@ -10,8 +9,6 @@ namespace CoachingCards
         public AppShell()
         {
             InitializeComponent();
-            Routing.RegisterRoute("IntroductionPage", typeof(IntroductionPage));
-            Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
         }
 
         protected override void OnNavigating(ShellNavigatingEventArgs args)

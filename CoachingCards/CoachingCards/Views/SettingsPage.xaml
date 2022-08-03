@@ -8,16 +8,24 @@
         <ScrollView>
             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical"  Padding="30,24,30,24" Spacing="10">
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="Upozornění ON/OFF" TextColor="Black" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                    <Label Text="Upozornění ON/OFF" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
                     <Switch IsToggled="{Binding NotificationsON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                 </StackLayout>
 
-                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="       KDY?" HorizontalOptions="StartAndExpand" FontSize="15" TextColor="Black" VerticalOptions="Center"/>
-                    <TimePicker HorizontalOptions="EndAndExpand" Time="{Binding SelectedTime}" TextColor="Black" BackgroundColor="Transparent" Format="t"/>
+                <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal" IsVisible="{Binding NotificationsON}}">
+                    <Label Text="       KDY?" HorizontalOptions="StartAndExpand" FontSize="15" VerticalOptions="Center"/>
+                    <TimePicker HorizontalOptions="EndAndExpand" Time="{Binding SelectedTime}" BackgroundColor="Transparent" Format="t"/>
                 </StackLayout>
                 
-                <Button Text="Save" Command="{Binding SaveCommand}" FontSize="15" TextColor="Black" HorizontalOptions="FillAndExpand" BorderRadius="15"/>
+                <Button Text="ULOŽIT" Command="{Binding SaveCommand}" HorizontalOptions="FillAndExpand" BorderRadius="15"/>
+
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Zde se můžete odhlásit z odběru novinek od nás." FontSize="Large" />
+                    <Label Text="Odhlášením současně zrušíte registraci k aplikaci Koučovací karty, kterou pak již nebudete moci nadále bez registrace používat. " />
+                    <Label Text="Kdykoliv v budoucnu se však můžete opětovně zaregistrovat a aplikaci znovu využívat." />
+                </StackLayout>
+
+                <Button Text="Zrušit" Command="{Binding Deregister}" HorizontalOptions="FillAndExpand" BorderRadius="15"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
