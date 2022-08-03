@@ -113,7 +113,7 @@ namespace CoachingCards.ViewModels
 
         private async Task FirstRun()
         {
-            await Shell.Current.GoToAsync("///IntroductionPage");
+            await Shell.Current.GoToAsync("/IntroductionPage");
             StaticHelper.FirstRun = false;
             await StaticHelper.ScheduleNotif();
         }
