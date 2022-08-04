@@ -1,23 +1,41 @@
-﻿using Plugin.LocalNotification;
-using System;
-using System.Threading.Tasks;
+﻿using System;
 using Xamarin.Essentials;
 
 namespace CoachingCards.Models
 {
     public static class StaticHelper
     {
-        public static int CurrentDeckId
-        {
-            get => Preferences.Get(nameof(CurrentDeckId), 0);
-            set => Preferences.Set(nameof(CurrentDeckId), value);
-        }
+        #region App
 
         public static bool FirstRun
         {
             get => Preferences.Get(nameof(FirstRun), true);
             set => Preferences.Set(nameof(FirstRun), value);
         }
+
+        public static int CurrentDeckId
+        {
+            get => Preferences.Get(nameof(CurrentDeckId), 0);
+            set => Preferences.Set(nameof(CurrentDeckId), value);
+        }
+        #endregion
+
+        #region User
+
+        public static string User
+        {
+            get => Preferences.Get(nameof(User), "");
+            set => Preferences.Set(nameof(User), value);
+        }
+
+        public static string Email
+        {
+            get => Preferences.Get(nameof(Email), "");
+            set => Preferences.Set(nameof(Email), value);
+        }
+        #endregion
+
+        #region Settings
 
         public static bool NotificationsON
         {
@@ -36,21 +54,7 @@ namespace CoachingCards.Models
             get => Preferences.Get(nameof(NotificationTime), new DateTime());
             set => Preferences.Set(nameof(NotificationTime), value);
         }
-
-        public static string GameModeToString(GameMode mode)
-        {
-            switch (mode)
-            {
-                case GameMode.Full:
-                    return "Všechny karty";
-                case GameMode.LeftHemisphere:
-                    return "Levá hemisféra";
-                case GameMode.RightHemisphere:
-                    return "Pravá hemisféra";
-                default:
-                    return null;
-            }
-        }
+        #endregion
 
         public static string GameModeToString(int mode)
         {
@@ -65,54 +69,6 @@ namespace CoachingCards.Models
                 default:
                     return null;
             }
-        }
-
-        public static async Task ScheduleNotif()
-        {
-            NotificationTime = DateTime.Now.AddSeconds(30);
-
-            var notification = new NotificationRequest
-            {
-                BadgeNumber = 1,
-                Title = "Koučovací karty",
-                Description = "Jaká bude tvá dnešní karta?",
-                NotificationId = 1,
-                Schedule = new NotificationRequestSchedule
-                {
-                    RepeatType = NotificationRepeat.TimeInterval,
-                    NotifyRepeatInterval = new TimeSpan(24, 0, 0),
-                    NotifyTime = NotificationTime
-                }
-            };
-            await NotificationCenter.Current.Show(notification);
-        }
-
-        public static async Task RescheduleNotif(DateTime scheduledTime)
-        {
-            NotificationCenter.Current.CancelAll();
-
-            NotificationTime = scheduledTime;
-
-            var notification = new NotificationRequest
-            {
-                BadgeNumber = 1,
-                Title = "Koučovací karty",
-                Description = "Jaká bude tvá dnešní karta?",
-                NotificationId = 1,
-                Schedule = new NotificationRequestSchedule
-                {
-                    RepeatType = NotificationRepeat.TimeInterval,
-                    NotifyRepeatInterval = new TimeSpan(24, 0, 0),
-                    NotifyTime = NotificationTime
-                }
-            };
-
-            await NotificationCenter.Current.Show(notification);
-        }
-
-        public static void CancelNotif()
-        {
-            NotificationCenter.Current.CancelAll();
         }
     }
 }
