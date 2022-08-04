@@ -75,12 +75,12 @@ namespace CoachingCards.ViewModels
             if (NotificationsON)
             {
                 var time = Convert.ToDateTime(SelectedTime.ToString());
-                await StaticHelper.RescheduleNotif(time);
+                await NotificationService.RescheduleNotif(time);
                 await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", $"Notification time set to {Convert.ToDateTime(SelectedTime.ToString()):HH:mm}", "Ok");
             }
             else
             {
-                StaticHelper.CancelNotif();
+                NotificationService.CancelNotif();
             }
         }
 

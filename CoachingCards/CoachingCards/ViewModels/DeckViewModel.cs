@@ -115,7 +115,7 @@ namespace CoachingCards.ViewModels
         {
             await Shell.Current.GoToAsync("/IntroductionPage");
             StaticHelper.FirstRun = false;
-            await StaticHelper.ScheduleNotif();
+            await NotificationService.ScheduleNotif();
         }
 
         private void LoadGame()
