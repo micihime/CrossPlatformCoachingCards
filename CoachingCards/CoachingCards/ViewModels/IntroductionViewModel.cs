@@ -92,15 +92,7 @@ namespace CoachingCards.ViewModels
             introPages = CardService.GetIntro().ToList();
 
             pageNr = 0;
-            Heading = introPages[pageNr].Heading;
-            Paragraph1 = introPages[pageNr].Paragraph1;
-            Paragraph2 = introPages[pageNr].Paragraph2;
-            Paragraph3 = introPages[pageNr].Paragraph3;
-            Paragraph4 = introPages[pageNr].Paragraph4;
-            Paragraph5 = introPages[pageNr].Paragraph5;
-
-            NextVisible = CanGoNext();
-            PreviousVisible = CanGoPrevious();
+            LoadPageContent();
 
             Next = new MvvmHelpers.Commands.Command(OnNext, CanGoNext);
             Previous = new MvvmHelpers.Commands.Command(OnPrevious, CanGoPrevious);
@@ -119,15 +111,7 @@ namespace CoachingCards.ViewModels
             if (CanGoNext())
             {
                 pageNr++;
-                Heading = introPages[pageNr].Heading;
-                Paragraph1 = introPages[pageNr].Paragraph1;
-                Paragraph2 = introPages[pageNr].Paragraph2;
-                Paragraph3 = introPages[pageNr].Paragraph3;
-                Paragraph4 = introPages[pageNr].Paragraph4;
-                Paragraph5 = introPages[pageNr].Paragraph5;
-
-                NextVisible = CanGoNext();
-                PreviousVisible = CanGoPrevious();
+                LoadPageContent();
             }
         }
 
@@ -136,16 +120,30 @@ namespace CoachingCards.ViewModels
             if (CanGoPrevious())
             {
                 pageNr--;
-                Heading = introPages[pageNr].Heading;
-                Paragraph1 = introPages[pageNr].Paragraph1;
-                Paragraph2 = introPages[pageNr].Paragraph2;
-                Paragraph3 = introPages[pageNr].Paragraph3;
-                Paragraph4 = introPages[pageNr].Paragraph4;
-                Paragraph5 = introPages[pageNr].Paragraph5;
-
-                NextVisible = CanGoNext();
-                PreviousVisible = CanGoPrevious();
+                LoadPageContent();
             }
+        }
+
+        void LoadPageContent()
+        {
+            SetIntroTexts();
+            SetButtonVisibility();
+        }
+
+        private void SetIntroTexts()
+        {
+            Heading = introPages[pageNr].Heading;
+            Paragraph1 = introPages[pageNr].Paragraph1;
+            Paragraph2 = introPages[pageNr].Paragraph2;
+            Paragraph3 = introPages[pageNr].Paragraph3;
+            Paragraph4 = introPages[pageNr].Paragraph4;
+            Paragraph5 = introPages[pageNr].Paragraph5;
+        }
+
+        private void SetButtonVisibility()
+        {
+            NextVisible = CanGoNext();
+            PreviousVisible = CanGoPrevious();
         }
 
         async Task OnRegister() { await Shell.Current.GoToAsync("/RegisterPage"); }
