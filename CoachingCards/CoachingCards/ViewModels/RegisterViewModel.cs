@@ -1,4 +1,5 @@
-﻿using CoachingCards.Services;
+﻿using CoachingCards.Models;
+using CoachingCards.Services;
 using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
@@ -53,8 +54,8 @@ namespace CoachingCards.ViewModels
         {
             try
             {
-                //TODO: save email
-                //TODO: save name
+                StaticHelper.User = name;
+                StaticHelper.Email = email;
 
                 var response = await SubscribeService.SubscribeToGroup(name, email);
 
