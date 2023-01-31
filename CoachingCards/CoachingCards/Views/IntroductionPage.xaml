@@ -3,8 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:viewmodels="clr-namespace:CoachingCards.ViewModels"
              x:Class="CoachingCards.Views.IntroductionPage"   
-             x:DataType="viewmodels:IntroductionViewModel">
+             x:DataType="viewmodels:IntroductionViewModel"
+             NavigationPage.HasNavigationBar="False">
 
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    
     <ContentPage.BindingContext>
         <viewmodels:IntroductionViewModel/>
     </ContentPage.BindingContext>

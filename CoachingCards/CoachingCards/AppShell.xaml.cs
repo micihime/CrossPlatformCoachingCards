@@ -12,6 +12,7 @@ namespace CoachingCards
             InitializeComponent();
             Routing.RegisterRoute("IntroductionPage", typeof(IntroductionPage));
             Routing.RegisterRoute("RegisterPage", typeof(RegisterPage));
+            //Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
         }
 
         protected override void OnNavigating(ShellNavigatingEventArgs args)
@@ -20,17 +21,17 @@ namespace CoachingCards
             if (args.Target.Location.OriginalString.ToLower().Contains(GameMode.Full.ToString().ToLower()))
             {
                 CardService.SetCurrentGameMode((int)GameMode.Full);
-                StaticHelper.CurrentDeckId = 0;
+                CardService.SetCurrentDeckId(0);
             }
             else if (args.Target.Location.OriginalString.ToLower().Contains(GameMode.LeftHemisphere.ToString().ToLower()))
             {
                 CardService.SetCurrentGameMode((int)GameMode.LeftHemisphere);
-                StaticHelper.CurrentDeckId = 0;
+                CardService.SetCurrentDeckId(0);
             }
             else if (args.Target.Location.OriginalString.ToLower().Contains(GameMode.RightHemisphere.ToString().ToLower()))
             {
                 CardService.SetCurrentGameMode((int)GameMode.RightHemisphere);
-                StaticHelper.CurrentDeckId = 0;
+                CardService.SetCurrentDeckId(0);
             }
         }
     }

@@ -115,16 +115,16 @@ namespace CoachingCards.ViewModels
         {
             await Shell.Current.GoToAsync("/IntroductionPage");
             StaticHelper.FirstRun = false;
-            await NotificationService.ScheduleNotif();
+            await NotificationService.ScheduleNotif(DateTime.Now);
         }
 
         private void LoadGame()
         {
-            if (StaticHelper.CurrentDeckId == 0)
+            if (CardService.GetCurrentDeckId() == 0)
                 ResetGame();
             else if (IsEmpty())
                 ShowEmptyDeck();
-            else if (card.IsBacksideUp) //show current card
+            else if (CardService.GetCurrentCardState() == 0) //if card is backside up, show current card
                 ShowCurrentCard();
             else //toss top card
                 ShowCardBack();
@@ -145,10 +145,10 @@ namespace CoachingCards.ViewModels
             else
                 TurnCard();
         }
-
+        
         private void TurnCard()
         {
-            if (card.IsBacksideUp) //show new card - incrementing current deck id
+            if (CardService.GetCurrentCardState() == 0) //show new card - incrementing current deck id
                 ShowNewCard();
             else //toss top card
                 ShowCardBack();
@@ -156,7 +156,7 @@ namespace CoachingCards.ViewModels
 
         private void ShowCardBack()
         {
-            card.IsBacksideUp = true;
+            CardService.SetCurrentCardState(0); //card.IsBacksideUp = true;
             Heading = Text = Action = string.Empty;
             Background = backgroundImage;
             Separator = string.Empty;
@@ -164,8 +164,8 @@ namespace CoachingCards.ViewModels
 
         public void ShowCurrentCard()
         {
-            card = CardService.GetCardExtendedByDeckId(StaticHelper.CurrentDeckId);
-            card.IsBacksideUp = false;
+            card = CardService.GetCardExtendedByDeckId(CardService.GetCurrentDeckId());
+            CardService.SetCurrentCardState(1); //card.IsBacksideUp = false;
             Heading = card.Heading;
             Text = card.Text;
             Action = card.Action;
@@ -175,13 +175,14 @@ namespace CoachingCards.ViewModels
 
         public void ShowNewCard()
         {
-            StaticHelper.CurrentDeckId++;
+            CardService.SetCurrentDeckId((CardService.GetCurrentDeckId() + 1));
             ShowCurrentCard();
+            //SubscribeService.SubscribeToCardGroup(CardService.GetUsername(), CardService.GetEmail(), card.ID);
         }
 
         private void ShowEmptyDeck()
         {
-            card.IsBacksideUp = true;
+            CardService.SetCurrentCardState(0); //card.IsBacksideUp = true;
             Heading = Text = Action = string.Empty;
             Background = emptyDeckBackgroundImage;
             Separator = string.Empty;
@@ -189,7 +190,7 @@ namespace CoachingCards.ViewModels
 
         private bool IsEmpty()
         {
-            return StaticHelper.CurrentDeckId == CardService.GetMaxDeckId();
+            return CardService.GetCurrentDeckId() == CardService.GetMaxDeckId();
         }
         #endregion
     }

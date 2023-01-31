@@ -7,28 +7,7 @@ namespace CoachingCards.Services
 {
     public static class NotificationService
     {
-
-        public static async Task ScheduleNotif()
-        {
-            StaticHelper.NotificationTime = DateTime.Now.AddSeconds(30);
-
-            var notification = new NotificationRequest
-            {
-                BadgeNumber = 1,
-                Title = "Koučovací karty",
-                Description = "Jaká bude tvá dnešní karta?",
-                NotificationId = 1,
-                Schedule = new NotificationRequestSchedule
-                {
-                    RepeatType = NotificationRepeat.TimeInterval,
-                    NotifyRepeatInterval = new TimeSpan(24, 0, 0),
-                    NotifyTime = StaticHelper.NotificationTime
-                }
-            };
-            await NotificationCenter.Current.Show(notification);
-        }
-
-        public static async Task RescheduleNotif(DateTime scheduledTime)
+        public static async Task ScheduleNotif(DateTime scheduledTime)
         {
             NotificationCenter.Current.CancelAll();
 

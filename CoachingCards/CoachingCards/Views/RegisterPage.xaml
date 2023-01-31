@@ -4,8 +4,14 @@
              xmlns:viewmodels="clr-namespace:CoachingCards.ViewModels"
              x:Class="CoachingCards.Views.RegisterPage"   
              x:DataType="viewmodels:RegisterViewModel"
+             NavigationPage.HasNavigationBar="False"
              Title="Registrace">
 
+    <Shell.NavBarIsVisible>False</Shell.NavBarIsVisible>
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior IsEnabled="False" />
+    </Shell.BackButtonBehavior>
+    
     <ContentPage.BindingContext>
         <viewmodels:RegisterViewModel/>
     </ContentPage.BindingContext>
@@ -24,7 +30,7 @@
             <Button Text="Odeslat"
                     Command="{Binding Register}" />
 
-            <Label Text="Link na podmienky TU."
+            <Label Text="Link na podmínky TU."
                 FontSize="Large" />
         </StackLayout>
     </ContentPage.Content>

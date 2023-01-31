@@ -4,6 +4,7 @@ using MvvmHelpers;
 using MvvmHelpers.Commands;
 using System;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace CoachingCards.ViewModels
@@ -15,7 +16,9 @@ namespace CoachingCards.ViewModels
         private const string successHeading = "Děkujeme!";
         private const string successText = "Přihlášení k odběru novinek bylo úspěšné.";
         private const string failureHeading = "UPOZORNENI";
-        private const string failureText = "Nepodařilo se vás přihlásit k odběru novinek. Prosíme zkuste to později.";
+        private string failureText = $"Name: {0}\nEmail: {1}\nStatus code: {2}\nReason phrase: {3}\nContent: {4}\n";
+        //private const string failureText = "Nepodařilo se vás přihlásit k odběru novinek. Prosíme zkuste to později.";
+        private const string noInternetText = "Nemáte pripojeni na internet. Pro pokracovani je pripojeni k internetu nevyhnutne.";
         private const string buttonText = "OK";
         #endregion
 
@@ -47,6 +50,7 @@ namespace CoachingCards.ViewModels
 
         public RegisterViewModel()
         {
+            StaticHelper.CheckInternetConnection();
             Register = new AsyncCommand(OnRegister);
         }
 
@@ -54,15 +58,25 @@ namespace CoachingCards.ViewModels
         {
             try
             {
-                StaticHelper.User = name;
-                StaticHelper.Email = email;
+                StaticHelper.CheckInternetConnection();
 
-                var response = await SubscribeService.SubscribeToGroup(name, email);
+                //save name and email to DB
+                CardService.SetUsername(name);
+                CardService.SetEmail(email);
 
+                //subscribe to newsletter
+                var response = SubscribeService.SubscribeToAppGroup(name, email);
                 if (response.IsSuccessStatusCode)
+                {
                     await Shell.Current.GoToAsync("///Full");
+                    Shell.Current.FlyoutBehavior = FlyoutBehavior.Flyout;
+                }
                 else
-                    await App.Current.MainPage.DisplayAlert(failureHeading, $"Name: {name}\nEmail: {email}\nStatus code: {response.StatusCode}\nReason phrase: {response.ReasonPhrase}\nContent: {response.Content.ReadAsStreamAsync()}\n", buttonText);
+                {
+                    await App.Current.MainPage.DisplayAlert(failureHeading, String.Format(failureText, name, email, response.StatusCode, response.ReasonPhrase, response.Content),
+                        buttonText); //TODO: replace with original text
+                    Shell.Current.FlyoutBehavior = FlyoutBehavior.Disabled;
+                }
             }
             catch (Exception e)
             {

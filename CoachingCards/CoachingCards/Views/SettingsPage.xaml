@@ -8,7 +8,7 @@
         <ScrollView>
             <StackLayout HorizontalOptions="FillAndExpand" Orientation="Vertical"  Padding="30,24,30,24" Spacing="10">
                 <StackLayout HorizontalOptions="FillAndExpand" Orientation="Horizontal">
-                    <Label Text="Upozornění ON/OFF" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
+                    <Label Text="Upozornění OFF/ON" FontSize="16" HorizontalOptions="StartAndExpand" VerticalOptions="Center"/>
                     <Switch IsToggled="{Binding NotificationsON}" HorizontalOptions="EndAndExpand" VerticalOptions="Center"/>
                 </StackLayout>
 
@@ -21,6 +21,9 @@
 
                 <StackLayout Orientation="Vertical">
                     <Label Text="Zde se můžete odhlásit z odběru novinek od nás." FontSize="Large" />
+                    <Label Text="Prihlaseny: " />
+                    <Label Text="{Binding Name}" />
+                    <Label Text="{Binding Email}" />
                     <Label Text="Odhlášením současně zrušíte registraci k aplikaci Koučovací karty, kterou pak již nebudete moci nadále bez registrace používat. " />
                     <Label Text="Kdykoliv v budoucnu se však můžete opětovně zaregistrovat a aplikaci znovu využívat." />
                 </StackLayout>

@@ -2,12 +2,12 @@
 
 namespace CoachingCards.Models
 {
-    //app settings - username, email
-    public class AppSetting
+    //game settings - deck
+    public class GameSetting
     {
         [PrimaryKey, AutoIncrement]
         public int ID { get; set; }
         public string Key { get; set; }
-        public string Value { get; set; }
+        public int Value { get; set; }
     }
 }

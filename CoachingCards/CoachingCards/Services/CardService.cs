@@ -14,8 +14,16 @@ namespace CoachingCards.Services
 
         #region CONST
 
+        //game settings - deck
         const string CURRENT_DECK_ID = "CurrentDeckId";
         const string GAME_MODE = "GameMode";
+        const string IS_DRAWN = "IsDrawn";
+        //const string MIN_DECK_ID = "MinDeckId";
+        //const string MAX_DECK_ID = "MaxDeckId";
+
+        //app settings - username, email
+        const string USERNAME = "Username";
+        const string EMAIL = "Email";
         #endregion
 
         #region TEXTS
@@ -104,12 +112,21 @@ namespace CoachingCards.Services
             }
         };
 
+        //game settings - deck
+        static readonly List<GameSetting> gameSettings = new List<GameSetting>()
+        {
+            new GameSetting { Key = CURRENT_DECK_ID, Value = 0 },
+            new GameSetting { Key = IS_DRAWN, Value = 0 },
+            //new Game { Key = MIN_DECK_ID, Value = 0 },
+            //new Game { Key = MAX_DECK_ID, Value = cards.Count },
+            new GameSetting { Key = GAME_MODE, Value = ((int)GameMode.Full) }
+        };
+
+        //app settings - username, email
         static readonly List<AppSetting> appSettings = new List<AppSetting>()
         {
-            new AppSetting{ Key = CURRENT_DECK_ID, Value = 0 },
-            //new AppSetting{ Key = MIN_DECK_ID, Value = 0 },
-            //new AppSetting{ Key = MAX_DECK_ID, Value = cards.Count },
-            new AppSetting{ Key = GAME_MODE, Value = ((int)GameMode.Full) }
+            new AppSetting { Key = USERNAME, Value = "" },
+            new AppSetting { Key = EMAIL, Value = "" }
         };
         #endregion
 
@@ -117,12 +134,13 @@ namespace CoachingCards.Services
         {
             if (db == null)
             {
-                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Tetepes3.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
+                var databasePath = Path.Combine(FileSystem.AppDataDirectory, "Tetepes5.db"); //Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)
                 db = new SQLiteConnection(databasePath);
                 db.CreateTable<Card>();
                 db.CreateTable<Intro>();
                 db.CreateTable<Deck>();
                 db.CreateTable<AppSetting>();
+                db.CreateTable<GameSetting>();
 
                 var cardList = db.Table<Card>().ToList();
                 if ((cardList == null) || (cardList.Count == 0))
@@ -149,6 +167,10 @@ namespace CoachingCards.Services
                 var settingsList = db.Table<AppSetting>().ToList();
                 if ((settingsList == null) || (settingsList.Count == 0))
                     db.InsertAll(appSettings);
+
+                var gameSettingsList = db.Table<GameSetting>().ToList();
+                if ((gameSettingsList == null) || (gameSettingsList.Count == 0))
+                    db.InsertAll(gameSettings);
             }
         }
 
@@ -322,9 +344,10 @@ namespace CoachingCards.Services
         }
         #endregion
 
-        #region APP SETTINGS
+        #region GAME SETTINGS
 
         public static int MinDeckId => 1;
+
         public static int GetMaxDeckId()
         {
             var mode = GetCurrentGameMode();
@@ -346,8 +369,8 @@ namespace CoachingCards.Services
         public static int GetCurrentDeckId()
         {
             Init();
-            var appSetting = db.Table<AppSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
-            return appSetting.Value;
+            var gameSetting = db.Table<GameSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
+            return gameSetting.Value;
         }
 
         public static bool SetCurrentDeckId(int val)
@@ -355,9 +378,9 @@ namespace CoachingCards.Services
             Init();
             try
             {
-                var appSetting = db.Table<AppSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
-                appSetting.Value = val;
-                db.Update(appSetting);
+                var gameSetting = db.Table<GameSetting>().Where(x => x.Key == CURRENT_DECK_ID).FirstOrDefault();
+                gameSetting.Value = val;
+                db.Update(gameSetting);
                 return true;
             }
             catch (Exception)
@@ -369,8 +392,8 @@ namespace CoachingCards.Services
         public static int GetCurrentGameMode()
         {
             Init();
-            var appSetting = db.Table<AppSetting>().Where(x => x.Key == GAME_MODE).FirstOrDefault();
-            return appSetting.Value;
+            var gameSetting = db.Table<GameSetting>().Where(x => x.Key == GAME_MODE).FirstOrDefault();
+            return gameSetting.Value;
         }
 
         public static bool SetCurrentGameMode(int val)
@@ -378,9 +401,81 @@ namespace CoachingCards.Services
             Init();
             try
             {
-                var appSetting = db.Table<AppSetting>().Where(x => x.Key == GAME_MODE).FirstOrDefault();
-                appSetting.Value = val;
-                db.Update(appSetting);
+                var gameSetting = db.Table<GameSetting>().Where(x => x.Key == GAME_MODE).FirstOrDefault();
+                gameSetting.Value = val;
+                db.Update(gameSetting);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static int GetCurrentCardState()
+        {
+            Init();
+            var gameSetting = db.Table<GameSetting>().Where(x => x.Key == IS_DRAWN).FirstOrDefault();
+            return gameSetting.Value;
+        }
+
+        public static bool SetCurrentCardState(int val)
+        {
+            Init();
+            try
+            {
+                var gameSetting = db.Table<GameSetting>().Where(x => x.Key == IS_DRAWN).FirstOrDefault();
+                gameSetting.Value = val;
+                db.Update(gameSetting);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+        #endregion
+
+        #region APP SETTINGS
+
+        public static string GetUsername()
+        {
+            Init();
+            var username = db.Table<AppSetting>().Where(x => x.Key == USERNAME).FirstOrDefault();
+            return username.Value;
+        }
+
+        public static bool SetUsername(string val)
+        {
+            Init();
+            try
+            {
+                var username = db.Table<AppSetting>().Where(x => x.Key == USERNAME).FirstOrDefault();
+                username.Value = val;
+                db.Update(username);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static string GetEmail()
+        {
+            Init();
+            var email = db.Table<AppSetting>().Where(x => x.Key == EMAIL).FirstOrDefault();
+            return email.Value;
+        }
+
+        public static bool SetEmail(string val)
+        {
+            Init();
+            try
+            {
+                var email = db.Table<AppSetting>().Where(x => x.Key == EMAIL).FirstOrDefault();
+                email.Value = val;
+                db.Update(email);
                 return true;
             }
             catch (Exception)

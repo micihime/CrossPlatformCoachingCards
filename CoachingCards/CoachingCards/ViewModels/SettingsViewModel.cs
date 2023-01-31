@@ -48,6 +48,10 @@ namespace CoachingCards.ViewModels
             }
         }
 
+        public string Name { get => CardService.GetUsername(); }
+
+        public string Email { get => CardService.GetEmail(); }
+
         TimeSpan _selectedTime;
 
         public TimeSpan SelectedTime
@@ -75,7 +79,7 @@ namespace CoachingCards.ViewModels
             if (NotificationsON)
             {
                 var time = Convert.ToDateTime(SelectedTime.ToString());
-                await NotificationService.RescheduleNotif(time);
+                await NotificationService.ScheduleNotif(time);
                 await Xamarin.Forms.Application.Current.MainPage.DisplayAlert("Notification Settings", $"Notification time set to {Convert.ToDateTime(SelectedTime.ToString()):HH:mm}", "Ok");
             }
             else
@@ -88,7 +92,7 @@ namespace CoachingCards.ViewModels
         {
             try
             {
-                var response = await SubscribeService.UnsubscribeFromAll();
+                var response = SubscribeService.Unsubscribe(CardService.GetEmail());
 
                 if (response.IsSuccessStatusCode)
                     await Shell.Current.GoToAsync("///IntroductionPage");
